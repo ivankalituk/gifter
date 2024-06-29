@@ -1,0 +1,38 @@
+// Шрифты
+@font-face {
+  font-family: 'Noah';
+  src: url('../fonts/NoahBlack.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+}
+  
+@font-face {
+  font-family: 'Noah';
+  src: url('../fonts/NoahLight.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+  
+@font-face {
+  font-family: 'Noah';
+  src: url('../fonts/NoahHeavy.otf') format('opentype');
+  font-weight: 800;
+  font-style: normal;
+}
+  
+@font-face {
+  font-family: 'Noah';
+  src: url('../fonts/NoahBold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+// Основные цвета
+$color-red: #D50842;
+$color-black: #2A2A2A;
+$color-orange: #FFAC30;
+$color-grey: #EDEDED;
+$color-white: #FFFFFF;
+
+// Размер текста
+$font-size-main: 16px;
