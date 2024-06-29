@@ -1,0 +1,80 @@
+@import '@/assets/styles/veriables';
+
+header{
+    background-color: $color-red;
+    
+    > .header_container{
+        max-width: 90rem;
+        margin: 0 auto;
+        padding: 0 2.25rem;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        height: 3.125rem;
+        justify-content: space-between;
+        
+        > a{
+            text-decoration: none;
+            display: flex;
+            color: $color-white;
+            gap: 0.3125rem;
+            align-items: center;
+
+            >img{
+                height: 2.0625rem;
+                width: 2.375rem;
+            }
+
+            > h1{
+                text-transform: uppercase;
+                font-weight: 900;
+                font-size: 2rem;
+            }
+
+        }
+
+        > .header_additionalButtons{
+            display: flex;
+            gap: 16px;
+
+            > .header_additionalButtons_marks{
+                display: flex;
+                gap: 5px;
+                text-decoration: none;
+                align-items: center;
+                img{
+
+                }
+
+                >  div{
+                    color: $color-white;
+                    font-weight: 700;
+                }
+            }
+
+            > .header_additionalButtons_propose{
+                display: flex;
+                background-color: $color-white;
+                text-decoration: none;
+                color: $color-black;
+                height: 37px;
+                align-items: center;
+                justify-content: space-around;
+                width: 136px;
+                border-radius: 8px;
+                font-weight: 700;
+                transition: $transition-speed-button;
+
+                &:hover{
+                    background-color: $color-grey;
+                    transition: $transition-speed-button;
+                }
+    
+                &:active{
+                    background-color: $color-grey-active;
+                    transition: $transition-speed-button;
+                }
+            }
+        }
+    }
+}

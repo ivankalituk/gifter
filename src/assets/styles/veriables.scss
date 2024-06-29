@@ -33,6 +33,13 @@ $color-black: #2A2A2A;
 $color-orange: #FFAC30;
 $color-grey: #EDEDED;
 $color-white: #FFFFFF;
-
+$color-grey-active: #AEAEAE;
+$color-red-hover: #8D0028;
+$color-red-active: #5A001A;
 // Размер текста
-$font-size-main: 16px;
+$font-size-main: 14px;
+
+// Скорость анимаций
+$transition-speed-button: 0.5s;
+
+// @import '@/assets/styles/veriables';

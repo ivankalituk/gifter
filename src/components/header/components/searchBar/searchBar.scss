@@ -1,0 +1,82 @@
+@import '@/assets/styles/veriables';
+
+// Перевести всё в ремы
+.searchBar{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    > .searchBar_bar{
+        display: flex;
+        align-items: center;
+        background-color: $color-white;
+        height: 2.375rem;
+        border-radius: 0.5rem;
+
+        > img{
+            margin-left: 6px;
+        }
+
+        > input{
+            margin-left: 12px;
+            width: 11.375rem;
+            outline: none;
+            border: none;
+            font-family: 'Noah';
+            font-weight: 400;
+            color: $color-black;
+            font-size: 14px;
+
+            &::placeholder{
+                color: $color-black;
+                opacity: 50%;
+            }
+        }
+
+        > button{
+            height: 100%;
+            outline: none;
+            border: none;
+            background-color: $color-white;
+            width: 92px;
+            align-items: center;
+            justify-content: space-around;
+            border-radius: 8px;
+            // text-transform: uppercase;
+            transition: $transition-speed-button;
+
+            &:hover{
+                background-color: $color-grey;
+                transition: $transition-speed-button;
+            }
+
+            &:active{
+                background-color: $color-grey-active;
+                transition: $transition-speed-button;
+            }
+        }
+    }
+
+    > button{
+        height: 38px;
+        width: 38px;
+        align-items: center;
+        justify-content: space-around;
+        outline: none;
+        border: none;
+        background-color: $color-white;
+        border-radius: 8px;
+        // text-transform: uppercase;
+        transition: $transition-speed-button;
+
+        &:hover{
+            background-color: $color-grey;
+            transition: $transition-speed-button;
+        }
+
+        &:active{
+            background-color: $color-grey-active;
+            transition: $transition-speed-button;
+        }
+    }
+}

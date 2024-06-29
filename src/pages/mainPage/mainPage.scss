@@ -1,0 +1,14 @@
+@import '@/assets/styles/veriables';
+
+.mainPage{
+    background-color: $color-grey;
+
+    // удалить
+    height: 100vh;
+
+    > .mainPage_container{
+        max-width: 1440px;
+        margin: 0 auto;
+        display: flex;
+    }
+}
