@@ -1,6 +1,7 @@
 @import '@/assets/styles/veriables';
 
 .giftCard{
+    position: relative;
     height: 365px;
     width: 308px;
     background-color: $color-white;
@@ -8,6 +9,8 @@
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.08);
     padding: 14px;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
 
     .giftCard_name{
         margin-top: 10px;
@@ -24,5 +27,77 @@
         -webkit-line-clamp: 2; /* Ограничение количества строк */
         line-clamp: 2; /* Ограничение количества строк (для совместимости) */
         text-overflow: ellipsis; /* Добавление троеточия */
+    }
+
+    > .giftCard_additional{
+        position: absolute;
+        top: 14px;
+        left: 14px;
+        cursor: pointer;
+        opacity: 0.5;
+        transition: $transition-speed-button;
+
+        &:hover{
+            transition: $transition-speed-button;
+            opacity: 1;
+        }
+    }
+
+    > .giftCard_mark{
+        position: absolute;
+        top: 14px;
+        right: 14px;
+        cursor: pointer;
+    }
+
+    > .giftCard_reating{
+        margin-top: 5px;
+        position: relative;
+        width: 100px;
+
+        > .giftCard_reating_stars{
+            display: flex;
+            gap: 5px;
+        }
+
+        > .giftCard_reating_reating{
+            // СМЕНА ВИДЗ, СМЕНА РЕЙТИНГА
+            width: 50%;
+            display: flex;
+            gap: 5px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+        }
+    }
+
+    > .giftCard_views{
+        margin-top: 5px;
+        font-weight: 700;
+        color: $color-black;
+        opacity: 0.5;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    > .giftCard_tags{
+        overflow: hidden;
+        height: 60px;
+        margin-top: auto;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+
+        > .giftCard_tags_tag{
+            max-height: 27px;
+            box-sizing: border-box;
+            padding: 5px;
+            background-color: $color-red;
+            border-radius: 6px;
+            color: $color-white;
+            font-weight: 700;
+        }
     }
 }
