@@ -1,0 +1,131 @@
+@import '@/assets/styles/veriables';
+
+.selector{
+    position: relative;
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 50px 0 22px 0;
+    width: 308px;
+    height: 47px;
+    background-color: $color-white;
+    border-radius: 8px;
+
+    > .selector_selectedOption{
+        z-index: 100;
+        position: relative;
+        background-color: $color-grey;
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 8px;
+        padding: 5px 10px;
+        box-sizing: border-box;
+        cursor: pointer;
+
+        > span{
+            font-weight: 700;
+        }
+    }
+
+    > .selector_options {
+        position: absolute;
+        cursor: pointer;
+        width: 288px;
+        background-color: $color-grey;
+        padding: 10px;
+        top: 31px;
+        left: 10px;
+        z-index: 99;
+        height: 86px;
+        border-radius: 0 0 8px 8px;
+        box-sizing: border-box;
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(-20%);
+    
+        > div {
+            font-weight: 700;
+            margin: 5px 0 0 0;
+            box-sizing: border-box;
+        }
+    }
+}
+
+
+.selector_options.open {
+    animation: selectorOpen 0.3s forwards;
+}
+
+.selector_options.close {
+    animation: selectorClose 0.3s forwards;
+    pointer-events: none;
+}
+
+.selector_tick.open{
+    transform: rotateZ(180deg);
+    transition: 0.3s;
+}
+
+.selector_tick.close{
+    transform: rotateZ(0deg);
+    transition: 0.3s;
+}
+
+.selector_selectedOption.open{
+    animation: selectedOpen 0.3s forwards;
+}
+
+.selector_selectedOption.close{
+    animation: selectedClose 0.3s forwards;
+}
+
+@keyframes selectedOpen {
+    0%{
+        background-color: $color-grey;
+    }
+    100%{
+        background-color: $color-grey-hover;
+    }  
+}
+
+@keyframes selectedClose {
+    0%{
+        background-color: $color-grey-hover;
+    }
+    100%{
+        background-color: $color-grey;
+    }  
+}
+
+@keyframes selectorOpen {
+    0% {
+        transform: translateY(-20%);
+        opacity: 0;
+        background-color: $color-grey;
+    }
+    90% {
+        transform: translateY(3%);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(0%);
+        opacity: 1;
+        background-color: $color-grey-hover;
+    }
+}
+
+@keyframes selectorClose {
+    0% {
+        transform: translateY(0%);
+        opacity: 1;
+        background-color: $color-grey-hover;
+    }
+    100% {
+        transform: translateY(-20%);
+        opacity: 0;
+        height: 0; 
+        overflow: hidden;
+        background-color: $color-grey;
+    }
+}
