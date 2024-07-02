@@ -4,47 +4,44 @@ header{
     background-color: $color-red;
     
     > .header_container{
-        max-width: 90rem;
+        max-width: 102.857rem;
         margin: 0 auto;
-        padding: 0 2.25rem;
+        padding: 0 2.57rem;
         box-sizing: border-box;
         display: flex;
         align-items: center;
-        height: 3.125rem;
+        height: 3.57rem;
         justify-content: space-between;
         
         > a{
             text-decoration: none;
             display: flex;
             color: $color-white;
-            gap: 0.3125rem;
+            gap: 0.357rem;
             align-items: center;
 
             >img{
-                height: 2.0625rem;
-                width: 2.375rem;
+                height: 2.357rem;
+                width: 2.714rem;
             }
 
             > h1{
                 text-transform: uppercase;
                 font-weight: 900;
-                font-size: 2rem;
+                font-size: 2.285rem;
             }
 
         }
 
         > .header_additionalButtons{
             display: flex;
-            gap: 16px;
+            gap: 1rem;
 
             > .header_additionalButtons_marks{
                 display: flex;
-                gap: 5px;
+                gap: 0.357rem;
                 text-decoration: none;
                 align-items: center;
-                img{
-
-                }
 
                 >  div{
                     color: $color-white;
@@ -57,11 +54,11 @@ header{
                 background-color: $color-white;
                 text-decoration: none;
                 color: $color-black;
-                height: 37px;
+                height: 2.64rem;
                 align-items: center;
                 justify-content: space-around;
-                width: 136px;
-                border-radius: 8px;
+                width: 9.714rem;
+                border-radius: 0.57rem;
                 font-weight: 700;
                 transition: $transition-speed-button;
 

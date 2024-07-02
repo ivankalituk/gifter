@@ -2,8 +2,8 @@
 
 .filters{
     background-color: $color-white;
-    width: 224px;
-    padding: 20px 10px;
+    width: 16rem;
+    padding: 1.42rem 0.71rem;
     box-sizing: border-box;
     min-height: 100vh;
 
@@ -13,35 +13,35 @@
             display: flex;
             align-items: center;
             border: 1px $color-grey solid; 
-            height: 38px;
+            height: 2.71rem;
             box-sizing: border-box;
-            padding: 6px;
-            border-radius: 8px;
+            padding: 0.42rem;
+            border-radius: 0.57rem;
 
             > input{
-                margin-left: 12px;
+                margin-left: 0.85rem;
                 outline: none;
                 border: none;
                 flex: 1;
-                font-size: 14px;
+                font-size: 1rem;
             }
         }
 
         > .filters_tagSearch_tags{
-            margin-top: 5px;
+            margin-top: 0.35rem;
             display: flex;
             flex-wrap: wrap;
-            gap: 5px;
+            gap: 0.35rem;
 
             > .tag{
-                padding: 5px;
+                padding: 0.35rem;
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
                 background-color: $color-red;
                 color: $color-white;
                 font-weight: 700;
-                border-radius: 6px;
+                border-radius: 0.35rem;
                 transition:  $transition-speed-button;
                 cursor: pointer;
 
@@ -59,18 +59,18 @@
     }
 
     > .filters_gender{
-        margin-top: 20px;
+        margin-top: 1.42rem;
 
         > .filters_gender_heading{
             font-weight: 700;
-            font-size: 14px;
+            font-size: 1rem;
         }
         
         > .filters_gender_genders{
-            margin-top: 5px;
+            margin-top: 0.35rem;
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 0.35rem;
 
             > .gender{
                 position: relative;
@@ -81,7 +81,7 @@
                 >span{
                     color: $color-black;
                     opacity: 0.5;
-                    font-size: 14px;
+                    font-size: 1rem;
                 }
 
                 > input{
@@ -96,9 +96,9 @@
                 }
 
                 > .gender_customCheck{
-                    height: 16px;
-                    width: 16px;
-                    border-radius: 4px;
+                    height: 1.14rem;
+                    width: 1.14rem;
+                    border-radius: 0.35rem;
                     border: 1px $color-red solid;
                     display: flex;
                     align-items: center;
@@ -117,42 +117,43 @@
     }
 
     > .filters_age{
-        margin-top: 20px;
+        margin-top: 1.42rem;
         
         >.filters_age_heading{
             
             > span{
-                font-size: 14px;
+                font-size: 1rem;
                 font-weight: 700;
             }
         }
 
         > .filters_age_customRange{
             position: relative;
+
             > input{
                 -webkit-appearance: none;
                 width: 100%;
                 height: 3px;
                 // background: white;
-                border-radius: 5px;
+                border-radius: 0.35rem;
                 outline: none;
                 padding: 0;
                 margin: 0;
                 
                 &::-webkit-slider-runnable-track {
                     width: 100%;
-                    height: 6px;
+                    height: 0.42rem;
                     cursor: pointer;
                     background: white;
-                    border-radius: 8px;
+                    border-radius: 0.57rem;
                     border: 1px solid $color-grey;
                 }
 
                 &::-webkit-slider-thumb {
                     -webkit-appearance: none;
                     appearance: none;
-                    width: 20px;
-                    height: 20px;
+                    width: 1.42rem;
+                    height: 1.42rem;
                     border: 1px $color-grey  solid ;
                     border-radius: 50%;
                     background: $color-red;

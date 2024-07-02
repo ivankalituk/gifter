@@ -4,28 +4,28 @@
 .searchBar{
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 0.714rem;
 
     > .searchBar_bar{
         display: flex;
         align-items: center;
         background-color: $color-white;
-        height: 2.375rem;
-        border-radius: 0.5rem;
+        height: 2.714rem;
+        border-radius: 0.571rem;
 
         > img{
-            margin-left: 6px;
+            margin-left: 0.42rem;
         }
 
         > input{
-            margin-left: 12px;
-            width: 11.375rem;
+            margin-left: 0.857rem;
+            width: 13rem;
             outline: none;
             border: none;
             font-family: 'Noah';
             font-weight: 400;
             color: $color-black;
-            font-size: 14px;
+            font-size: 1rem;
 
             &::placeholder{
                 color: $color-black;
@@ -38,10 +38,10 @@
             outline: none;
             border: none;
             background-color: $color-white;
-            width: 92px;
+            width: 6.571rem;
             align-items: center;
             justify-content: space-around;
-            border-radius: 8px;
+            border-radius: 0.571rem;
             // text-transform: uppercase;
             transition: $transition-speed-button;
 
@@ -58,14 +58,14 @@
     }
 
     > button{
-        height: 38px;
-        width: 38px;
+        height: 2.714rem;
+        width: 2.714rem;
         align-items: center;
         justify-content: space-around;
         outline: none;
         border: none;
         background-color: $color-white;
-        border-radius: 8px;
+        border-radius: 0.571rem;
         // text-transform: uppercase;
         transition: $transition-speed-button;
 

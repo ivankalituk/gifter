@@ -4,12 +4,12 @@
 
     > .giftCard_container{
         position: relative;
-        height: 365px;
-        width: 308px;
+        height: 26.071rem;
+        width: 22rem;
         background-color: $color-white;
-        border-radius: 16px;
-        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.08);
-        padding: 14px;
+        border-radius: 1rem;
+        box-shadow: 0px 0.57rem 1rem rgba(0, 0, 0, 0.08);
+        padding: 1rem;
         box-sizing: border-box;
         display: flex;
         flex-direction: column;
@@ -17,12 +17,12 @@
         > .giftCard_inner{
 
             > .giftCard_name{
-                margin-top: 10px;
+                margin-top: 0.714rem;
                 font-weight: 700;
-                font-size: 24px;
-                line-height: 30px;
-                width:280px; 
-                height: 60px;
+                font-size: 1.714rem;
+                line-height: 2.14rem;
+                width: 20rem; 
+                height: 4.28rem;
                 word-wrap: break-word;
                 overflow-wrap: break-word;
                 overflow: hidden; /* Скрытие переполняющего содержимого */
@@ -34,20 +34,20 @@
             }
 
             > .giftCard_reating{
-                margin-top: 5px;
+                margin-top: 0.35rem;
                 position: relative;
-                width: 100px;
+                width: 7.14rem;
 
                 > .giftCard_reating_stars{
                     display: flex;
-                    gap: 5px;
+                    gap: 0.35rem;
                 }
 
                 > .giftCard_reating_reating{
                     // СМЕНА ВИДЗ, СМЕНА РЕЙТИНГА
                     width: 50%;
                     display: flex;
-                    gap: 5px;
+                    gap: 0.35rem;
                     position: absolute;
                     top: 0;
                     left: 0;
@@ -56,7 +56,7 @@
             }
 
             > .giftCard_views{
-                margin-top: 5px;
+                margin-top: 0.35rem;
                 font-weight: 700;
                 color: $color-black;
                 opacity: 0.5;
@@ -67,18 +67,18 @@
 
             > .giftCard_tags{
                 overflow: hidden;
-                height: 60px;
+                height: 4.28rem;
                 margin-top: auto;
                 display: flex;
                 flex-wrap: wrap;
-                gap: 5px;
+                gap: 0.35rem;
 
                 > .giftCard_tags_tag{
-                    max-height: 27px;
+                    max-height: 2rem;
                     box-sizing: border-box;
-                    padding: 5px;
+                    padding: 0.35rem;
                     background-color: $color-red;
-                    border-radius: 6px;
+                    border-radius: 0.42rem;
                     color: $color-white;
                     font-weight: 700;
                 }
@@ -92,8 +92,8 @@
                 position: relative;
 
                 > img{
-                    top: 14px;
-                    left: 14px;
+                    top: 1rem;
+                    left: 1rem;
                     cursor: pointer;
                     opacity: 0.5;
                     transition: $transition-speed-button;
@@ -105,15 +105,15 @@
                 }
 
                 > span{
-                    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.08);
+                    box-shadow: 0.57rem  1rem rgba(0, 0, 0, 0.08);
                     position: absolute;
                     top: 0;
-                    padding: 12px 24px;
+                    padding: 0.85rem 1.71rem;
                     box-sizing: border-box;
                     background-color: $color-white;
                     border-radius: 12px;
                     font-weight: 700;
-                    font-size: 14px;
+                    font-size: 0.85rem;
                     transition: $transition-speed-button;
                     cursor: pointer;
                     
@@ -140,8 +140,8 @@
 
         > .giftCard_mark{
             position: absolute;
-            top: 14px;
-            right: 14px;
+            top: 1rem;
+            right: 1rem;
             cursor: pointer;
 
             img.active {
@@ -181,11 +181,11 @@
             background-color: white;
             z-index: 102;
             transform: translate(-50%, -50%);
-            width: 700px;
-            height: 300px;
-            padding: 16px;
+            width: 50rem;
+            height: 21.42rem;
+            padding: 1.14rem;
             box-sizing: border-box;
-            border-radius: 12px;
+            border-radius: 0.85rem;
             display: flex;
             flex-direction: column;
 
@@ -199,15 +199,15 @@
 
             > span{
                 font-weight: 700;
-                font-size: 24px;
+                font-size: 1.71rem;
             }
 
             > textarea{
-                margin-top: 5px;
+                margin-top: 0.35rem;
                 outline: none;
                 border: 1px $color-grey solid; 
                 border-radius: 8px;
-                padding: 12px;
+                padding: 0.85rem;
                 box-sizing: border-box;
                 white-space: pre-wrap;
                 resize: none;
@@ -215,12 +215,12 @@
             }
 
             > button{
-                margin-top: 5px;
-                max-height: 27px;
+                margin-top: 0.35rem;
+                max-height: 2rem;
                 box-sizing: border-box;
-                padding: 5px;
+                padding: 0.35rem;
                 background-color: $color-red;
-                border-radius: 6px;
+                border-radius: 0.35rem;
                 color: $color-white;
                 font-weight: 700;
                 border: none;
@@ -265,11 +265,11 @@
             background-color: white;
             z-index: 102;
             transform: translate(-50%, -50%);
-            width: 700px;
-            height: 300px;
-            padding: 16px;
+            width: 50rem;
+            height: 21.42rem;
+            padding: 1.14rem;
             box-sizing: border-box;
-            border-radius: 12px;
+            border-radius: 0.85rem;
             display: flex;
             flex-direction: column;
 

@@ -7,68 +7,18 @@
     min-height: 100vh;
 
     > .mainPage_container{
-        max-width: 1440px;
+        max-width: 102.85rem;
         margin: 0 auto;
         display: flex;
 
         > .mainPage_giftContent{
-            margin-left: 96px;
+            margin-left: 6.85rem;
             flex: 1;
-            
-            > .mainPage_giftContent_selector{
-                position: relative;
-                padding: 10px;
-                box-sizing: border-box;
-                margin: 50px 0 22px 0;
-                width: 308px;
-                height: 47px;
-                background-color: $color-white;
-                border-radius: 8px;
-
-                > .selector_selectedOption{
-                    z-index: 100;
-                    position: relative;
-                    background-color: $color-grey;
-                    height: 100%;
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    border-radius: 8px;
-                    padding: 5px 10px;
-                    box-sizing: border-box;
-                    cursor: pointer;
-
-                    > span{
-                        font-weight: 700;
-                    }
-                }
-
-                > .selector_options{
-                    overflow: hidden;
-                    position: absolute;
-                    cursor: pointer;
-                    width: 100%;
-                    background-color: $color-grey-active;
-                    padding: 10px;
-                    top: 31px;
-                    left: 10px;
-                    z-index: 99;
-                    border-radius: 0 0 8px 8px;
-                    width: 288px;
-                    box-sizing: border-box;
-                    animation: selectorClose 0.5s ease infinite;
-                    
-                    > div{
-                        font-weight: 700;
-                        padding: 5px 0 0 0;
-                    }
-                }
-            }
 
             > .mainPage_giftContent_giftList{
                 display: flex;
                 flex-wrap: wrap;
-                gap: 40px;
+                gap: 2.85rem;
             }
         }
     }

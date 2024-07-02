@@ -2,13 +2,13 @@
 
 .selector{
     position: relative;
-    padding: 10px;
+    padding: 0.71rem;
     box-sizing: border-box;
-    margin: 50px 0 22px 0;
-    width: 308px;
-    height: 47px;
+    margin: 3.57rem 0 1.57rem 0;
+    width: 22rem;
+    height: 3.35rem;
     background-color: $color-white;
-    border-radius: 8px;
+    border-radius: 0.57rem;
 
     > .selector_selectedOption{
         z-index: 100;
@@ -18,8 +18,8 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        border-radius: 8px;
-        padding: 5px 10px;
+        border-radius: 0.57rem;
+        padding: 0.35rem 0.71rem;
         box-sizing: border-box;
         cursor: pointer;
 
@@ -31,14 +31,14 @@
     > .selector_options {
         position: absolute;
         cursor: pointer;
-        width: 288px;
+        width: 20.57rem;
         background-color: $color-grey;
-        padding: 10px;
-        top: 28px;
-        left: 10px;
+        padding: 0.71rem;
+        top: 2rem;
+        left: 0.71rem;
         z-index: 99;
-        height: 86px;
-        border-radius: 0 0 8px 8px;
+        height: 6.14rem;
+        border-radius: 0 0 0.57rem 0.57rem;
         box-sizing: border-box;
         overflow: hidden;
         opacity: 0;
@@ -46,7 +46,7 @@
     
         > div {
             font-weight: 700;
-            margin: 5px 0 0 0;
+            margin: 0.35rem 0 0 0;
             box-sizing: border-box;
         }
     }
