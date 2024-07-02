@@ -15,15 +15,20 @@ const Filters: FC = () =>{
     const handleChangeGenderAll = (event: ChangeEvent<HTMLInputElement>) =>{
         setCheckboxGenderAll(event.target.checked)
     }
-
     const handleChangeGenderMen = (event: ChangeEvent<HTMLInputElement>) =>{
         setCheckboxGenderMen(event.target.checked)
     }
-
     const handleChangeGenderWoman = (event: ChangeEvent<HTMLInputElement>) =>{
         setCheckboxGenderWoman(event.target.checked)
     }
 
+    // для инпут ренджа
+    const [rangeValue, setRangeValue] = useState<number>(0)
+
+    // для инпут ренджа
+    const handleRangeChange = (event: ChangeEvent<HTMLInputElement>) =>{
+        setRangeValue(Number(event.target.value))
+    }
 
     return(
         <div className="filters">
@@ -91,12 +96,11 @@ const Filters: FC = () =>{
                 </div>
 
                 <div className="filters_age_customRange">
-                    <input type="range" min={0} max={2} step={1}/>
+                    <input type="range" min={0} max={2} step={1} value={rangeValue} onChange={handleRangeChange} />
                 </div>
                 
 
             </div>
-
 
         </div>
     )

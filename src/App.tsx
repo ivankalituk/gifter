@@ -10,7 +10,7 @@ import MainPage from '@/pages/mainPage/mainPage';
 
 function App() {
   return (
-    <div className="App">
+    <div className={0? "App blockScroll" : "App"}>
       <Header />
 
       <main>
