@@ -104,8 +104,10 @@
                     }
                 }
 
-                > span{
-                    box-shadow: 0.57rem  1rem rgba(0, 0, 0, 0.08);
+                > button{
+                    box-shadow: 0.57rem 0.3rem rgba(0, 0, 0, 0.08);
+                    border: none;
+                    outline: none;
                     position: absolute;
                     top: 0;
                     padding: 0.85rem 1.71rem;
@@ -353,5 +355,23 @@
     }
     100%{
         opacity: 0;
+    }
+}
+
+@media (max-width: 1000px) {
+    .giftCard{
+        flex: 1;
+        display: flex;
+
+        > .giftCard_container{
+            flex: 1;
+            height: 100%;
+
+            > .giftCard_inner{
+                > img{
+                    width: 100%;
+                }
+            }
+        }
     }
 }

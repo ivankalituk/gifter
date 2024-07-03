@@ -28,19 +28,19 @@ const Selector: FC = () => {
 
     return (
         <div className="selector">
-        <div className={open? "selector_selectedOption open" : "selector_selectedOption close"} onClick={handleOpen}>
-            <span>{selected}</span>
-            <img src={tick} alt="tick" className={open? "selector_tick open" : "selector_tick close"}/>
+            <button className={open? "selector_selectedOption open" : "selector_selectedOption close"} onClick={handleOpen}>
+                <span>{selected}</span>
+                <img src={tick} alt="tick" className={open? "selector_tick open" : "selector_tick close"}/>
+            </button>
+
+
+            <div className={open? "selector_options open" :"selector_options close"}>
+                {options.map((option, index) => (
+                    <button className="selection_option" key={index} onClick={() => handleSelector(option)}>{option}</button>
+                ))}
+            </div>
+
         </div>
-
-
-        <div className={open? "selector_options open" :"selector_options close"}>
-            {options.map((option, index) => (
-                <div className="selection_option" key={index} onClick={() => handleSelector(option)}>{option}</div>
-            ))}
-        </div>
-
-    </div>
     )
 }
 

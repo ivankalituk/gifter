@@ -41,12 +41,12 @@ const Filters: FC = () =>{
                 </div>
 
                 <div className="filters_tagSearch_tags">
-                    <div className="tag">#ДляГеїв</div>
-                    <div className="tag">#ДляПедиків</div>
-                    <div className="tag">#ДляПедорастів</div>
-                    <div className="tag">#ДляНебінарніхХвойдоДрочерів</div>
-                    <div className="tag">#ДляГеївЩоГолосуютьЗаОПЗЖ</div>
-                    <div className="tag">#ХуйКартопляБалалайкаАнусТигрЯраняйка</div>
+                    <button className="tag">#ДляГеїв</button>
+                    <button className="tag">#ДляПедиків</button>
+                    <button className="tag">#ДляПедорастів</button>
+                    <button className="tag">#ДляНебінарніхХвойдоДрочерів</button>
+                    <button className="tag">#ДляГеївЩоГолосуютьЗаОПЗЖ</button>
+                    <button className="tag">#ХуйКартопляБалалайкаАнусТигрЯраняйка</button>
                 </div>
 
             </div>

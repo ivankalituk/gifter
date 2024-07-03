@@ -2,7 +2,7 @@
 
 .mainPage{
     background-color: $color-grey;
-
+    padding: 0 1rem 0 0;
     // удалить
     min-height: 100vh;
 
@@ -19,6 +19,18 @@
                 display: flex;
                 flex-wrap: wrap;
                 gap: 2.85rem;
+            }
+        }
+    }
+}
+
+@media (max-width: 1000px) {
+    .mainPage{
+        padding: 0 1rem;
+
+        > .mainPage_container{
+            .mainPage_giftContent{
+                margin-left: 0;
             }
         }
     }

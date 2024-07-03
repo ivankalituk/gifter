@@ -5,8 +5,10 @@
     display: flex;
     align-items: center;
     gap: 0.714rem;
+    // flex: 1;
 
     > .searchBar_bar{
+        flex: 1;
         display: flex;
         align-items: center;
         background-color: $color-white;
@@ -79,4 +81,23 @@
             transition: $transition-speed-button;
         }
     }
+}
+
+@media (max-width: 1000px) {
+    .searchBar{
+        flex: 1;
+
+        > .searchBar_bar{
+
+            >input{
+                width: 100%;
+                flex: 1;
+            }
+        }
+
+        >button{
+            display: none;
+        }
+    }
+    
 }

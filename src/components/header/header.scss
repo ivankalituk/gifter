@@ -13,64 +13,175 @@ header{
         height: 3.57rem;
         justify-content: space-between;
         
-        > a{
-            text-decoration: none;
+
+        > .header_leftGroup{
             display: flex;
-            color: $color-white;
-            gap: 0.357rem;
+            align-items: center;
+            gap: 9.4rem;
+            
+            > a{
+                text-decoration: none;
+                display: flex;
+                color: $color-white;
+                gap: 0.357rem;
+                align-items: center;
+
+                >img{
+                    height: 2.357rem;
+                    width: 2.714rem;
+                }
+
+                > h1{
+                    text-transform: uppercase;
+                    font-weight: 900;
+                    font-size: 2.285rem;
+                }
+            }
+        }
+
+        .header_profile{
+            display: flex;
+        }
+
+        > .burgerMenu{
+            background-color: $color-red;
+            outline: none;
+            border: none;
+            cursor: pointer;
+            display: none;
             align-items: center;
 
-            >img{
-                height: 2.357rem;
-                width: 2.714rem;
+            > img{
+                height: 2.5rem;
+                width: 2.5rem;
+            }
+        }
+
+        > .burgerMenu_Menu{
+            position: absolute;
+            right: 0;
+            top: 0;
+            z-index: 110;
+
+            > .burgerMenu_Menu_background{
+                background-color: $color-black;
+                opacity: 0.5;
+                width: 100vw;
+                height: 100vh;
+                animation: opacityFadeBG 0.5s forwards;
+
+                &.show{
+                    animation: opacityUnFadeBG 0.5s forwards;
+                }
             }
 
-            > h1{
-                text-transform: uppercase;
-                font-weight: 900;
-                font-size: 2.285rem;
+            > .burgerMenu_Menu_content{
+                display: flex;
+                position: absolute;
+                padding: 1rem;
+                box-sizing: border-box;
+                top: 0;
+                right: 0;
+                z-index: 111;
+                width: 300px;
+                background-color: $color-white;
+                height: 100vh;
+                animation: fadeAndSlideBurger 1s forwards;
+
+                &.show{
+                    animation: fadeAndHideBurger 1s forwards;
+                }
+
+                > .burger_profile{
+                   flex: 1;
+                   display: flex;
+                }
             }
 
         }
+    }
+}
 
-        > .header_additionalButtons{
-            display: flex;
+
+// для появления бургера
+@keyframes fadeAndHideBurger {
+    0%{
+        opacity: 1;
+        transform: translateX(0);
+    }
+    75%{
+        opacity: 0;
+    }
+    100%{
+        transform: translateX(100%);
+        opacity: 1;
+        display: none;
+    }
+}
+
+@keyframes fadeAndSlideBurger {
+    0%{
+        display: block;
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    25%{
+        opacity: 1;
+        display: block;
+        transform: translateX(0);
+    }
+    100%{
+        opacity: 1;
+        display: block;
+    }
+}
+
+// для заднего фона бургера
+@keyframes opacityFadeBG {
+    0%{
+        display: block;
+        opacity: 0;
+    }
+    100%{
+        opacity: 0.7;
+    }
+}
+
+@keyframes opacityUnFadeBG {
+    0%{
+        opacity: 0.7;
+    }
+    100%{
+        opacity: 0;
+        display: none;
+    }
+}
+
+
+// адаптив
+@media (max-width: 1000px) {
+    header{
+
+        > .header_container{
+            padding: 0 1rem;
             gap: 1rem;
+            > .header_leftGroup{
+                gap: 1rem;
+                flex: 1;
 
-            > .header_additionalButtons_marks{
-                display: flex;
-                gap: 0.357rem;
-                text-decoration: none;
-                align-items: center;
-
-                >  div{
-                    color: $color-white;
-                    font-weight: 700;
+                > a{
+                    > h1{
+                        display: none;
+                    }
                 }
             }
 
-            > .header_additionalButtons_propose{
-                display: flex;
-                background-color: $color-white;
-                text-decoration: none;
-                color: $color-black;
-                height: 2.64rem;
-                align-items: center;
-                justify-content: space-around;
-                width: 9.714rem;
-                border-radius: 0.57rem;
-                font-weight: 700;
-                transition: $transition-speed-button;
+            > .header_profile{
+                display: none;
+            }
 
-                &:hover{
-                    background-color: $color-grey;
-                    transition: $transition-speed-button;
-                }
-    
-                &:active{
-                    background-color: $color-grey-active;
-                    transition: $transition-speed-button;
-                }
+            > .burgerMenu{
+                display: flex;
             }
         }
     }

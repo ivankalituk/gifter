@@ -34,6 +34,8 @@
             gap: 0.35rem;
 
             > .tag{
+                outline: none;
+                border: none;
                 padding: 0.35rem;
                 white-space: nowrap;
                 overflow: hidden;
@@ -232,5 +234,11 @@
     }
     100%{
         transform: scale(1);
+    }
+}
+
+@media (max-width: 1000px) {
+    .filters{
+        display: none;
     }
 }

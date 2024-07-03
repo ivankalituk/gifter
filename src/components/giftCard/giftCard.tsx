@@ -19,6 +19,8 @@ const GiftCard: FC = () =>{
     // Отмеченный подарок
     const [marked, setMarked] = useState<boolean>(false)
 
+
+    // 
     const handleAdditional = () => {
         if(additional){
             setAditional(false)
@@ -31,15 +33,19 @@ const GiftCard: FC = () =>{
         }
     }
 
+    // отметить марк
     const handleMarked = () => {
         setMarked(!marked)
     }
 
+    // открытие адишинал по трём точкам
     const handleAddtionalOpen = () => {
         if (report){
             setReport(false)
             setTimeout(() => {
                 setReportVisible(false)
+                setAditionaVisible(false)
+                setAditional(false)
             }, 500);
         } else {
             setReport(true)
@@ -116,7 +122,7 @@ const GiftCard: FC = () =>{
                     <div className="giftCard_additional_container">
                         <img src={dots} alt="dots" onClick={handleAdditional} />
 
-                        {additionalVisible && <span className={additional? 'active' : 'disabled'} onClick={handleAddtionalOpen}>Поскаржтись</span>}
+                        {additionalVisible && <button className={additional? 'active' : 'disabled'} onClick={handleAddtionalOpen}>Поскаржтись</button>}
                     </div>
                 </div>
 

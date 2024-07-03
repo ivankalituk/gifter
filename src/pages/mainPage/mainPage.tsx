@@ -23,7 +23,6 @@ const MainPage: FC = () => {
                         <GiftCard />
                         <GiftCard />
                         <GiftCard />
-                        <GiftCard />
                     </div>
                 </div>
             </div>
