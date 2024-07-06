@@ -31,6 +31,10 @@
         > .mainPage_container{
             .mainPage_giftContent{
                 margin-left: 0;
+
+                > .mainPage_giftContent_giftList{
+                    gap: 1.5rem;
+                }
             }
         }
     }

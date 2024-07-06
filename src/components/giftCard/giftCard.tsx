@@ -7,11 +7,11 @@ import dots from '@/assets/images/three dots.svg'
 import mark from '@/assets/images/markGrey.svg'
 import starGrey from '@/assets/images/StarGrey.svg'
 import starYellow from '@/assets/images/StarYellow.svg'
+import ModalReport from "./components/modalReport/modalReport";
 
 const GiftCard: FC = () =>{
 
-    const [additional, setAditional] = useState<boolean>(false)                     //для отображение доп функций
-    const [additionalVisible, setAditionaVisible] = useState<boolean>(false)        //для отображения анимации доп функций 
+    const [additional, setAditional] = useState<boolean>(false)                     //для отображение доп функций (три точки)
     const [report, setReport] = useState<boolean>(false)                            //для открытия модального окна жалоб
     const [reportVisible, setReportVisible] = useState<boolean>(false)              //для отображения анимации модального окна
     const [giftModal, setGiftModal] = useState<boolean>(false)
@@ -20,31 +20,36 @@ const GiftCard: FC = () =>{
     const [marked, setMarked] = useState<boolean>(false)
 
 
-    // 
+
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(true);
+
+    const openModal = () => {
+      setIsModalOpen(true);
+    };
+  
+    const closeModal = () => {
+      setIsModalOpen(false);
+    };
+
+
+
+    // ЗАМЕНИТЬ
+    // для отображения дополнительных (три точки)
     const handleAdditional = () => {
-        if(additional){
-            setAditional(false)
-            setTimeout(() => {
-                setAditionaVisible(false)
-            }, 500);
-        } else {
-            setAditionaVisible(true)
-            setAditional(true)
-        }
+        setAditional(!additional)
     }
 
-    // отметить марк
+    // отметить подарок (марк)
     const handleMarked = () => {
         setMarked(!marked)
     }
 
-    // открытие адишинал по трём точкам
+    // открытия модального окна репорта
     const handleAddtionalOpen = () => {
         if (report){
             setReport(false)
             setTimeout(() => {
                 setReportVisible(false)
-                setAditionaVisible(false)
                 setAditional(false)
             }, 500);
         } else {
@@ -122,22 +127,14 @@ const GiftCard: FC = () =>{
                     <div className="giftCard_additional_container">
                         <img src={dots} alt="dots" onClick={handleAdditional} />
 
-                        {additionalVisible && <button className={additional? 'active' : 'disabled'} onClick={handleAddtionalOpen}>Поскаржтись</button>}
+                        <button className={additional? 'active' : 'disabled'} onClick={handleAddtionalOpen}>Поскаржтись</button>
                     </div>
                 </div>
 
                 <div className="giftCard_mark"><img src={mark}  alt="mark" className={marked? "active": ""} onClick={handleMarked}/></div>
             </div>
 
-            {reportVisible && <div className="giftCard_additionalModal">
-                <div className={report? "giftCard_additionalModal_background show" : "giftCard_additionalModal_background hide"} onClick={handleAddtionalOpen}></div>
-
-                <div className={report? "giftCard_additionalModal_content show" : "giftCard_additionalModal_content hide"}>
-                    <span>Відгук</span>
-                    <textarea placeholder="Введіть відгук"/>
-                    <button onClick={handleAddtionalOpen}>Відправити відгук</button>
-                </div>
-            </div>}
+            {/* <ModalReport isOpen={isModalOpen} onClose={closeModal} /> */}
 
             {giftmodalVisible && <div className="giftCard_giftModal">
                 <div className={giftModal? "giftCard_giftModal_background show": "giftCard_giftModal_background hide" } onClick={handleGiftModal}></div>

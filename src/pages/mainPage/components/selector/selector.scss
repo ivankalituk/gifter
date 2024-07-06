@@ -1,6 +1,6 @@
 @import '@/assets/styles/veriables';
 
-.selector{
+.selectors{
     position: relative;
     padding: 0.71rem;
     box-sizing: border-box;
@@ -9,53 +9,83 @@
     height: 3.35rem;
     background-color: $color-white;
     border-radius: 0.57rem;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
 
-    > .selector_selectedOption{
+    > .selectors_filters{
+        display: none;
+        flex: 1;
+        height: 100%;
         border: none;
         outline: none;
-        width: 100%;
-        z-index: 100;
-        position: relative;
         background-color: $color-grey;
-        height: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
         border-radius: 0.57rem;
-        padding: 0.35rem 0.71rem;
-        box-sizing: border-box;
-        cursor: pointer;
+        transition: $transition-speed-button;
 
-        > button{
-            font-weight: 700;
+        // &:hover{
+        //     transition: $transition-speed-button;
+        //     background-color: $color-grey-hover;
+        // }
+
+        &:active{
+            transition: $transition-speed-button;
+            background-color: $color-grey-active;
         }
     }
 
-    > .selector_options {
-        position: absolute;
-        cursor: pointer;
-        width: 20.57rem;
-        background-color: $color-grey;
-        padding: 0.71rem;
-        top: 2rem;
-        left: 0.71rem;
-        z-index: 99;
-        height: 6.14rem;
-        border-radius: 0 0 0.57rem 0.57rem;
-        box-sizing: border-box;
-        overflow: hidden;
-        opacity: 0;
-        transform: translateY(-20%);
-    
-        > button {
-            display: block;
-            flex: 1;
-            outline: none;
+
+    > .main_selector{
+        position: relative;
+        flex: 1;
+
+        > .selector_selectedOption{
             border: none;
-            background-color: $color-grey-hover;
-            font-weight: 700;
-            margin: 0.35rem 0 0 0;
+            outline: none;
+            width: 100%;
+            z-index: 100;
+            position: relative;
+            background-color: $color-grey;
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 0.57rem;
+            padding: 0.35rem 0.71rem;
             box-sizing: border-box;
+            cursor: pointer;
+
+            > button{
+                font-weight: 700;
+            }
+        }
+
+        > .selector_options {
+            position: absolute;
+            cursor: pointer;
+            width: 100%;
+            background-color: $color-grey;
+            padding: 0.71rem;
+            top: 1.5rem;
+            left: 0;
+            z-index: 99;
+            height: 6.14rem;
+            border-radius: 0 0 0.57rem 0.57rem;
+            box-sizing: border-box;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(-20%);
+        
+            > button {
+                display: block;
+                flex: 1;
+                outline: none;
+                border: none;
+                background-color: $color-grey-hover;
+                font-weight: 700;
+                margin: 0.35rem 0 0 0;
+                box-sizing: border-box;
+            }
         }
     }
 }
@@ -135,5 +165,29 @@
         height: 0; 
         overflow: hidden;
         background-color: $color-grey;
+        visibility: hidden;
+    }
+}
+
+@media (max-width: 1000px) {
+    .selectors{
+        width: 100%;
+        margin: 1.57rem 0 1.57rem 0;
+
+        > .selectors_filters{
+            display: block;
+        }
+    }
+}
+
+@media (max-width: 700px) {
+    .selectors{
+        width: 100%;
+        margin: 1.57rem 0 1.57rem 0;
+        gap: 0.71rem;
+
+        > .selectors_filters{
+            display: block;
+        }
     }
 }

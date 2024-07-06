@@ -10,12 +10,18 @@ import SearchBar from '@/components/header/components/searchBar/searchBar'
 import burger from '@/assets/images/burgerMenu.svg'
 import Account from "./components/account/account";
 
-const Header: FC = () =>{
+interface HeaderProps {
+    scrollCallback: (block: boolean) => void
+}
+
+
+const Header: FC<HeaderProps> = ({scrollCallback}) =>{
 
     const [burgerMenu, setBurgerMenu] = useState<boolean>(true)
 
     const handleBurger = () =>{
         setBurgerMenu(!burgerMenu)
+        scrollCallback(burgerMenu)
     }
 
     return (
