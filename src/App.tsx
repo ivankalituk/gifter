@@ -7,6 +7,7 @@ import './App.scss';
 import Header from '@/components/header/header';
 
 import MainPage from '@/pages/mainPage/mainPage';
+import SuggestPage from './pages/suggestPage/suggestPage';
 
 function App() {
 
@@ -22,6 +23,10 @@ function App() {
       <main>
         <Routes>
           <Route path='/' element={<MainPage scrollCallback = {scrollCallback}/>}></Route>
+
+          {/* PROTECTED AUTH */}
+          <Route path='/suggest' element={<SuggestPage/>}></Route>
+
         </Routes>
       </main>
       

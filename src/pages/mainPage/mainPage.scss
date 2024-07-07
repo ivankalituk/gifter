@@ -1,10 +1,9 @@
 @import '@/assets/styles/veriables';
 
 .mainPage{
+    flex: 1;
     background-color: $color-grey;
-    padding: 0 1rem 0 0;
-    // удалить
-    min-height: 100vh;
+    padding: 0 1rem 0 0;    //пединг безопасности только справа тк слева фильтры
 
     > .mainPage_container{
         max-width: 102.85rem;

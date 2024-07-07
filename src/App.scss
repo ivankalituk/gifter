@@ -1,5 +1,16 @@
-.App{
+@import '@/assets/styles/veriables';
 
+.App{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    >main{
+        flex: 1;
+        background-color: $color-grey;
+        display: flex;
+        flex-direction: column;
+    }
 
     &.blockScroll{
         overflow: hidden;
