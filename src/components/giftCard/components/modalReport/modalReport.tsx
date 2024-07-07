@@ -1,15 +1,16 @@
 import React, { FC, useState } from 'react';
 import './modalReport.scss';
 
+
+
 interface ModalProps {
-  report: boolean;
   handleReportClose: () => void;
 }
 
-const Modal: FC<ModalProps> = ({ report, handleReportClose }) => {
+const Modal: FC<ModalProps> = ({ handleReportClose }) => {
 
   // создаём переменную для 
-  const [reportAnimation, setReportAnimation] = useState<boolean>(report)
+  const [reportAnimation, setReportAnimation] = useState<boolean>(true)
 
   const handleClose = () => {
     setReportAnimation(false)

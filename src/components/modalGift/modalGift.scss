@@ -1,0 +1,180 @@
+@import '@/assets/styles/veriables';
+
+.modalGift {
+  >.modalGift_pageOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black; /* Затемнение фона */
+    opacity: 0.5;
+    z-index: 1000; /* Высокий z-index, чтобы перекрыть остальное содержимое */
+    animation: modalBackShow 0.5s forwards;
+
+    &.hide{
+      animation: modalBackHide 0.5s forwards;
+    }
+  }
+
+  >.modalGift_modalOverlay {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2000;
+    animation: modalShow 0.5s forwards;
+
+    &.hide{
+      animation: modalHide 0.5s forwards;
+    }
+
+    > .modalGift_container {
+      position: relative;
+      background: white;
+      border-radius: 8px;
+
+      > .modalGift_content {
+        width: 50rem;
+        // height: 21.42rem;
+        height: 100%;
+        max-height: 50rem;
+        padding: 1.14rem;
+        box-sizing: border-box;
+        border-radius: 0.85rem;
+        // display: flex;
+        gap: 0.5rem;
+
+        > .modalGift_img{
+          flex: 1;
+          
+
+          > img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;  
+          }
+        }
+
+        > .modalGift_info{
+          height: 100%;
+          flex: 1;
+          overflow: scroll;
+          overflow: auto;
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+          scrollbar-width: none; /* для Firefox */
+          
+          &::-webkit-scrollbar{
+            display: none;
+          }
+
+          > .modalGift_info_name{
+            margin-top: 0.714rem;
+            font-weight: 700;
+            font-size: 1.714rem;
+            line-height: 2.14rem;
+            width: 100%; 
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+          }
+
+          > .modalGift_info_views{
+            margin-top: 0.35rem;
+            font-weight: 700;
+            color: $color-black;
+            opacity: 0.5;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+
+          > .modalGift_info_tags{
+            height: 4.28rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.35rem;
+
+            > .modalGift_info_tag{
+                max-height: 2rem;
+                box-sizing: border-box;
+                padding: 0.35rem;
+                background-color: $color-red;
+                border-radius: 0.42rem;
+                color: $color-white;
+                font-weight: 700;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+        }
+        }
+      }
+    }
+  }
+}
+
+// для фона модального
+@keyframes modalBackShow {
+  0%{
+      opacity: 0;
+  }
+  100%{
+      opacity: 0.5;
+  }
+}
+
+@keyframes modalBackHide {
+  0%{
+      opacity: 0.5;
+  }
+  100%{
+    opacity: 0;
+  }
+}
+
+
+// для окна модального
+@keyframes modalShow {
+  0%{
+      opacity: 0;
+  }
+  100%{
+      opacity: 1;
+  }
+}
+
+@keyframes modalHide {
+  0%{
+      opacity: 1;
+  }
+  100%{
+      opacity: 0;
+      visibility: hidden;
+  }
+}
+
+@media (max-width: 1000px) {
+  .modalGift{
+    > .modalGift_modalOverlay{
+      > .modalGift_container{
+        > .modalGift_content{
+          width: 500px
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 550px) {
+  .modalGift{
+    > .modalGift_modalOverlay{
+      > .modalGift_container{
+        > .modalGift_content{
+          width: 300px
+        }
+      }
+    }
+  }
+}
