@@ -1,18 +1,29 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import './modalReport.scss';
 
 interface ModalProps {
-  isOpen: boolean;
-  onClose: () => void;
+  report: boolean;
+  handleReportClose: () => void;
 }
 
-const Modal: FC<ModalProps> = ({ isOpen, onClose }) => {
+const Modal: FC<ModalProps> = ({ report, handleReportClose }) => {
+
+  // создаём переменную для 
+  const [reportAnimation, setReportAnimation] = useState<boolean>(report)
+
+  const handleClose = () => {
+    setReportAnimation(false)
+
+    setTimeout(() => {
+      handleReportClose()
+    }, 500);
+  }
 
   return (
     <div className="modalReport">
-      <div className="modalReport_pageOverlay" onClick={onClose} />
+      <div className={reportAnimation? "modalReport_pageOverlay" : "modalReport_pageOverlay hide"} onClick={handleClose}/>
       
-      <div className="modalReport_overlay">
+      <div className={reportAnimation? "modalReport_overlay": "modalReport_overlay hide"}>
         <div className="modalReport_container">
           <div className="modalReport_content">
             <span>Відгук</span>

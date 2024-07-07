@@ -10,6 +10,11 @@
     background-color: black; /* Затемнение фона */
     opacity: 0.5;
     z-index: 1000; /* Высокий z-index, чтобы перекрыть остальное содержимое */
+    animation: modalBackShow 0.5s forwards;
+
+    &.hide{
+      animation: modalBackHide 0.5s forwards;
+    }
   }
 
   >.modalReport_overlay {
@@ -18,6 +23,11 @@
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 2000;
+    animation: modalShow 0.5s forwards;
+
+    &.hide{
+      animation: modalHide 0.5s forwards;
+    }
 
     > .modalReport_container {
       position: relative;
@@ -76,5 +86,68 @@
       }
     }
   }
+}
 
+// для фона модального
+@keyframes modalBackShow {
+  0%{
+      opacity: 0;
+  }
+  100%{
+      opacity: 0.5;
+  }
+}
+
+@keyframes modalBackHide {
+  0%{
+      opacity: 0.5;
+  }
+  100%{
+    opacity: 0;
+  }
+}
+
+
+// для окна модального
+@keyframes modalShow {
+  0%{
+      opacity: 0;
+  }
+  100%{
+      opacity: 1;
+  }
+}
+
+@keyframes modalHide {
+  0%{
+      opacity: 1;
+  }
+  100%{
+      opacity: 0;
+      visibility: hidden;
+  }
+}
+
+@media (max-width: 1000px) {
+  .modalReport{
+    > .modalReport_overlay{
+      > .modalReport_container{
+        > .modalReport_content{
+          width: 500px
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 550px) {
+  .modalReport{
+    > .modalReport_overlay{
+      > .modalReport_container{
+        > .modalReport_content{
+          width: 300px
+        }
+      }
+    }
+  }
 }

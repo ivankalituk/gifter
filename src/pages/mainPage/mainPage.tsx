@@ -32,11 +32,11 @@ const MainPage: FC <MainPageInterface>= ({scrollCallback}) => {
                     <Selector handleFiltersOpen ={handleFiltersOpen}  />
 
                     <div className="mainPage_giftContent_giftList">
-                        <GiftCard />
-                        {/* <GiftCard />
-                        <GiftCard />
-                        <GiftCard /> */}
-
+                        <GiftCard scrollCallback = {scrollCallback}/>
+                        <GiftCard scrollCallback = {scrollCallback}/>
+                        <GiftCard scrollCallback = {scrollCallback}/>
+                        <GiftCard scrollCallback = {scrollCallback}/>
+                        <GiftCard scrollCallback = {scrollCallback}/>
                     </div>
                 </div>
             </div>
