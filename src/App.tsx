@@ -8,6 +8,7 @@ import Header from '@/components/header/header';
 
 import MainPage from '@/pages/mainPage/mainPage';
 import SuggestPage from './pages/suggestPage/suggestPage';
+import ProfilePage from './pages/profilePage/profilePage';
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
 
           {/* PROTECTED AUTH */}
           <Route path='/suggest' element={<SuggestPage/>}></Route>
+          <Route path='/profile' element={<ProfilePage/>}></Route>
 
         </Routes>
       </main>
