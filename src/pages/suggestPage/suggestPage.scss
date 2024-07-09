@@ -33,6 +33,7 @@
                 > img{
                     width: 100%;
                     height: 100%;
+                    border-radius: 0.75rem;
                 }
 
                 > .suggestPage_suggest_imgUpload_inputGroup{
@@ -194,6 +195,7 @@
 @media (max-width: 800px) {
     .suggestPage{
         .suggestPage_container{
+            padding: 1rem;
             .suggestPage_suggest{
                 display: block;
                 height: 100%;

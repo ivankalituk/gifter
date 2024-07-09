@@ -1,140 +1,70 @@
 @import '@/assets/styles/veriables';
 
 .modalReport {
-  >.modalReport_pageOverlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: black; /* Затемнение фона */
-    opacity: 0.5;
-    z-index: 1000; /* Высокий z-index, чтобы перекрыть остальное содержимое */
-    animation: modalBackShow 0.5s forwards;
 
-    &.hide{
-      animation: modalBackHide 0.5s forwards;
-    }
-  }
+  > .modalReport_container {
+    position: relative;
+    background: white;
+    border-radius: 8px;
 
-  >.modalReport_overlay {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2000;
-    animation: modalShow 0.5s forwards;
+    > .modalReport_content {
+      width: 50rem;
+      height: 21.42rem;
+      padding: 1.14rem;
+      box-sizing: border-box;
+      border-radius: 0.85rem;
+      display: flex;
+      flex-direction: column;
 
-    &.hide{
-      animation: modalHide 0.5s forwards;
-    }
+      > span{
+        font-weight: 700;
+        font-size: 1.71rem;
+      }
 
-    > .modalReport_container {
-      position: relative;
-      background: white;
-      border-radius: 8px;
-
-      > .modalReport_content {
-        width: 50rem;
-        height: 21.42rem;
-        padding: 1.14rem;
+      > textarea{
+        margin-top: 0.35rem;
+        outline: none;
+        border: 1px $color-grey solid; 
+        border-radius: 8px;
+        padding: 0.85rem;
         box-sizing: border-box;
-        border-radius: 0.85rem;
-        display: flex;
-        flex-direction: column;
-
-        > span{
-          font-weight: 700;
-          font-size: 1.71rem;
-        }
-
-        > textarea{
-          margin-top: 0.35rem;
-          outline: none;
-          border: 1px $color-grey solid; 
-          border-radius: 8px;
-          padding: 0.85rem;
-          box-sizing: border-box;
-          white-space: pre-wrap;
-          resize: none;
-          flex: 1;
-        }
-
-        > button{
-          margin-top: 0.35rem;
-          max-height: 2rem;
-          box-sizing: border-box;
-          padding: 0.35rem;
-          background-color: $color-red;
-          border-radius: 0.35rem;
-          color: $color-white;
-          font-weight: 700;
-          border: none;
-          transition:  $transition-speed-button;
-          cursor: pointer;
-
-          &:hover{
-              transition:  $transition-speed-button;
-              background-color: $color-red-hover;
-          }
-
-          &:active{
-              transition:  $transition-speed-button;
-              background-color: $color-red-active;
-          }
+        white-space: pre-wrap;
+        resize: none;
+        flex: 1;
       }
+
+      > button{
+        margin-top: 0.35rem;
+        max-height: 2rem;
+        box-sizing: border-box;
+        padding: 0.35rem;
+        background-color: $color-red;
+        border-radius: 0.35rem;
+        color: $color-white;
+        font-weight: 700;
+        border: none;
+        transition:  $transition-speed-button;
+        cursor: pointer;
+
+        &:hover{
+            transition:  $transition-speed-button;
+            background-color: $color-red-hover;
+        }
+
+        &:active{
+            transition:  $transition-speed-button;
+            background-color: $color-red-active;
+        }
       }
     }
-  }
-}
-
-// для фона модального
-@keyframes modalBackShow {
-  0%{
-      opacity: 0;
-  }
-  100%{
-      opacity: 0.5;
-  }
-}
-
-@keyframes modalBackHide {
-  0%{
-      opacity: 0.5;
-  }
-  100%{
-    opacity: 0;
-  }
-}
-
-
-// для окна модального
-@keyframes modalShow {
-  0%{
-      opacity: 0;
-  }
-  100%{
-      opacity: 1;
-  }
-}
-
-@keyframes modalHide {
-  0%{
-      opacity: 1;
-  }
-  100%{
-      opacity: 0;
-      visibility: hidden;
   }
 }
 
 @media (max-width: 1000px) {
   .modalReport{
-    > .modalReport_overlay{
-      > .modalReport_container{
-        > .modalReport_content{
-          width: 500px
-        }
+    > .modalReport_container{
+      > .modalReport_content{
+        width: 500px
       }
     }
   }
@@ -142,11 +72,9 @@
 
 @media (max-width: 550px) {
   .modalReport{
-    > .modalReport_overlay{
-      > .modalReport_container{
-        > .modalReport_content{
-          width: 300px
-        }
+    > .modalReport_container{
+      > .modalReport_content{
+        width: 300px
       }
     }
   }

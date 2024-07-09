@@ -10,6 +10,7 @@ import starYellow from '@/assets/images/StarYellow.svg'
 
 import ModalReport from "@/components/giftCard/components/modalReport/modalReport";
 import ModalGift from "@/components/modalGift/modalGift";
+import Modal from "@/components/modal/modal";
 
 interface GiftCardInterface  {
     scrollCallback: (block: boolean) => void
@@ -122,9 +123,9 @@ const GiftCard: FC <GiftCardInterface> = ({scrollCallback}) =>{
                 <div className="giftCard_mark"><img src={mark}  alt="mark" className={marked? "active": ""} onClick={handleMarked}/></div>
             </div>
 
-            {report && <ModalReport handleReportClose = {handleReportClose}/>}
+            {report && <Modal onClose = {handleReportClose} Component={ModalReport}/>}
 
-            {giftModal && <ModalGift handleGiftModalClose = {handleGiftModalClose}/>}
+            {giftModal && <Modal onClose = {handleGiftModalClose} Component={ModalGift}/>}
         </div>
     )
 }

@@ -22,15 +22,11 @@ const Modal: FC<ModalProps> = ({ handleReportClose }) => {
 
   return (
     <div className="modalReport">
-      <div className={reportAnimation? "modalReport_pageOverlay" : "modalReport_pageOverlay hide"} onClick={handleClose}/>
-      
-      <div className={reportAnimation? "modalReport_overlay": "modalReport_overlay hide"}>
-        <div className="modalReport_container">
-          <div className="modalReport_content">
-            <span>Відгук</span>
-            <textarea placeholder="Введіть відгук"/>
-            <button>Відправити відгук</button>
-          </div>
+      <div className="modalReport_container">
+        <div className="modalReport_content">
+          <span>Відгук</span>
+          <textarea placeholder="Введіть відгук"/>
+          <button>Відправити відгук</button>
         </div>
       </div>
     </div>
