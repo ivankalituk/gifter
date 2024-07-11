@@ -31,6 +31,7 @@ const ProfilePage: FC = () => {
                 <div className="profilePage_secondColumn">
                     <div className="profilePage_secondColumn_markedLists">
                         <MarkedList />
+
                     </div>
                 </div>
             </div>

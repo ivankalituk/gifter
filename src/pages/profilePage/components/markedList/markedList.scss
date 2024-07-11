@@ -1,25 +1,6 @@
-@import '@/assets/styles/veriables';
-
 .markedList{
-    width: 100%;
-    background-color: $color-grey;
+    background-color: red;
     padding: 1rem;
     border-radius: 0.75rem;
-    box-sizing: border-box;
-
-    > .markedList_heading{
-        font-weight: 700;
-        text-transform: uppercase;
-    }
-
-    > .markedList_giftList{
-        display: flex;
-        overflow: scroll;
-        scrollbar-width: none; /* для Firefox */
-        
-        &::-webkit-scrollbar{
-          display: none;
-        }
-    }
-
+    display: flex; 
 }

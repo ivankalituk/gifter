@@ -38,6 +38,13 @@ const Filters: FC <FilterInterface>= ({filtersOpen, handleFiltersOpen}) =>{
         setRangeValue(Number(event.target.value))
     }
 
+    // для инпут свитч
+    const [ageInputSwitch, setAgeInputSwitch] = useState<boolean>(false)
+
+    const handleAgeInputSwitch = () =>{
+        setAgeInputSwitch(!ageInputSwitch)
+    }
+
     return(
         <div className="filters">
             <div className= {filtersOpen? "filters_container" : "filters_container show"}>
@@ -101,7 +108,11 @@ const Filters: FC <FilterInterface>= ({filtersOpen, handleFiltersOpen}) =>{
                 <div className="filters_age">
                     <div className="filters_age_heading">
                         <span>Вік</span>
-                        <div className="custom_switch"></div>
+
+                        <div className={ageInputSwitch? "custom_switch active" : "custom_switch"}>
+                            <div className={ageInputSwitch? "custom_switch_thumb active" : "custom_switch_thumb "} />
+                            <input type="checkbox" checked={ageInputSwitch} onChange={handleAgeInputSwitch}/>
+                        </div>
                     </div>
 
                     <div className="filters_age_customRange">
