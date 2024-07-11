@@ -131,7 +131,6 @@ $transition-speed-button: 0.5s;
 }
 
 // кастомный инпут свитч
-
 .custom_switch{
   width: 2.28rem;
   height: 1.28rem;
@@ -171,7 +170,24 @@ $transition-speed-button: 0.5s;
   }
 }
 
+// кастомный скроллбар
 
+.customScrollbar{
+  &::-webkit-scrollbar{
+    height: 0.35rem;
+    width: 0.35rem;
+  }
+
+  &::-webkit-scrollbar-track{
+      background-color: $color-grey-hover;
+      border-radius: 0.7rem;
+  }
+
+  &::-webkit-scrollbar-thumb{
+      background-color: $color-grey-active;
+      border-radius: 0.7rem;
+  }
+}
 
 
 

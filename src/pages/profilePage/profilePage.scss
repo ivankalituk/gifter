@@ -9,6 +9,7 @@
     box-sizing: border-box;
 
     > .profilePage_container{
+        align-items: flex-start;
         display: flex;
         gap: 1rem;
         overflow: hidden;
@@ -60,12 +61,14 @@
             flex: 1;
             padding: 1rem;
             box-sizing: border-box;
+            overflow: hidden;
             border-radius: 0.35rem;
             background-color: $color-white;
             box-shadow: 0px 0.57rem 1rem rgba(0, 0, 0, 0.08);
 
             > .profilePage_secondColumn_markedLists{
-
+                display: flex;
+                overflow: hidden;
             }
         }
     }

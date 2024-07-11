@@ -1,0 +1,40 @@
+@import '@/assets/styles/veriables';
+
+.adminPanelPage{
+    max-width: 1440px;
+    width: 100%;
+    margin: 0 auto;
+    flex: 1;
+    padding: 1rem 2.57rem;
+    box-sizing: border-box;
+
+    > .adminPanelPage_container{
+        display: flex;
+        gap: 1rem;
+        align-items: flex-start;
+
+        > .adminPanelPage_proposes{
+            flex: 1;
+            // max-width: 25rem;
+            width: 100%;
+            padding: 1rem;
+            box-sizing: border-box;
+            border-radius: 0.75rem;
+            background-color: $color-white;
+            box-shadow: 0px 0.57rem 1rem rgba(0, 0, 0, 0.08);
+            // gap: 1rem;
+
+            > .adminPanelPage_proposes_heading{
+                font-size: 1.5rem;
+                font-weight: 700;
+                padding: 1rem 0;
+            }
+
+            > .adminPanelPage_proposes_list{
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    }
+}

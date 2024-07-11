@@ -9,6 +9,7 @@ import Header from '@/components/header/header';
 import MainPage from '@/pages/mainPage/mainPage';
 import SuggestPage from './pages/suggestPage/suggestPage';
 import ProfilePage from './pages/profilePage/profilePage';
+import AdminPanelPage from './pages/adminPanelPage/adminPanelPage';
 
 function App() {
 
@@ -23,11 +24,15 @@ function App() {
 
       <main>
         <Routes>
-          <Route path='/' element={<MainPage scrollCallback = {scrollCallback}/>}></Route>
+          <Route path='/' element={<MainPage scrollCallback = {scrollCallback}/>} />
 
           {/* PROTECTED AUTH */}
-          <Route path='/suggest' element={<SuggestPage/>}></Route>
-          <Route path='/profile' element={<ProfilePage/>}></Route>
+          <Route path='/suggest' element={<SuggestPage/>} />
+          <Route path='/profile' element={<ProfilePage/>} />
+
+          {/* PROTECRED AUTH ROLE */}
+          <Route path='/adminPanel' element = {<AdminPanelPage/>} />
+
 
         </Routes>
       </main>
