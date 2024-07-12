@@ -1,0 +1,40 @@
+@import '@/assets/styles/veriables';
+
+.blacklistUser{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: $color-grey;
+    padding: 0.5rem;
+    border-radius: 0.75rem;
+
+    > .blacklistUser_leftGroup{
+        display: flex;
+        gap: 0.5rem;
+        flex: 1;
+        overflow: hidden;
+        align-items: center;
+
+
+        > img{
+            height: 2rem;
+            width: 2rem;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        > span{
+            font-weight: 700;
+            flex: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    }
+
+    > button{
+        width: 10%;
+        min-width: 100px
+    }
+}

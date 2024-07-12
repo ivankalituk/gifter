@@ -3,18 +3,20 @@ import './adminPanelAdditional.scss'
 import { Link } from 'react-router-dom';
 import { FC } from "react";
 
-const AdminPanelAdditional: FC = () =>{
+
+
+const AdminPanelAdditional: FC <{page : string}>= ({page}) =>{
 
     const chosen: number = 1;
     
     return (
         <div className="adminPanelAdditional">
             
-            <Link to={'/'}>Пропозиції</Link>
-            <Link className={chosen? "chosen" : ""} to={'/'}>Скарги</Link>
-            <Link to={'/'}>Керування адмінами</Link>
-            <Link to={'/'}>Чорний список</Link>
-            <Link to={'/'}>Статистика</Link>
+            <Link className={page === 'gifts'? "chosen" : ""} to={'/adminPanel/gifts'}>Пропозиції</Link>
+            <Link className={page === 'repport'? "chosen" : ""} to={'/adminPanel/reports'}>Скарги</Link>
+            <Link className={page === 'admins'? "chosen" : ""} to={'/adminPanel/admins'}>Керування адмінами</Link>
+            <Link className={page === 'blacklist'? "chosen" : ""} to={'/adminPanel/blacklist'}>Чорний список</Link>
+            <Link className={page === 'stats'? "chosen" : ""} to={'/adminPanel/stats'}>Статистика</Link>
 
 
         </div>

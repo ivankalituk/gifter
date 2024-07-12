@@ -9,7 +9,8 @@ import Header from '@/components/header/header';
 import MainPage from '@/pages/mainPage/mainPage';
 import SuggestPage from './pages/suggestPage/suggestPage';
 import ProfilePage from './pages/profilePage/profilePage';
-import AdminPanelPage from './pages/adminPanelPage/adminPanelPage';
+import AdminGiftpage from './pages/adminGiftPage/adminGiftPage';
+import AdminBlacklistPage from './pages/adminBlacklistPage/adminBlacklistPage';
 
 function App() {
 
@@ -31,8 +32,8 @@ function App() {
           <Route path='/profile' element={<ProfilePage/>} />
 
           {/* PROTECRED AUTH ROLE */}
-          <Route path='/adminPanel' element = {<AdminPanelPage/>} />
-
+          <Route path='/adminPanel/gifts' element = {<AdminGiftpage/>} />
+          <Route path='/adminPanel/blacklist' element = {<AdminBlacklistPage/>} />
 
         </Routes>
       </main>
