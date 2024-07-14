@@ -27,7 +27,10 @@ function App() {
 
           {/* PROTECTED AUTH */}
           <Route path='/suggest' element={<SuggestPage/>} />
-          <Route path='/profile' element={<ProfilePage/>} />
+    
+          {/* ДВА РАЗНЫХ РОУТА НА ПРОФИЛЬ, ПЕРВЫЙ ДЛЯ ВСЕХ ПОЛЬЗОВАТЕЛЕЙ, ВТОРОЙ ТОЛЬКО ДЛЯ СВОЕГО ПРОФИЛЯ */}
+          <Route path='/profile' element={<ProfilePage scrollCallback = {scrollCallback} type={'anyUser'}/>} />
+
 
           {/* PROTECRED AUTH ROLE */}
 
