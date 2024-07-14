@@ -8,32 +8,39 @@ import MarkedList from "./components/markedList/markedList";
 
 const ProfilePage: FC = () => {
 
-    // две колонки, на первой - ава человека, длинна колонки длинна второй колонки, там же переход на настройки как в гитхабе
-    // в второй колонке будет вся инфа пользователя по предложениям и так далее
+    // полностью переделать. в левой колонке будут теги выбранные пользователем, описание его интересов и возможно наиболее используемые теги пользователя
+    // справа будет список пользовательских тегов, переход на его желаемые подарки и список добавленных и одобренных им подарков
 
     return(
         <div className="profilePage">
-            <div className="profilePage_container">
-                <div className="profilePage_firstColumn">
+            <div className="profilePage_leftColumn">
+                {/* ФОТО ПРОФИЛЯ, НИК ПРОФИЛЯ, ОПИСАНИЕ ПРОФИЛЯ, ЧАСТО ИСПОЛЬЗУЕМЫЕ ТЕГИ */}
 
-                    <Link to={'/settings'}>
-                        <div className="profile_firstColumb_avatar"><img src={profilePhoto} alt="" /></div>
-                    </Link>
+                <img className="profilePage_leftColumn_avatar" src={profilePhoto} alt="profile photo" />
 
-                    <div className="profilePage_firstColumn_nickname">NIGNAMENIGNAMENIGNAME</div>
+                <div className="profilePage_leftColumn_nickname">NIGNAME</div>
 
-
-                    <Link to={'/settings'} className="link_button">Редагувати профіль</Link>
-
-
+                <div className="profilePage_leftColumn_description">
+                    <div className="profilePage_leftColumn_description_heading">Біо:</div>
+                    <div className="profilePage_leftColumn_description_text">Текс описания аккаунта гифтера для пользователя бла бла бла бла бла блядт бля бла</div>
                 </div>
 
-                <div className="profilePage_secondColumn">
-                    <div className="profilePage_secondColumn_markedLists">
-                        <MarkedList />
+                <div className="profilePage_leftColumn_usedTags">
+                    <div className="profilePage_leftColumn_usedTags_heading">Використані теги:</div>
+                    
+                    <div className="profilePage_leftColumn_usedTags_tags">
+                        <div>#Тег</div>
+                        <div>#Довгий тег</div>
+                        <div>#ДУЖЕ ДОВГИЙ ТЕГ</div>
+                        <div>#Тегггггггггггггеггггггггггг</div>
+                        <div>#Тег</div>
+                        <div>#Тег</div>
+                        <div>#Тег</div>
                     </div>
                 </div>
+
             </div>
+            <div className="profilePage_rightColumn">2</div>
         </div>
     )
 }

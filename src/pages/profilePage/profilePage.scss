@@ -2,74 +2,88 @@
 
 .profilePage{
     max-width: 1440px;
-    width: 100%;
     margin: 0 auto;
-    flex: 1;
-    padding: 1rem 2.57rem;
+    padding: 1rem 36px;
     box-sizing: border-box;
+    display: flex;  
+    gap: 1rem;
+    align-items: flex-start;
 
-    > .profilePage_container{
-        align-items: flex-start;
-        display: flex;
-        gap: 1rem;
-        overflow: hidden;
+    > .profilePage_leftColumn{
+        flex: 1;
+        background-color: $color-white;
+        box-shadow: 0px 0.57rem 1rem rgba(0, 0, 0, 0.08);
+        border-radius: 0.75rem;
+        padding: 1rem;
+        box-sizing: border-box;
+        max-width: 30rem;
 
-        > .profilePage_firstColumn{
-            max-width: 25rem;
+        > .profilePage_leftColumn_avatar{
+            aspect-ratio: 1 / 1;
             width: 100%;
-            // min-height: 100vh;
-            padding: 1rem;
+            height: auto;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px $color-grey solid;
             box-sizing: border-box;
-            border-radius: 0.75rem;
-            background-color: $color-white;
-            box-shadow: 0px 0.57rem 1rem rgba(0, 0, 0, 0.08);
+        }
 
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
+        > .profilePage_leftColumn_nickname{
+            margin-top: 1rem;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        
+        > .profilePage_leftColumn_description{
+            margin-top: 1rem;
 
-            > a{
-                > .profile_firstColumb_avatar{
-                    width: 100%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-around;
-                    
-                    > img{
-                        width: 22rem;
-                        height: 22rem;
-                        object-fit: cover;
-                        border-radius: 50%;
-                        border: 3px solid $color-grey;
-                    }
+            > .profilePage_leftColumn_description_heading{
+                font-size: 1.5rem;
+                font-weight: 700;
+                opacity: 0.5;
+            }
+
+            > .profilePage_leftColumn_description_text{
+                font-size: 1.2rem;
+            }
+        }
+
+        > .profilePage_leftColumn_usedTags{
+            margin-top: 1rem;
+
+            > .profilePage_leftColumn_usedTags_heading{
+                font-size: 1.5rem;
+                font-weight: 700;
+                opacity: 0.5;
+            }
+
+            > .profilePage_leftColumn_usedTags_tags{
+                display: flex;
+                gap: 0.35rem;
+                flex-wrap: wrap;
+
+                > div{
+                    background-color: $color-red;
+                    color: $color-white;
+                    border-radius: 0.35rem;
+                    padding: 0.35rem;
+                    font-weight: 700;
                 }
             }
-            
-            > .profilePage_firstColumn_nickname{
-                text-align: center;
-                font-weight: 700;
-                white-space: nowrap;
-                overflow: hidden;
-                max-width: 100%;
-                text-overflow: ellipsis;
-            }
-
-
         }
 
-        > .profilePage_secondColumn{
-            flex: 1;
-            padding: 1rem;
-            box-sizing: border-box;
-            overflow: hidden;
-            border-radius: 0.35rem;
-            background-color: $color-white;
-            box-shadow: 0px 0.57rem 1rem rgba(0, 0, 0, 0.08);
+    }
 
-            > .profilePage_secondColumn_markedLists{
-                display: flex;
-                overflow: hidden;
-            }
-        }
+    > .profilePage_rightColumn{
+        flex: 1;
+        background-color: $color-white;
+        box-shadow: 0px 0.57rem 1rem rgba(0, 0, 0, 0.08);
+        border-radius: 0.75rem;
+        padding: 1rem;
+        box-sizing: border-box;
     }
 }
