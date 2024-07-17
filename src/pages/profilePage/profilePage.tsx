@@ -14,10 +14,6 @@ interface ProfilePageInterface {
 
 const ProfilePage: FC <ProfilePageInterface> = ({type, scrollCallback}) => {
 
-    // сделать адаптив
-    // добавить кнопки и отображение данных по пропсу
-    // добавить карточку подарка
-
     return(
         <div className="profilePage">
             <div className="profilePage_leftColumn">
@@ -45,7 +41,8 @@ const ProfilePage: FC <ProfilePageInterface> = ({type, scrollCallback}) => {
                     </div>
                 </div>
 
-                <Link className="link_button" to={'/settings'}>Редагувати</Link>
+                {type == 'privateUser' && <Link className="link_button" to={'/settings'}>Редагувати</Link>}
+                
                 <Link className="link_button" to={'/admin'}>Адмін панель</Link>
                 
             </div>
@@ -100,7 +97,7 @@ const ProfilePage: FC <ProfilePageInterface> = ({type, scrollCallback}) => {
 
 
                 <div className="profilePage_rightColumn_gifts">
-                    <Link to={'/suggest'} className="link_button">Запропонувати</Link>
+                    {type == 'privateUser' && <Link to={'/suggest'} className="link_button">Запропонувати</Link>}
 
                     <div className="profilePage_rightColumn_gifts_list">
                         <GiftCard scrollCallback={scrollCallback}/>

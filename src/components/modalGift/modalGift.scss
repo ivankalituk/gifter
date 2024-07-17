@@ -81,7 +81,36 @@
               text-overflow: ellipsis;
               white-space: nowrap;
           }
-      }
+        }
+
+        > .modalGift_info_creator{
+          text-decoration: none;
+          color: $color-white;
+          padding: 0.35rem;
+          background-color: $color-red;
+          width: 300px;
+          font-weight: 700;
+          border-radius: 0.35rem;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+
+          > img{
+            width: 2rem;
+            height: auto;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 1px $color-grey solid;
+            box-sizing: border-box;
+          }
+          
+          > span{
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+          }
+        }
       }
     }
   }

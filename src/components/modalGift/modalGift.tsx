@@ -1,8 +1,10 @@
 import './modalGift.scss'
 
 import sampleGiftPhoto from '@/assets/images/Sample Gift Photo.png'
+import sampleAvatar from '@/assets/images/logoSample.jpg'
 
 import { FC, useState } from "react";
+import { Link } from 'react-router-dom';
 
 interface ModalGiftInterface {
     handleGiftModalClose: () => void
@@ -30,6 +32,11 @@ const ModalGift: FC <ModalGiftInterface>= ({handleGiftModalClose}) => {
 
                     <div className="modalGift_info">
                         <div className="modalGift_info_name">Кавун базований свіжий Херсонський (1шт)</div>
+
+                        <Link to={'/account/:user_id'} className='modalGift_info_creator'>
+                            <img src={sampleAvatar} alt="creatorAvatar" />
+                            <span>NIGNAME</span>
+                        </Link>
 
                         <div className="modalGift_info_reating">Рейтинг Большие звёзды</div>
 

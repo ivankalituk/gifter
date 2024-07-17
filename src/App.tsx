@@ -9,6 +9,8 @@ import Header from '@/components/header/header';
 import MainPage from '@/pages/mainPage/mainPage';
 import SuggestPage from './pages/suggestPage/suggestPage';
 import ProfilePage from './pages/profilePage/profilePage';
+import SettingsPage from './pages/settingsPage/settingsPage';
+import AdminSuggestsPage from './pages/adminSuggestsPage/adminSuggestsPage';
 
 function App() {
 
@@ -28,11 +30,13 @@ function App() {
           {/* PROTECTED AUTH */}
           <Route path='/suggest' element={<SuggestPage/>} />
     
-          {/* ДВА РАЗНЫХ РОУТА НА ПРОФИЛЬ, ПЕРВЫЙ ДЛЯ ВСЕХ ПОЛЬЗОВАТЕЛЕЙ, ВТОРОЙ ТОЛЬКО ДЛЯ СВОЕГО ПРОФИЛЯ */}
-          <Route path='/profile' element={<ProfilePage scrollCallback = {scrollCallback} type={'anyUser'}/>} />
-
-
+          <Route path='/profile' element={<ProfilePage scrollCallback = {scrollCallback} type={'privateUser'}/>} />
+          <Route path='/account/:user_id' element={<ProfilePage scrollCallback = {scrollCallback} type={'anyUser'}/>} />
+          <Route path='profile/settings' element={<SettingsPage />}/>
+          
           {/* PROTECRED AUTH ROLE */}
+          <Route path='/adminPanel/suggests' element={<AdminSuggestsPage />}/>
+
 
         </Routes>
       </main>
