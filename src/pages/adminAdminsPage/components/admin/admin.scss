@@ -1,0 +1,47 @@
+@import '@/assets/styles/veriables';
+
+.admin{
+    display: flex;
+    background-color: $color-grey;
+    padding: 0.35rem;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 0.75rem;
+    
+    > .admin_left{
+        display: flex;
+        gap: 0.35rem;
+        align-items: center;
+
+        > img{
+            width: 2rem;
+            height: auto;
+            aspect-ratio: 1/1;
+            border: 1px solid $color-grey-hover;
+            box-sizing: border-box;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        > a{
+            font-weight: 700;
+            text-decoration: none;
+            color: $color-black;
+        }
+    }
+
+    > .admin_right{
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+
+        > button{
+            border-radius: 50%;
+            width: 2rem;
+            height: 2rem;
+            border: none;
+            background-color: $color-grey-hover;
+        }
+    }
+}
