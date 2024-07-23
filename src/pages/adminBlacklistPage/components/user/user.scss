@@ -1,0 +1,34 @@
+@import '@/assets/styles/veriables';
+
+.user{
+    padding: 0.35rem;
+    box-sizing: border-box;
+    background-color: $color-grey;
+    border-radius: 0.35rem;
+    height: 2.7rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    > .user_left{
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        > img{
+            width: 2rem;
+            height: auto;
+            aspect-ratio: 1/1;
+            border: 1px solid $color-grey-hover;
+            box-sizing: border-box;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        > a{
+            font-weight: 700;
+            text-decoration: none;
+            color: $color-black;
+        }
+    }
+}
