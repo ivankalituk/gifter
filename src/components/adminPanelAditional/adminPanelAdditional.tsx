@@ -13,7 +13,7 @@ const AdminPanelAdditional: FC <{page : string}>= ({page}) =>{
         <div className="adminPanelAdditional">
             
             <Link className={page === 'gifts'? "chosen" : ""} to={'/adminPanel/suggests'}>Пропозиції</Link>
-            <Link className={page === 'repport'? "chosen" : ""} to={'/adminPanel/reports'}>Скарги</Link>
+            <Link className={page === 'report'? "chosen" : ""} to={'/adminPanel/reports'}>Скарги</Link>
             <Link className={page === 'admins'? "chosen" : ""} to={'/adminPanel/admins'}>Керування адмінами</Link>
             <Link className={page === 'blacklist'? "chosen" : ""} to={'/adminPanel/blacklist'}>Чорний список</Link>
             <Link className={page === 'stats'? "chosen" : ""} to={'/adminPanel/stats'}>Статистика</Link>
