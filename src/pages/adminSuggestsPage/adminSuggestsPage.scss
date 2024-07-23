@@ -8,6 +8,8 @@
     display: flex;  
     gap: 1rem;
     align-items: flex-start;
+    
+    width: 100%;
 
     > .adminSuggestsPage_content{
         background-color: $color-white;
