@@ -7,41 +7,13 @@
     padding: 1rem;
     border-radius: 0.75rem;
     box-sizing: border-box;
-
-    > .report_account{
-        width: 300px;
-        text-decoration: none;
-        display: flex;
-        gap: 0.5rem;
-        align-items: center;
-        background-color: $color-red;
-        padding: 0.35rem;
-        box-sizing: border-box;
-        border-radius: 0.35rem;
-
-
-        > img {
-            width: 2rem;
-            height: auto;
-            aspect-ratio: 1/1;
-            object-fit: cover;
-            border-radius: 50%;
-            box-sizing: border-box;
-            border: 1px $color-grey solid;
-        }
-
-        > span{
-            font-size: 1rem;
-            font-weight: 700;
-            color: $color-white;
-        }
-    }
     
     > .report_text{
-        margin-top: 0.5rem;
+        margin-top: 1rem;
     }
     
     > .giftCard{
+        margin-top: 1rem;
         flex: 1;
         display: flex;
 

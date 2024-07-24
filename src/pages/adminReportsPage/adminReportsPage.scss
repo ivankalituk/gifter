@@ -18,5 +18,10 @@
         flex: 1;
         overflow: hidden;
         border-radius: 0.75rem;
+
+        > .adminReportsPage_heading{
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
     }
 }
