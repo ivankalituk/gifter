@@ -133,7 +133,7 @@ $transition-speed-button: 0.5s;
 // кастомный инпут свитч
 .custom_switch{
   width: 2.28rem;
-  height: 1.28rem;
+  height: 1.24rem;
   background-color: $color-white;
   border: 1px $color-red solid;
   border-radius: 0.64rem;
@@ -171,7 +171,6 @@ $transition-speed-button: 0.5s;
 }
 
 // кастомный скроллбар
-
 .customScrollbar{
   &::-webkit-scrollbar{
     height: 0.35rem;
@@ -186,6 +185,33 @@ $transition-speed-button: 0.5s;
   &::-webkit-scrollbar-thumb{
       background-color: $color-grey-active;
       border-radius: 0.7rem;
+  }
+}
+
+.custom_search{
+  
+  margin-top: 0.35rem;
+  display: flex;
+  align-items: center;
+  border: 1px $color-grey solid; 
+  height: 2.71rem;
+  box-sizing: border-box;
+  padding: 0.42rem;
+  border-radius: 0.57rem;
+
+  > button{
+    background-color: $color-white;
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+
+  > input{
+      margin-left: 0.85rem;
+      outline: none;
+      border: none;
+      flex: 1;
+      font-size: 1rem;
   }
 }
 

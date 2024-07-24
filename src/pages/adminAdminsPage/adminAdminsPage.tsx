@@ -3,6 +3,8 @@ import { FC } from "react";
 
 import './adminAdminsPage.scss'
 import Admin from "./components/admin/admin";
+import search from '@/assets/images/Search.svg'
+
 
 const AdminAdminsPage: FC = () => {
     return(
@@ -13,7 +15,10 @@ const AdminAdminsPage: FC = () => {
                 <div className="adminAdminsPage_heading">Пропозиції подарунків користувачів</div>
 
                 <div className="adminAdminsPage_search">
-                    <input type="text" className="inputText_preset" placeholder="Введіть пошту адміна"/>
+                    <div className="custom_search">
+                        <button><img src={search} alt="search" /></button>
+                        <input type="text" placeholder="Введіть пошту користувача" />
+                    </div>
                 </div>
 
                 <div className="adminAdminsPage_list">

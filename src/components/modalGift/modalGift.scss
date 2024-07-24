@@ -88,12 +88,14 @@
           color: $color-white;
           padding: 0.35rem;
           background-color: $color-red;
-          width: 300px;
+          // width: 300px;
+          max-width: 200px;
           font-weight: 700;
           border-radius: 0.35rem;
           display: flex;
           align-items: center;
           gap: 0.5rem;
+          flex: 1;
 
           > img{
             width: 2rem;

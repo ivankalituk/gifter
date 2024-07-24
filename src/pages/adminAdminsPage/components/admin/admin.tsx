@@ -14,7 +14,7 @@ const Admin: FC = () => {
             </div>
 
             <div className="admin_right">
-                <div className="admin_status">3</div>
+                <div className="admin_status">Рівень 3</div>
                 <button>-1</button>
                 <button>+1</button>
             </div>

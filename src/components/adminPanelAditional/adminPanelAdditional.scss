@@ -45,3 +45,9 @@
         }
     }
 }
+
+@media (max-width: 1000px) {
+    .adminPanelAdditional{
+        display: none;
+    }
+}

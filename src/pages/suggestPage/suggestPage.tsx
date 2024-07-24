@@ -62,7 +62,7 @@ const  SuggestPage: FC  = () => {
                         <div className="dataUpload_addTags">
                             <span>Введіть теги, котрі відповідают товару</span>
                             
-                            <div className="dataUpload_addTags_searchBar">
+                            <div className="custom_search">
                                 <img src={search} alt="search" />
                                 <input type="text" placeholder="Введіть тег" />
                             </div>
