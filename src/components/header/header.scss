@@ -96,6 +96,31 @@ header{
                    flex: 1;
                    display: flex;
                 }
+
+                > .burger_mainLinks{
+                    margin-top: 1rem;
+                    display: flex;
+                    flex-direction: column;
+                    
+                    > a{
+                        text-decoration: none;
+                        color: $color-black;
+                        font-weight: 700;
+                    }
+                }
+
+                > .burger_aditionalLinks{
+                    margin-top: 1rem;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.5rem;
+
+                    > a{
+                        text-decoration: none;
+                        color: $color-black;
+                        font-weight: 700;
+                    }
+                }
             }
 
         }
