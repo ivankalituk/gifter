@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 import sampleAvatar from '@/assets/images/logoSample.jpg'
 import sampleGift from '@/assets/images/Sample Gift Photo.png'
+import Account from "../account/account";
 
 
 const AnySuggest: FC = () => {
@@ -16,10 +17,8 @@ const AnySuggest: FC = () => {
 
     return(
         <div className="suggest">
-            <Link to={'/account/:user_id'} className="suggest_account">
-                <img src={sampleAvatar} alt="" />
-                <span>Nigname</span>
-            </Link>
+
+            <Account />
 
             <div className="suggest_comment">Комментарий коммент комменткомменткомменткомменткомменткомменткомменткомменткомменткомменткоммент</div>
 

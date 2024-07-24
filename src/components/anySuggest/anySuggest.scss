@@ -7,43 +7,16 @@
     padding: 1rem;
     border-radius: 0.75rem;
     box-sizing: border-box;
-
-    > .suggest_account{
-        width: 300px;
-        text-decoration: none;
-        display: flex;
-        gap: 0.5rem;
-        align-items: center;
-        background-color: $color-red;
-        padding: 0.35rem;
-        box-sizing: border-box;
-        border-radius: 0.35rem;
-
-
-        > img {
-            width: 2rem;
-            height: auto;
-            aspect-ratio: 1/1;
-            object-fit: cover;
-            border-radius: 50%;
-            box-sizing: border-box;
-            border: 1px $color-grey solid;
-        }
-
-        > span{
-            font-size: 1rem;
-            font-weight: 700;
-            color: $color-white;
-        }
-    }
     
     > .suggest_comment{
+        margin-top: 1rem;
         overflow: hidden;
         text-overflow: ellipsis;
         word-break: break-all;
     }
 
     > .suggest_gift{
+        margin-top: 1rem;
         > img{
             width: 100%;
             // max-width: 100%;

@@ -99,7 +99,7 @@
                 gap: 1rem;
 
                 > img{
-                    width: 3rem;
+                    width: 7rem;
                     height: auto;
                     aspect-ratio: 1/1;
                     border: 3px solid $color-grey;
@@ -107,12 +107,22 @@
                     box-sizing: border-box;
                 }
 
-                > span{
-                    font-size: 1.5rem;
-                    font-weight: 700;
-                    text-overflow: ellipsis;
-                    overflow: hidden;
-                    white-space: nowrap;
+                > .profilePage_rightColumn_accountInfo_info{
+                    display: flex;
+                    flex-direction: column;
+                    
+                    > div{
+                        font-size: 1.5rem;
+                        font-weight: 700;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                        white-space: nowrap;
+                    }
+
+                    > div:last-child{
+                        font-weight: 400;
+                        font-size: 1rem;
+                    }
                 }
             }
 
