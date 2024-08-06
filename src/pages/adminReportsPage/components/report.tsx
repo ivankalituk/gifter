@@ -16,7 +16,7 @@ const Report: FC = () => {
             <div className="report_text">РАНДОМ ТЕКСТ РЕПОРТА</div>
 
             {/* ДОБАВИТЬ КОЛБЕКИ */}
-            <GiftCard />
+            {/* <GiftCard /> */}
 
         </div>
     )
