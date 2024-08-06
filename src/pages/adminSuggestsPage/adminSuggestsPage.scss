@@ -18,5 +18,16 @@
         flex: 1;
         overflow: hidden;
         border-radius: 0.75rem;
+
+        > .adminSuggestsPage_heading{
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+    }
+}
+
+@media (max-width: 1000px) {
+    .adminSuggestsPage{
+        padding: 1rem;
     }
 }

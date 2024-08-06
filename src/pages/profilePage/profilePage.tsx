@@ -54,7 +54,10 @@ const ProfilePage: FC <ProfilePageInterface> = ({type, scrollCallback}) => {
                     <div className="profilePage_rightColumn_accountInfo">
                         <img src={profilePhoto} alt="avatar" />
 
-                        <span>Nigname</span>
+                        <div className="profilePage_rightColumn_accountInfo_info">
+                             <div>Nigname</div>
+                             <div>Зареєстрований: 12/12/2012</div>
+                        </div>
                     </div>
 
                     <div className="profilePage_rightColumn_description">
