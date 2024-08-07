@@ -5,6 +5,8 @@ import './mainPage.scss'
 import Filters from "./components/filters/filters";
 import GiftCard from "@/components/giftCard/giftCard";
 import Selector from "./components/selector/selector";
+import { useGetRequest } from "@/hooks/useGetReuquest";
+import { getAllGifts } from "@/api/gifts";
 
 interface MainPageInterface {
     scrollCallback: (block: boolean)=> void
@@ -19,8 +21,7 @@ const MainPage: FC <MainPageInterface>= ({scrollCallback}) => {
         scrollCallback(!filtersOpen)
         // если тру то колбек
     }
-
-
+    
     return (
         <div className="mainPage">
             <div className="mainPage_container">

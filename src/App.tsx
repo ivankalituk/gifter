@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import './App.scss';
@@ -14,14 +14,49 @@ import AdminSuggestsPage from './pages/adminSuggestsPage/adminSuggestsPage';
 import AdminBlacklistPage from './pages/adminBlacklistPage/adminBlacklistPage';
 import AdminAdminsPage from './pages/adminAdminsPage/adminAdminsPage';
 import AdminReportsPage from './pages/adminReportsPage/adminReportsPage';
+import { useGetRequest } from './hooks/useGetReuquest';
+import { getUserInfo } from './api/user';
+import axios from 'axios';
 
 function App() {
 
   const [blockScroll, setBlockScroll] = useState<boolean>(false)
 
+  // блокировка скролла
   const scrollCallback = (block: boolean) =>{
     setBlockScroll(block)
   }
+
+  // получение информации про пользователя
+
+  const [userEnabled, setUserEnabled] = useState<boolean>(false)
+  const [userKey, setUserKey] = useState<number>(0)
+  const [access_token, setAccess_tocken] = useState<string | null>(null)
+
+  const {data: userData, isFetched: userFetched} = useGetRequest({fetchFunc: ()=> getUserInfo(23232), key: [userKey], enabled: userEnabled})
+
+  useEffect(() => {
+    const checkUser = async () => {
+      // если токен существует
+      const token = localStorage.getItem('access_token')
+      console.log(token)
+      // if (token){
+      //   try {
+      //     // проверяем активен ли токен
+          
+      //     const response = await axios.get(process.env.REACT_APP_SERVER_URL + '/user/' + token);
+      //     const data = response.data
+
+
+      //   } catch (error) {
+      //     console.error('Error:', error);
+      //   }
+      // }
+    }
+
+    checkUser()
+  }, [])
+
   return (
     <div className={blockScroll? "App blockScroll" : "App"}>
       <Header scrollCallback={scrollCallback}/>
