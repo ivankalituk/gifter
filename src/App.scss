@@ -5,12 +5,42 @@
     display: flex;
     flex-direction: column;
 
+    > .loader{
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 100vw;
+        z-index: 10000;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+
+        > .loader_logo{
+            text-decoration: none;
+            display: flex;
+            gap: 0.357rem;
+            align-items: center;
+    
+            >img{
+                height: 2.357rem;
+                width: 2.714rem;
+            }
+    
+            > h1{
+                text-transform: uppercase;
+                font-weight: 900;
+                font-size: 2.285rem;
+                color: $color-red;
+            }
+        }
+    }
+
     >main{
         flex: 1;
         background-color: $color-grey;
         display: flex;
         flex-direction: column;
-
     }
 
     &.blockScroll{

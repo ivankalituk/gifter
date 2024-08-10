@@ -20,7 +20,7 @@ import axios from 'axios';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { RootState, UserState } from './interfaces/interface';
 import { setUser } from './redux/userSlice';
-
+import logo from '@/assets/images/logoRed.svg'
 
 function App() {
 
@@ -70,10 +70,18 @@ function App() {
   }, [])
 
   // для задержки к получению данных аккаунта
-  const[ready, setReady] = useState<boolean>(false)
+  const[ready, setReady] = useState<boolean>(true)
 
   return (
     <div className={blockScroll? "App blockScroll" : "App"}>
+
+      {!ready &&<div className="loader">
+        <div className="loader_logo">
+          <img src={logo} alt="logo" />
+          <h1>gifter</h1>
+        </div>
+      </div>}
+
       {ready && <>
         <Header scrollCallback={scrollCallback}/>
 

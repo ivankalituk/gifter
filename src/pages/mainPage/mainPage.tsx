@@ -19,7 +19,6 @@ const MainPage: FC <MainPageInterface>= ({scrollCallback}) => {
     const handleFiltersOpen = () =>{
         setFiltersOpen(!filtersOpen)
         scrollCallback(!filtersOpen)
-        // если тру то колбек
     }
     
     return (

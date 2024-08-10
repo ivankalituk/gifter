@@ -6,6 +6,8 @@ import profilePhoto from "@/assets/images/logoSample.jpg"
 import './profilePage.scss'
 import MarkedList from "./components/markedList/markedList";
 import GiftCard from "@/components/giftCard/giftCard";
+import { TypedUseSelectorHook, useSelector } from "react-redux";
+import { RootState } from "@/interfaces/interface";
 
 interface ProfilePageInterface {
     type: string;
@@ -14,13 +16,16 @@ interface ProfilePageInterface {
 
 const ProfilePage: FC <ProfilePageInterface> = ({type, scrollCallback}) => {
 
+    const useTypeSelector: TypedUseSelectorHook <RootState> = useSelector
+    const user = useTypeSelector((state) => state.user)
+
     return(
         <div className="profilePage">
             <div className="profilePage_leftColumn">
 
-                <img className="profilePage_leftColumn_avatar" src={profilePhoto} alt="profile photo" />
+                <img className="profilePage_leftColumn_avatar" src={user.user_imgUrl? user.user_imgUrl :profilePhoto} alt="profile photo" />
 
-                <div className="profilePage_leftColumn_nickname">NIGNAME</div>
+                <div className="profilePage_leftColumn_nickname">{user.user_nickName}</div>
 
                 <div className="profilePage_leftColumn_description">
                     <div className="profilePage_leftColumn_description_heading">Біо:</div>
