@@ -38,13 +38,13 @@ function App() {
     const checkUser = async () => {
       // если токен существует
       const token = localStorage.getItem('access_token')
-      // console.log(token)
+      console.log(token)
 
       if (token){
         try {
           // проверяем активен ли токен
           
-          const response = await axios.post('http://localhost:1000/user', {access_token: token});
+          const response = await axios.post('http://localhost:1000/user', {access_token: token+'2'});
           const data = response.data
           console.log(data)
 
@@ -60,6 +60,7 @@ function App() {
 
           dispatch(setUser(newUser))
           setReady(true)
+
         } catch (error) {
           console.error('Error:', error);
         }
@@ -70,7 +71,7 @@ function App() {
   }, [])
 
   // для задержки к получению данных аккаунта
-  const[ready, setReady] = useState<boolean>(true)
+  const[ready, setReady] = useState<boolean>(false)
 
   return (
     <div className={blockScroll? "App blockScroll" : "App"}>
