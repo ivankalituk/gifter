@@ -3,6 +3,8 @@ import { FC, useState , ChangeEvent, useEffect} from "react";
 import './filters.scss'
 
 import search from '@/assets/images/Search.svg'
+import { useGetRequest } from "@/hooks/useGetReuquest";
+import { getTagByInput } from "@/api/tags";
 
 interface FilterInterface {
     handleFiltersOpen: ()=> void,
@@ -45,6 +47,31 @@ const Filters: FC <FilterInterface>= ({filtersOpen, handleFiltersOpen}) =>{
         setAgeInputSwitch(!ageInputSwitch)
     }
 
+
+    // для хранения выбранных тегов подарков
+    const [chosenTags, setChosenTags] = useState<string[] | null>(null)
+
+
+
+    // по вводу текста в поиск, будут находиться теги, при выборе тега из списка, он будет добавляться в общий список
+    const [tagInput, setTagInput] = useState<string>('')
+    const [tagInputKey, setTagInputKey] = useState<number>(1)
+    const [tagInputEnabled, setTagInputEnabled] = useState<boolean>(true)
+
+
+    const handleTagInputChange = (event: React.ChangeEvent<HTMLInputElement>) =>{    
+        setTagInput(event.target.value)
+    
+        // тут же отправлять запрос на сервер по этому тегу
+        
+        setTagInputKey(tagInputKey + 1)
+        console.log(tags)
+    }
+
+    const {data: tags, isFetched: tagsFetched} = useGetRequest({fetchFunc: () => getTagByInput({text: tagInput}), enabled: tagInputEnabled, key: [tagInputKey]})
+
+    // сделать отображение данных
+
     return(
         <div className="filters">
             <div className= {filtersOpen? "filters_container" : "filters_container show"}>
@@ -53,7 +80,7 @@ const Filters: FC <FilterInterface>= ({filtersOpen, handleFiltersOpen}) =>{
                     
                     <div className="filters_tagSearch_searchBar">
                         <img src={search} alt="search" />
-                        <input type="text" placeholder="Введіть тег" />
+                        <input type="text" placeholder="Введіть тег" value={tagInput} onChange={handleTagInputChange}/>
                     </div>
 
                     <div className="filters_tagSearch_tags">

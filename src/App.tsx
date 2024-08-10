@@ -44,7 +44,7 @@ function App() {
         try {
           // проверяем активен ли токен
           
-          const response = await axios.post('http://localhost:1000/user', {access_token: token+'2'});
+          const response = await axios.post('http://localhost:1000/user', {access_token: token});
           const data = response.data
           console.log(data)
 
