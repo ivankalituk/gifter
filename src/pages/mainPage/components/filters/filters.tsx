@@ -22,35 +22,11 @@ const Filters: FC <FilterInterface>= ({filtersOpen, handleFiltersOpen}) =>{
     const [burgerFilter, setBurgerFilter] = useState<boolean>(false)
 
     // для чекбокса гендера
-    // const handleChangeGenderAll = (event: ChangeEvent<HTMLInputElement>) =>{
-    //     setCheckboxGenderAll(event.target.checked)
-    //     if(event.target.checked){
-    //         handleAddTag("#дляВсіх")
-    //     } else {
-    //         handleRemoveTag("#дляВсіх")
-    //     }
-    // }
-    // const handleChangeGenderMen = (event: ChangeEvent<HTMLInputElement>) =>{
-    //     setCheckboxGenderMen(event.target.checked)
-    //     if(event.target.checked){
-    //         handleAddTag("#дляЧоловіків")
-    //     } else {
-    //         handleRemoveTag("#дляЧоловіків")
-    //     }
-    // }
-    // const handleChangeGenderWoman = (event: ChangeEvent<HTMLInputElement>) =>{
-    //     setCheckboxGenderWoman(event.target.checked)
-    //     if(event.target.checked){
-    //         handleAddTag("#дляЖінок")
-    //     } else {
-    //         handleRemoveTag("#дляЖінок")
-    //     }
-    // }
-
     const handleChangeGender = (event: ChangeEvent<HTMLInputElement>, gender: string) => {
+        
         const isChecked = event.target.checked;
     
-        // Обновляем состояние соответствующего чекбокса
+        // Обновляем состояние чекбокса
         switch (gender) {
             case "#дляВсіх":
                 setCheckboxGenderAll(isChecked);
@@ -65,7 +41,7 @@ const Filters: FC <FilterInterface>= ({filtersOpen, handleFiltersOpen}) =>{
                 break;
         }
     
-        // Добавляем или удаляем тег в зависимости от состояния чекбокса
+        // Добавляем или удаляем тег 
         if (isChecked) {
             handleAddTag(gender);
         } else {
