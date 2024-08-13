@@ -13,6 +13,7 @@
         > .filters_tagSearch{
 
             > .filters_tagSearch_searchBar{
+                position: relative;
                 display: flex;
                 align-items: center;
                 border: 1px $color-grey solid; 
@@ -27,6 +28,31 @@
                     border: none;
                     flex: 1;
                     font-size: 1rem;
+                }
+
+                > .filters_tagSearch_results{
+                    padding: 0.7rem;
+                    box-sizing: border-box;
+                    top: 2.7rem;
+                    left: -1px;
+                    position: absolute;
+                    width: 205px;
+                    background-color: $color-white;
+                    border-radius: 0 0 0.75rem 0.75rem;
+                    z-index: 100;
+
+                    > .filters_tagSearch_result{
+                        color: $color-black;
+                        font-size: 1rem;
+                        height: 2rem;
+                        display: flex;
+                        align-items: center;
+                        cursor: pointer;
+                        border: none;
+                        outline: none;
+                        background-color: $color-white;
+                        width: 100%;
+                    }
                 }
             }
 
