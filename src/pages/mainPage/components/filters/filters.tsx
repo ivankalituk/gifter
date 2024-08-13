@@ -198,7 +198,7 @@ const Filters: FC <FilterInterface>= ({filtersOpen, handleFiltersOpen}) =>{
 
                             <input type="checkbox" checked={checkboxGenderWoman} onChange={(event) => handleChangeGender(event, '#дляЖінок')}/>
                         </div>
-
+ 
                     </div>
                 </div>
 
