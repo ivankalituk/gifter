@@ -45,7 +45,7 @@ const Filters: FC <FilterInterface>= ({filtersOpen, handleFiltersOpen}) =>{
         if (isChecked) {
             handleAddTag(gender);
         } else {
-            handleRemoveTag(gender);
+            handleRemoveTag(gender); 
         }
     };
     
