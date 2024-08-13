@@ -22,15 +22,57 @@ const Filters: FC <FilterInterface>= ({filtersOpen, handleFiltersOpen}) =>{
     const [burgerFilter, setBurgerFilter] = useState<boolean>(false)
 
     // для чекбокса гендера
-    const handleChangeGenderAll = (event: ChangeEvent<HTMLInputElement>) =>{
-        setCheckboxGenderAll(event.target.checked)
-    }
-    const handleChangeGenderMen = (event: ChangeEvent<HTMLInputElement>) =>{
-        setCheckboxGenderMen(event.target.checked)
-    }
-    const handleChangeGenderWoman = (event: ChangeEvent<HTMLInputElement>) =>{
-        setCheckboxGenderWoman(event.target.checked)
-    }
+    // const handleChangeGenderAll = (event: ChangeEvent<HTMLInputElement>) =>{
+    //     setCheckboxGenderAll(event.target.checked)
+    //     if(event.target.checked){
+    //         handleAddTag("#дляВсіх")
+    //     } else {
+    //         handleRemoveTag("#дляВсіх")
+    //     }
+    // }
+    // const handleChangeGenderMen = (event: ChangeEvent<HTMLInputElement>) =>{
+    //     setCheckboxGenderMen(event.target.checked)
+    //     if(event.target.checked){
+    //         handleAddTag("#дляЧоловіків")
+    //     } else {
+    //         handleRemoveTag("#дляЧоловіків")
+    //     }
+    // }
+    // const handleChangeGenderWoman = (event: ChangeEvent<HTMLInputElement>) =>{
+    //     setCheckboxGenderWoman(event.target.checked)
+    //     if(event.target.checked){
+    //         handleAddTag("#дляЖінок")
+    //     } else {
+    //         handleRemoveTag("#дляЖінок")
+    //     }
+    // }
+
+    const handleChangeGender = (event: ChangeEvent<HTMLInputElement>, gender: string) => {
+        const isChecked = event.target.checked;
+    
+        // Обновляем состояние соответствующего чекбокса
+        switch (gender) {
+            case "#дляВсіх":
+                setCheckboxGenderAll(isChecked);
+                break;
+            case "#дляЧоловіків":
+                setCheckboxGenderMen(isChecked);
+                break;
+            case "#дляЖінок":
+                setCheckboxGenderWoman(isChecked);
+                break;
+            default:
+                break;
+        }
+    
+        // Добавляем или удаляем тег в зависимости от состояния чекбокса
+        if (isChecked) {
+            handleAddTag(gender);
+        } else {
+            handleRemoveTag(gender);
+        }
+    };
+    
 
     // для инпут ренджа
     const [rangeValue, setRangeValue] = useState<number>(0)
@@ -72,6 +114,10 @@ const Filters: FC <FilterInterface>= ({filtersOpen, handleFiltersOpen}) =>{
         // сделать проверку на такие же теги
         if(!chosenTags.includes(text)){
             handleAddTag(text)
+
+            if (text === "#дляВсіх"){setCheckboxGenderAll(true)}
+            if (text === "#дляЧоловіків"){setCheckboxGenderMen(true)}
+            if (text === "#дляЖінок"){setCheckboxGenderWoman(true)}
         }
 
         setTagInput('')
@@ -81,6 +127,9 @@ const Filters: FC <FilterInterface>= ({filtersOpen, handleFiltersOpen}) =>{
     // убрать тег по нажатию на него
     const handleRemoveTag = (text: string) => {
         setChosenTags(prevTags => prevTags.filter(tag => tag !== text))
+        if (text === "#дляВсіх"){setCheckboxGenderAll(false)}
+        if (text === "#дляЧоловіків"){setCheckboxGenderMen(false)}
+        if (text === "#дляЖінок"){setCheckboxGenderWoman(false)}
     }
 
     const handleAddTag = (text: string) => {
@@ -127,7 +176,7 @@ const Filters: FC <FilterInterface>= ({filtersOpen, handleFiltersOpen}) =>{
                                 <div className={checkboxGenderAll? "gender_customCheck_circle active" : "gender_customCheck_circle disabled"}></div>
                             </div>
 
-                            <input type="checkbox" checked={checkboxGenderAll} onChange={handleChangeGenderAll}/>
+                            <input type="checkbox" checked={checkboxGenderAll} onChange={(event) => handleChangeGender(event, '#дляВсіх')}/>
                         </div>
                         
                         <div className="gender">
@@ -137,7 +186,7 @@ const Filters: FC <FilterInterface>= ({filtersOpen, handleFiltersOpen}) =>{
                                 <div className={checkboxGenderMen? "gender_customCheck_circle active" : "gender_customCheck_circle disabled"}></div>
                             </div>
 
-                            <input type="checkbox" checked={checkboxGenderMen} onChange={handleChangeGenderMen}/>
+                            <input type="checkbox" checked={checkboxGenderMen} onChange={(event) => handleChangeGender(event, '#дляЧоловіків')}/>
                         </div>
 
                         <div className="gender">
@@ -147,7 +196,7 @@ const Filters: FC <FilterInterface>= ({filtersOpen, handleFiltersOpen}) =>{
                                 <div className={checkboxGenderWoman? "gender_customCheck_circle active" : "gender_customCheck_circle disabled"}></div>
                             </div>
 
-                            <input type="checkbox" checked={checkboxGenderWoman} onChange={handleChangeGenderWoman}/>
+                            <input type="checkbox" checked={checkboxGenderWoman} onChange={(event) => handleChangeGender(event, '#дляЖінок')}/>
                         </div>
 
                     </div>
