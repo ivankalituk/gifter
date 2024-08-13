@@ -26,6 +26,8 @@ const Filters: FC <FilterInterface>= ({filtersOpen, handleFiltersOpen}) =>{
         
         const isChecked = event.target.checked;
     
+        const NEWFKNCOMMITFORGITFKNHUB = false
+
         // Обновляем состояние чекбокса
         switch (gender) {
             case "#дляВсіх":
