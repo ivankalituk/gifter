@@ -108,10 +108,10 @@ const ProfilePage: FC <ProfilePageInterface> = ({type, scrollCallback}) => {
                     {type == 'privateUser' && <Link to={'/suggest'} className="link_button">Запропонувати</Link>}
 
                     <div className="profilePage_rightColumn_gifts_list">
+                        {/* <GiftCard scrollCallback={scrollCallback}/>
                         <GiftCard scrollCallback={scrollCallback}/>
                         <GiftCard scrollCallback={scrollCallback}/>
-                        <GiftCard scrollCallback={scrollCallback}/>
-                        <GiftCard scrollCallback={scrollCallback}/>
+                        <GiftCard scrollCallback={scrollCallback}/> */}
                     </div>
                 </div>
 

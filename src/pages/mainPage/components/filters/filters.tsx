@@ -8,10 +8,11 @@ import { getTagByInput } from "@/api/tags";
 
 interface FilterInterface {
     handleFiltersOpen: ()=> void,
+    filtersCallback: (tags: string[]) => void,
     filtersOpen: boolean
 }
 
-const Filters: FC <FilterInterface>= ({filtersOpen, handleFiltersOpen}) =>{
+const Filters: FC <FilterInterface>= ({filtersOpen, handleFiltersOpen, filtersCallback}) =>{
 
     // для чекбокса гендера
     const [checkboxGenderAll, setCheckboxGenderAll] = useState<boolean>(false)
@@ -110,8 +111,15 @@ const Filters: FC <FilterInterface>= ({filtersOpen, handleFiltersOpen}) =>{
         if (text === "#дляЖінок"){setCheckboxGenderWoman(false)}
     }
 
+    // добавление тега в массив
     const handleAddTag = (text: string) => {
         setChosenTags(prevTags => [...prevTags, text])
+    }
+
+    // начать поиск по тегам
+    const handleSearchByFilters = () =>{
+        console.log(1)
+        filtersCallback(chosenTags)
     }
 
     // запрос на сервер для списка тегов по схожести
@@ -196,6 +204,8 @@ const Filters: FC <FilterInterface>= ({filtersOpen, handleFiltersOpen}) =>{
                     
 
                 </div>
+
+                <button className="button_preset" onClick={handleSearchByFilters}>Застосувати</button>
 
             </div>
 

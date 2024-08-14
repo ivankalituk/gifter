@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import './giftCard.scss'
@@ -15,9 +15,10 @@ import Modal from "@/components/modal/modal";
 
 interface GiftCardInterface  {
     scrollCallback: (block: boolean) => void
+    data: any
 }
 
-const GiftCard: FC <GiftCardInterface> = ({scrollCallback}) =>{
+const GiftCard: FC <GiftCardInterface> = ({scrollCallback, data}) =>{
 
     const [additional, setAditional] = useState<boolean>(false)                     //для отображение доп функций (три точки)
     const [report, setReport] = useState<boolean>(false)                            //для открытия модального репорта
@@ -60,7 +61,8 @@ const GiftCard: FC <GiftCardInterface> = ({scrollCallback}) =>{
         setMarked(!marked)
     }
 
-    
+    // переносим строку тегов подарка в массив для отображения
+
 
     return(
         <div className="giftCard">
@@ -68,9 +70,9 @@ const GiftCard: FC <GiftCardInterface> = ({scrollCallback}) =>{
             <div className="giftCard_container">
 
                 <div className="giftCard_inner">
-                    <img src={sampleGiftPhoto} alt="Gift photo" />
+                    <img src={data.photoPath? 'http://localhost:1000/' + data.photoPath : sampleGiftPhoto} alt="Gift photo" />
                     
-                    <div className="giftCard_name" onClick={handleGiftModalOpen}>Кавун базований свіжий Херсонський (1шт)</div>
+                    <div className="giftCard_name" onClick={handleGiftModalOpen}>{data.name}</div>
 
                     <div className="giftCard_reating" onClick={handleGiftModalOpen}>
                         <div className="giftCard_reating_stars">
@@ -91,24 +93,12 @@ const GiftCard: FC <GiftCardInterface> = ({scrollCallback}) =>{
                         
                     </div>
 
-                    <div className="giftCard_views">1999 перегляди</div>
+                    <div className="giftCard_views">{data.userViews} перегляди</div>
 
                     <div className="giftCard_tags">
-                        <div className="giftCard_tags_tag">#тег</div>
-                        <div className="giftCard_tags_tag">#тег</div>
-                        <div className="giftCard_tags_tag">#тег</div>
-                        <div className="giftCard_tags_tag">#тег</div>
-                        <div className="giftCard_tags_tag">#тег</div>
-                        <div className="giftCard_tags_tag">#тег</div>
-                        <div className="giftCard_tags_tag">#тег</div>
-                        <div className="giftCard_tags_tag">#тег</div>
-                        <div className="giftCard_tags_tag">#тег</div>
-                        <div className="giftCard_tags_tag">#тег</div>
-                        <div className="giftCard_tags_tag">#тег</div>
-                        <div className="giftCard_tags_tag">#тег</div>
-                        <div className="giftCard_tags_tag">#тег</div>
-                        <div className="giftCard_tags_tag">#тег</div>
-                        <div className="giftCard_tags_tag">#тег</div>
+                        { data.tags.split(', ').map((tag: string, index:number) => (
+                            <div className="giftCard_tags_tag" key={index}>{tag}</div>
+                        ))}
                     </div>
 
                 </div>
