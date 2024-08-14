@@ -21,6 +21,7 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { RootState, UserState } from './interfaces/interface';
 import { setUser } from './redux/userSlice';
 import logo from '@/assets/images/logoRed.svg'
+import AuthPage from './pages/authPage/authPage';
 
 function App() {
 
@@ -89,6 +90,7 @@ function App() {
         <main>
           <Routes>
             <Route path='/' element={<MainPage scrollCallback = {scrollCallback}/>} />
+            <Route path='/auth' element = {<AuthPage/>}></Route>
 
             {/* PROTECTED AUTH */}
             <Route path='/suggest' element={<SuggestPage/>} />
