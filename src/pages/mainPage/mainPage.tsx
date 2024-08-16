@@ -7,6 +7,7 @@ import GiftCard from "@/components/giftCard/giftCard";
 import Selector from "./components/selector/selector";
 import { useGetRequest } from "@/hooks/useGetReuquest";
 import { getAllGifts, getAllGiftsByTags } from "@/api/gifts";
+import { Gift } from "@/interfaces/interface";
 
 interface MainPageInterface {
     scrollCallback: (block: boolean)=> void
@@ -23,7 +24,7 @@ const MainPage: FC <MainPageInterface>= ({scrollCallback}) => {
 
     const [giftKey, setGiftKey] = useState<number>(1)
     const [giftTags, setGiftTags] = useState<string[]>([])
-    const {data: gifts, isFetched: giftsFetched} = useGetRequest({fetchFunc: () => getAllGiftsByTags(giftTags), key: [giftKey], enabled: true})
+    const {data: gifts, isFetched: giftsFetched} = useGetRequest<Gift[] | undefined>({fetchFunc: () => getAllGiftsByTags(giftTags), key: [giftKey], enabled: true})
 
     // колбек на применение фильтров
     const filtersCallBack = (tags: string[]) => {
@@ -33,6 +34,8 @@ const MainPage: FC <MainPageInterface>= ({scrollCallback}) => {
         console.log(2)
         console.log(giftTags, giftKey)
     }
+
+    console.log(gifts)
 
     return (
         <div className="mainPage">

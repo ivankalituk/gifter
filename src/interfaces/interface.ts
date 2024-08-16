@@ -11,3 +11,20 @@ export interface UserState {
 export interface RootState {
         user: UserState;
 }
+
+// -----------------------------------------------------------------------------
+// --------------------------ДЛЯ ЗАПРОСОВ НА СЕРВЕР-----------------------------
+// -----------------------------------------------------------------------------
+
+// интерфейс подарка
+export interface Gift {
+        id: number | null,
+        addData: string | null,
+        appreciators: number | null,
+        creatorId: number | null,
+        name: string | null,
+        photoPath: string | null,
+        reating: number | null,
+        tags: string | null,
+        userViews: number | null
+}
