@@ -6,6 +6,7 @@ import search from '@/assets/images/Search.svg'
 
 import insertPhoto from '@/assets/images/insertPhoto.svg'
 import giftPreInsertPhoto from '@/assets/images/giftPreInsertPhoto.svg'
+import { suggestForPost } from '@/interfaces/interface';
 
 const  SuggestPage: FC  = () => {
 
@@ -28,6 +29,9 @@ const  SuggestPage: FC  = () => {
         console.log(typeof(selectedImgFile))
     }
 
+
+    // дата для отправки
+    const data :suggestForPost | null= null
 
 
     return(

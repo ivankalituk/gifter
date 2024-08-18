@@ -5,6 +5,7 @@ import './filters.scss'
 import search from '@/assets/images/Search.svg'
 import { useGetRequest } from "@/hooks/useGetReuquest";
 import { getTagByInput } from "@/api/tags";
+import { Tag } from "@/interfaces/interface";
 
 interface FilterInterface {
     handleFiltersOpen: ()=> void,
@@ -123,7 +124,7 @@ const Filters: FC <FilterInterface>= ({filtersOpen, handleFiltersOpen, filtersCa
     }
 
     // запрос на сервер для списка тегов по схожести
-    const {data: tags, isFetched: tagsFetched} = useGetRequest({fetchFunc: () => getTagByInput({text: tagInput}), enabled: tagInputEnabled, key: [tagInputKey]})
+    const {data: tags, isFetched: tagsFetched} = useGetRequest<Tag[]>({fetchFunc: () => getTagByInput({text: tagInput}), enabled: tagInputEnabled, key: [tagInputKey]})
 
     return(
         <div className="filters">
@@ -135,7 +136,7 @@ const Filters: FC <FilterInterface>= ({filtersOpen, handleFiltersOpen, filtersCa
                         <img src={search} alt="search" />
                         <input type="text" placeholder="Введіть тег" value={tagInput} onChange={handleTagInputChange}/>
 
-                        {(tagsFetched && tags.length > 0) && <div className="filters_tagSearch_results">
+                        {(tagsFetched && tags !== null && tags.length > 0) && <div className="filters_tagSearch_results">
                             {tags.map((data: any, index: number) => (
                                 <button className="filters_tagSearch_result" onClick={() =>handleSearchTag(data.text)} key={index}>{data.text}</button>
                                 ))}

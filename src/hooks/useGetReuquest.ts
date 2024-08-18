@@ -1,3 +1,4 @@
+import { Gift } from "@/interfaces/interface"
 import { useEffect, useState } from "react"
 
 interface UseGetRequestInterface <T>{
@@ -9,7 +10,7 @@ interface UseGetRequestInterface <T>{
 }
 
 export const useGetRequest = <T>({fetchFunc, key, enabled, mutationFunc}: UseGetRequestInterface<T>) => {
-    const [data, setData] = useState<any | null>(null)
+    const [data, setData] = useState<T | null>(null)
     const [isFetched, setIsFetched] = useState<boolean>(false)
 
     useEffect(() => {

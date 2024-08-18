@@ -48,7 +48,7 @@ const MainPage: FC <MainPageInterface>= ({scrollCallback}) => {
                     <Selector handleFiltersOpen ={handleFiltersOpen}  />
 
                     {giftsFetched && <div className="mainPage_giftContent_giftList">
-                        {gifts.map((data: any, index:number) => (<GiftCard scrollCallback = {scrollCallback} key={index} data={data}/>))}
+                        {gifts !== null && gifts !== undefined && gifts.map((data: any, index:number) => (<GiftCard scrollCallback = {scrollCallback} key={index} data={data}/>))}
                     </div>}
                 </div>
             </div>

@@ -28,3 +28,22 @@ export interface Gift {
         tags: string | null,
         userViews: number | null
 }
+
+export interface Tag {
+        id: number,
+        text: string
+}
+
+export interface suggest {
+        id: number,
+        addData: string,
+        creatorId: number,
+        name: string
+}
+
+export interface suggestForPost {
+        creatorId: number,
+        name: string,
+        description: string,
+        tags: string[]
+}
