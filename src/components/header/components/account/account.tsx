@@ -17,18 +17,18 @@ const  Account: FC = () =>{
     const user = useTypeSelector((state) => state.user)
 
     return(
-            <div className="account">
-                
-                {!user.user_nickName && <Link to={'/auth'}>Авторизація</Link>}
-                
-                {user.user_nickName && <Link className='account_loged' to={'/profile'}>
-                    <div className="header_profile_nickname">{user.user_nickName}</div>
+        <div className="account">
+            
+            {!user.user_nickName && <Link to={'/auth'} className='link_button_white'>Авторизація</Link>}
+            
+            {user.user_nickName && <Link className='account_loged' to={'/profile'}>
+                <div className="header_profile_nickname">{user.user_nickName}</div>
 
-                    <div className="header_profile_img">
-                        <img src={user.user_imgUrl? user.user_imgUrl : profileLogo} alt="avatar" />
-                    </div>
-                </Link>}
-            </div>
+                <div className="header_profile_img">
+                    <img src={user.user_imgUrl? user.user_imgUrl : profileLogo} alt="avatar" />
+                </div>
+            </Link>}
+        </div>
     )
 }
 
