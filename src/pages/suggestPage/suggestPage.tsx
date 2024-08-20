@@ -11,13 +11,15 @@ import { useUpdateRequest } from '@/hooks/useUpdateRequest';
 import { createSuggest } from '@/api/suggest';
 import { useGetRequest } from '@/hooks/useGetReuquest';
 import { getTagByInput } from '@/api/tags';
+import { useNavigate } from 'react-router-dom';
 
 const  SuggestPage: FC  = () => {
 
+    const navigate = useNavigate()
 
+    // ОБРАБОТКА ФОТО
     const [selectedImgFile, setSelectedImgFile] = useState<any>(null)           //сохранение файла фото
     const [selectedImg, setSelectedImg] = useState<any>(null)                   //сохранение ссылки на файл фото
-
 
     const handleImageUpload = (event: any)=>{
         const file = event.target.files[0]
@@ -32,13 +34,8 @@ const  SuggestPage: FC  = () => {
         console.log(typeof(selectedImg))
         console.log(typeof(selectedImgFile))
     }
-
-
-    // дата для отправки
-
-    // НЕОБХОДИМО СДЕЛАТЬ ОТПРАВКУ ДАННЫХ НА СЕРВЕР
     
-    // получение функции для отправки на сервер
+    // РАБОТА С ЗАПРОСАМИ ДЛЯ САГГЕСТА
     const {mutatedFunc: postSuggest} = useUpdateRequest({fetchFunc: createSuggest})
 
     const [suggestName, setSuggestName] = useState<string>('')
@@ -46,9 +43,6 @@ const  SuggestPage: FC  = () => {
     const [help, setHelp] = useState<boolean>(false)
 
     const handleCreateSuggest = () =>{
-        // тут будет отправка данных на сервер
-
-        // проверка есть ли название и описание подарка
         if (suggestDesc === '' || suggestName === ''){
             setHelp(true)
             console.log("HELP")
@@ -63,18 +57,21 @@ const  SuggestPage: FC  = () => {
             data.append('image', selectedImgFile)
 
             postSuggest(data)
+            navigate('/')
         }
     }
 
+    // отловить текст названия 
     const handleSuggestName = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSuggestName(event.target.value)
     }
 
+    // отловить текст описания
     const handleSuggestDesc = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         setSuggestDesc(event.target.value)
     }
     
-    // массив тегов
+    // МАССИВ ТЕГОВ
     const [tagArray, setTagArray] = useState<string[]>([])
 
     // для запроса на теги
@@ -136,12 +133,12 @@ const  SuggestPage: FC  = () => {
                         <input type='file' className="dataUpload_photo" onChange={handleImageUpload}/>
 
                         <div className="dataUpload_name">
-                            <div>Введіть назву подарунку</div>
+                            <div>Введіть назву подарунку{help && <span className='helpSpan'>*</span>}</div>
                             <input type="text" className='inputText_preset' placeholder='Назва подарунку' onChange={(event) => handleSuggestName(event)}/>
                         </div>
 
                         <div className="dataUpload_description">
-                            <div>Введіть пояснення подарунку</div>
+                            <div>Введіть пояснення подарунку{help && <span className='helpSpan'>*</span>}</div>
                             <textarea placeholder='Як ви прийшли до думки запропонувати це' className='textArea_preset' onChange={(event) => handleSuggestDesc(event)}/>
                         </div>
 
