@@ -1,12 +1,16 @@
 import './suggestPage.scss'
 
-import { FC, useState, ChangeEvent } from "react";
+import { FC, useState } from "react";
 
 import search from '@/assets/images/Search.svg'
 
 import insertPhoto from '@/assets/images/insertPhoto.svg'
 import giftPreInsertPhoto from '@/assets/images/giftPreInsertPhoto.svg'
-import { suggestForPost } from '@/interfaces/interface';
+import { suggestForPost, Tag } from '@/interfaces/interface';
+import { useUpdateRequest } from '@/hooks/useUpdateRequest';
+import { createSuggest } from '@/api/suggest';
+import { useGetRequest } from '@/hooks/useGetReuquest';
+import { getTagByInput } from '@/api/tags';
 
 const  SuggestPage: FC  = () => {
 
@@ -31,8 +35,86 @@ const  SuggestPage: FC  = () => {
 
 
     // дата для отправки
-    const data :suggestForPost | null= null
 
+    // НЕОБХОДИМО СДЕЛАТЬ ОТПРАВКУ ДАННЫХ НА СЕРВЕР
+    
+    // получение функции для отправки на сервер
+    const {mutatedFunc: postSuggest} = useUpdateRequest({fetchFunc: createSuggest})
+
+    const [suggestName, setSuggestName] = useState<string>('')
+    const [suggestDesc, setSuggestDesc] = useState<string>('')
+    const [help, setHelp] = useState<boolean>(false)
+
+    const handleCreateSuggest = () =>{
+        // тут будет отправка данных на сервер
+
+        // проверка есть ли название и описание подарка
+        if (suggestDesc === '' || suggestName === ''){
+            setHelp(true)
+            console.log("HELP")
+        } else {
+
+            // в формдату залить массив тегов
+            const data = new FormData()
+            data.append('name', suggestName)
+            data.append('user_id', '2')
+            data.append('content', suggestDesc)
+            // data.append('tags[]', tagArray)
+            data.append('image', selectedImgFile)
+
+            postSuggest(data)
+        }
+    }
+
+    const handleSuggestName = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setSuggestName(event.target.value)
+    }
+
+    const handleSuggestDesc = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setSuggestDesc(event.target.value)
+    }
+    
+    // массив тегов
+    const [tagArray, setTagArray] = useState<string[]>([])
+
+    // для запроса на теги
+    const [tagInput, setTagInput] = useState<string>('')
+    const [tagInputKey, setTagInputKey] = useState<number>(1)
+    const [tagInputEnabled, setTagInputEnabled] = useState<boolean>(true)
+
+    // сделать добавление тегов через поиск и так далее
+    const {data: tags, isFetched: tagsFetched} = useGetRequest<Tag[]>({fetchFunc: () => getTagByInput({text: tagInput}), enabled: tagInputEnabled, key: [tagInputKey]})
+
+    // отловить изменения инпута
+    const handleTagInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setTagInput(event.target.value)
+        console.log(tagInput)
+        setTagInputKey(tagInputKey + 1)
+        console.log(tags)
+    }
+
+    // для добавления неопределённого тега по нажатию на энтер
+    const handleEnterTagInput = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter' && tagInput !== ''){
+            handleTag(tagInput)
+            setTagInput('')
+            setTagInputKey(tagInputKey + 1)
+        }
+    }
+    
+    // для удаления тега из списка выбранных тегов
+    const handleRemoveTag = (newTag: string) => {
+        setTagArray(prevTags => prevTags.filter(tag => tag !== newTag))
+    }
+
+    // для добавления тега из списка результатов
+    const handleTag = (tag: string) => {
+        if (!tagArray.includes(tag)){
+            setTagArray(prevTags => [...prevTags, tag])
+        }
+        setTagInput('')
+        setTagInputKey(tagInputKey + 1)
+    }
 
     return(
         <div className="suggestPage">
@@ -53,43 +135,43 @@ const  SuggestPage: FC  = () => {
 
                         <input type='file' className="dataUpload_photo" onChange={handleImageUpload}/>
 
-
                         <div className="dataUpload_name">
                             <div>Введіть назву подарунку</div>
-                            <input type="text" className='inputText_preset' placeholder='Назва подарунку'/>
+                            <input type="text" className='inputText_preset' placeholder='Назва подарунку' onChange={(event) => handleSuggestName(event)}/>
                         </div>
 
                         <div className="dataUpload_description">
                             <div>Введіть пояснення подарунку</div>
-                            <textarea placeholder='Як ви прийшли до думки запропонувати це' className='textArea_preset'/>
+                            <textarea placeholder='Як ви прийшли до думки запропонувати це' className='textArea_preset' onChange={(event) => handleSuggestDesc(event)}/>
                         </div>
 
                         <div className="dataUpload_addTags">
                             <span>Введіть теги, котрі відповідают товару</span>
                             
-                            <div className="custom_search">
-                                <img src={search} alt="search" />
-                                <input type="text" placeholder="Введіть тег" />
-                            </div>
+
+                        <div className="filters_tagSearch_searchBar">
+                            <img src={search} alt="search" />
+                            <input type="text" placeholder="Введіть тег" value={tagInput} onChange={handleTagInput} onKeyDown={(event) => handleEnterTagInput(event)}/>
+
+                            {(tagsFetched && tags !== null && tags.length > 0) && <div className="filters_tagSearch_results">
+                                {tags.map((data: any, index: number) => (
+                                    <button className="filters_tagSearch_result" onClick={() =>handleTag(data.text)} key={index}>{data.text}</button>
+                                    ))}
+                            </div>}
+                        </div>
 
                             <div className="dataUpload_addTags_tags">
                                 <span>Додані теги:</span>
 
-                                <div>
-                                    <button>#тег</button>
-                                    <button>#ДОВГИЙтег</button>
-                                    <button>#ДУЖЕДОВГИЙтег</button>
-                                    <button>#тТЕФКОФАФАФАег</button>
-                                    <button>#гег</button>
-                                    <button>#ЧУДЛЯКИБУДЛЯКИчудлибудлибудляки</button>
-                                    <button>#чудличудличудлюдлей</button>
-                                    <button>#чудличудличудлюдлей</button>
+                                <div>{tagArray.map((tag) => (
+                                     <button onClick={() => handleRemoveTag(tag)}>{tag}</button>
+                                ))}
                                 </div>
                             </div>
                         </div>
 
 
-                        <button className='button_preset'>Відправити пропозицію</button>
+                        <button className='button_preset' onClick={handleCreateSuggest}>Відправити пропозицію</button>
                     </div>
                 </div>
 

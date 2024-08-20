@@ -10,7 +10,7 @@ export const useUpdateRequest = <T,F>({fetchFunc}:useUpdateRequest<T,F>) =>{
     const[data, setData] = useState<any | null>(null)
     const[isFetched, setIsFetched] = useState<boolean>(false)
 
-    const mutatedFunc = (data: F) => fetchFunc(data).then((fechedData: T) =>{
+    const mutatedFunc = (data: any) => fetchFunc(data).then((fechedData: T) =>{
         setData(fechedData)
         setIsFetched(true)
     })
