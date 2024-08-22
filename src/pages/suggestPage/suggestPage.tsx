@@ -53,7 +53,8 @@ const  SuggestPage: FC  = () => {
             data.append('name', suggestName)
             data.append('user_id', '2')
             data.append('content', suggestDesc)
-            // data.append('tags[]', tagArray)
+            tagArray?.forEach((tag) => (data.append('tagArray', tag)))
+            
             data.append('image', selectedImgFile)
 
             postSuggest(data)
