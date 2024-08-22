@@ -38,6 +38,7 @@ export async function getGiftNameByName(name: string): Promise<giftName[] | unde
 // получение всех подарков по массиву тегов (если массив пуст, то любые подарки)
 export async function getAllGiftsByTags(tags: string[], sort: string, byName: string):Promise<Gift[] | undefined> {
     try{
+        console.log(byName)
         return await axios.post<Gift[] | undefined>('http://localhost:1000/gift/tags', {tags: tags, sort: sort, byName: byName}).then(({data}) => data);
     } catch (error){
         if (axios.isAxiosError(error)){

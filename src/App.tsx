@@ -25,15 +25,19 @@ import AuthPage from './pages/authPage/authPage';
 
 function App() {
 
-  const [blockScroll, setBlockScroll] = useState<boolean>(false)
+  const dispatch = useDispatch()
+
 
   // блокировка скролла
+  const [blockScroll, setBlockScroll] = useState<boolean>(false)
   const scrollCallback = (block: boolean) =>{
     setBlockScroll(block)
   }
 
-  const dispatch = useDispatch()
 
+  // для задержки к получению данных аккаунта
+  const[ready, setReady] = useState<boolean>(false)
+  
   // получение информации про пользователя
   useEffect(() => {
     const checkUser = async () => {
@@ -71,8 +75,13 @@ function App() {
     checkUser()
   }, [])
 
-  // для задержки к получению данных аккаунта
-  const[ready, setReady] = useState<boolean>(false)
+  const [nameSearch, setNameSearch] = useState<string>('')
+
+  const nameSearchCallBack = (name: string) => {
+    setNameSearch(name)
+    console.log(nameSearch)
+  }
+
 
   return (
     <div className={blockScroll? "App blockScroll" : "App"}>
@@ -85,11 +94,11 @@ function App() {
       </div>}
 
       {ready && <>
-        <Header scrollCallback={scrollCallback}/>
+        <Header scrollCallback={scrollCallback} nameSearchCallBack = {nameSearchCallBack}/>
 
         <main>
           <Routes>
-            <Route path='/' element={<MainPage scrollCallback = {scrollCallback}/>} />
+            <Route path='/' element={<MainPage scrollCallback = {scrollCallback} nameSearch = {nameSearch}/>} />
             <Route path='/auth' element = {<AuthPage/>}></Route>
 
             {/* PROTECTED AUTH */}

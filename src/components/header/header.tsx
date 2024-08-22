@@ -12,10 +12,11 @@ import Account from "./components/account/account";
 
 interface HeaderProps {
     scrollCallback: (block: boolean) => void
+    nameSearchCallBack: (name: string) => void
 }
 
 
-const Header: FC<HeaderProps> = ({scrollCallback}) =>{
+const Header: FC<HeaderProps> = ({scrollCallback, nameSearchCallBack}) =>{
 
     const [burgerMenu, setBurgerMenu] = useState<boolean>(true)
 
@@ -34,7 +35,7 @@ const Header: FC<HeaderProps> = ({scrollCallback}) =>{
                         <h1>gifter</h1>
                     </Link>
 
-                    <SearchBar />
+                    <SearchBar nameSearchCallBack = {nameSearchCallBack} />
                 </div>
                 
                 <div className="header_profile">

@@ -8,7 +8,11 @@ import { useGetRequest } from '@/hooks/useGetReuquest';
 import { getGiftNameByName } from '@/api/gifts';
 import { giftName } from '@/interfaces/interface';
 
-const SearchBar: FC = () =>{
+interface SearchBarInterface{
+    nameSearchCallBack: (name: string) => void
+}
+
+const SearchBar: FC<SearchBarInterface> = ({nameSearchCallBack}) =>{
 
     const [searchInput, setSearchInput] = useState<string>('')
 
@@ -25,7 +29,7 @@ const SearchBar: FC = () =>{
 
     // применение поиска
     const handleSearchInput = () => {
-        console.log(searchInput)
+        nameSearchCallBack(searchInput)
     }
 
     // заполнение в сёрчбар по нажатию на возможный результат

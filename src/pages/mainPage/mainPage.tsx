@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 
 import './mainPage.scss'
 
@@ -11,9 +11,10 @@ import { Gift } from "@/interfaces/interface";
 
 interface MainPageInterface {
     scrollCallback: (block: boolean)=> void
+    nameSearch: string
 }
 
-const MainPage: FC <MainPageInterface>= ({scrollCallback}) => {
+const MainPage: FC <MainPageInterface>= ({scrollCallback, nameSearch}) => {
 
     const [filtersOpen, setFiltersOpen] = useState<boolean>(false)
 
@@ -26,10 +27,13 @@ const MainPage: FC <MainPageInterface>= ({scrollCallback}) => {
     const [giftTags, setGiftTags] = useState<string[]>([])
 
     const [selector, setSelector] = useState<string>('За датою')              //селектор за датой, за названием, за рейтингом
-    const [byName, setByName] = useState<string>('')                        //для поиска за названием
 
     // НЕ ТОЛЬКО ТЕГИ НО И ФИЛЬТРЫ И ТЕКСТ
-    const {data: gifts, isFetched: giftsFetched} = useGetRequest<Gift[] | undefined>({fetchFunc: () => getAllGiftsByTags(giftTags, selector, byName), key: [giftKey], enabled: true})
+    const {data: gifts, isFetched: giftsFetched} = useGetRequest<Gift[] | undefined>({fetchFunc: () => getAllGiftsByTags(giftTags, selector, nameSearch), key: [giftKey], enabled: true})
+
+    useEffect(()=> {
+        setGiftKey(giftKey + 1)
+    }, [nameSearch])
 
     // колбек для селектора
     const selecrotCallBack = (selectedSelector: string) => {
