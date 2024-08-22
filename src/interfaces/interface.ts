@@ -47,3 +47,7 @@ export interface suggestForPost {
         description: string,
         tags: string[]
 }
+
+export interface giftName{
+        name: string
+}

@@ -8,6 +8,7 @@
     // flex: 1;
 
     > .searchBar_bar{
+        position: relative;
         flex: 1;
         display: flex;
         align-items: center;
@@ -55,6 +56,35 @@
             &:active{
                 background-color: $color-grey-active;
                 transition: $transition-speed-button;
+            }
+        }
+
+        > .searchBar_results{
+            position: absolute;
+            background-color: $color-white;
+            top: 32px;
+            z-index: 10000;
+            width: 100%;
+            padding: 0.5rem;
+            box-sizing: border-box;
+            border-radius: 0 0 0.57rem 0.57rem;
+
+            > button{
+                padding: 0.5rem;
+                box-sizing: border-box;
+                color: $color-black;
+                font-size: 1rem;
+                height: 2rem;
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+                border: none;
+                outline: none;
+                background-color: $color-white;
+                width: 100%;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
             }
         }
     }

@@ -24,7 +24,18 @@ const MainPage: FC <MainPageInterface>= ({scrollCallback}) => {
 
     const [giftKey, setGiftKey] = useState<number>(1)
     const [giftTags, setGiftTags] = useState<string[]>([])
-    const {data: gifts, isFetched: giftsFetched} = useGetRequest<Gift[] | undefined>({fetchFunc: () => getAllGiftsByTags(giftTags), key: [giftKey], enabled: true})
+
+    const [selector, setSelector] = useState<string>('За датою')              //селектор за датой, за названием, за рейтингом
+    const [byName, setByName] = useState<string>('')                        //для поиска за названием
+
+    // НЕ ТОЛЬКО ТЕГИ НО И ФИЛЬТРЫ И ТЕКСТ
+    const {data: gifts, isFetched: giftsFetched} = useGetRequest<Gift[] | undefined>({fetchFunc: () => getAllGiftsByTags(giftTags, selector, byName), key: [giftKey], enabled: true})
+
+    // колбек для селектора
+    const selecrotCallBack = (selectedSelector: string) => {
+        setSelector(selectedSelector)
+        setGiftKey(giftKey + 1)
+    }
 
     // колбек на применение фильтров
     const filtersCallBack = (tags: string[]) => {
@@ -45,7 +56,7 @@ const MainPage: FC <MainPageInterface>= ({scrollCallback}) => {
 
                 <div className="mainPage_giftContent">
 
-                    <Selector handleFiltersOpen ={handleFiltersOpen}  />
+                    <Selector handleFiltersOpen ={handleFiltersOpen}  selecrotCallBack = {selecrotCallBack}/>
 
                     {giftsFetched && <div className="mainPage_giftContent_giftList">
                         {gifts !== null && gifts !== undefined && gifts.map((data: any, index:number) => (<GiftCard scrollCallback = {scrollCallback} key={index} data={data}/>))}

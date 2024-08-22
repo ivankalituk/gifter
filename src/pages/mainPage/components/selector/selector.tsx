@@ -6,9 +6,10 @@ import tick from '@/assets/images/tick.svg'
 
 interface SelectorInterface {
     handleFiltersOpen: ()=> void
+    selecrotCallBack: (selectredSelector: string) => void
 }
 
-const Selector: FC<SelectorInterface>= ({handleFiltersOpen}) => {
+const Selector: FC<SelectorInterface>= ({handleFiltersOpen, selecrotCallBack}) => {
 
     const options: string[] = ["За датою", "За рейтингом", "За переглядами"]
 
@@ -18,9 +19,10 @@ const Selector: FC<SelectorInterface>= ({handleFiltersOpen}) => {
 
     // функция для выбора опшина
     const handleSelector = (option: string) => {
-        setSelected(option)
+        setSelected(option)         //для отображения изменений
+        selecrotCallBack(option)    //для запроса
         setOpen(false)
-
+        
         // СДЕЛАТЬ КОЛБЕК
     }
 
