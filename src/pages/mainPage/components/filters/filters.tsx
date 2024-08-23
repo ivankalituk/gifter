@@ -71,17 +71,6 @@ const Filters: FC <FilterInterface>= ({filtersOpen, handleFiltersOpen, filtersCa
     }
 
 
-    // для хранения выбранных тегов подарков
-    const [chosenTags, setChosenTags] = useState<string[]>([])
-
-
-
-    // по вводу текста в поиск, будут находиться теги, при выборе тега из списка, он будет добавляться в общий список
-    const [tagInput, setTagInput] = useState<string>('')
-    const [tagInputKey, setTagInputKey] = useState<number>(1)
-    const [tagInputEnabled, setTagInputEnabled] = useState<boolean>(true)
-
-
     // отловить изменение в поиске тегов 
     const handleTagInputChange = (event: React.ChangeEvent<HTMLInputElement>) =>{    
         setTagInput(event.target.value)
@@ -124,27 +113,31 @@ const Filters: FC <FilterInterface>= ({filtersOpen, handleFiltersOpen, filtersCa
         filtersCallback(chosenTags)
     }
 
+
+    // ЗАНОВО СОЗДАННЫЕ ТЕГИ 
+    const [chosenTags, setChosenTags] = useState<string[]>([])              //хранение выбранных тегов
+    const [tagInput, setTagInput] = useState<string>('')                    //сохранение инпута сёрчбара
+    const [tagInputKey, setTagInputKey] = useState<number>(1)               //ключ обновления инпута тегов
+    const [tagInputEnabled, setTagInputEnabled] = useState<boolean>(true)   //енейблед для хука тегов(пока не работает)
+
     // запрос на сервер для списка тегов по схожести
-    const {data: tags, isFetched: tagsFetched} = useGetRequest<Tag[]>({fetchFunc: () => getTagByInput({text: tagInput}), enabled: tagInputEnabled, key: [tagInputKey]})
+    const {data: tags, isFetched: tagsFetched} = useGetRequest<Tag[]>({fetchFunc: () => getTagByInput({text: tagInput}), enabled: true, key: [tagInputKey]})
+    
+    // колбек для сёрчбара (возвращает результат для поиска тега)
+    const handleTagInputCallBack = (text: string) => {
+        
+        setTagInput(text)
+        setTagInputKey(tagInputKey + 1)
+        console.log(tags)
+    }
 
     return(
         <div className="filters">
             <div className= {filtersOpen? "filters_container" : "filters_container show"}>
 
                 <div className="filters_tagSearch">
-                    
-                    <div className="filters_tagSearch_searchBar">
-                        <img src={search} alt="search" />
-                        <input type="text" placeholder="Введіть тег" value={tagInput} onChange={handleTagInputChange}/>
 
-                        {(tagsFetched && tags !== null && tags.length > 0) && <div className="filters_tagSearch_results">
-                            {tags.map((data: any, index: number) => (
-                                <button className="filters_tagSearch_result" onClick={() =>handleSearchTag(data.text)} key={index}>{data.text}</button>
-                                ))}
-                        </div>}
-                    </div>
-
-                    <SearchBar />
+                    <SearchBar tagInput = {tagInput} tags = {tags} handleTagInputCallBack = {handleTagInputCallBack} tagsFetched = {tagsFetched}/>
 
                     {chosenTags.length > 0 && <div className="filters_tagSearch_tags">
                         {chosenTags.map((text: string, index: number) => (
