@@ -6,6 +6,7 @@ import search from '@/assets/images/Search.svg'
 import { useGetRequest } from "@/hooks/useGetReuquest";
 import { getTagByInput } from "@/api/tags";
 import { Tag } from "@/interfaces/interface";
+import SearchBar from "@/components/searchBar/searchBar";
 
 interface FilterInterface {
     handleFiltersOpen: ()=> void,
@@ -142,6 +143,8 @@ const Filters: FC <FilterInterface>= ({filtersOpen, handleFiltersOpen, filtersCa
                                 ))}
                         </div>}
                     </div>
+
+                    <SearchBar />
 
                     {chosenTags.length > 0 && <div className="filters_tagSearch_tags">
                         {chosenTags.map((text: string, index: number) => (
