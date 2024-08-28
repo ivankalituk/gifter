@@ -125,10 +125,15 @@ const Filters: FC <FilterInterface>= ({filtersOpen, handleFiltersOpen, filtersCa
     
     // колбек для сёрчбара (возвращает результат для поиска тега)
     const handleTagInputCallBack = (text: string) => {
-        
         setTagInput(text)
         setTagInputKey(tagInputKey + 1)
         console.log(tags)
+    }
+
+    // окончательное добавление тега через сёрчбар
+    const handleTagInputSubmitCallBack = (text: string) => {
+        setTagInput('')
+        console.log(text)
     }
 
     return(
@@ -137,7 +142,7 @@ const Filters: FC <FilterInterface>= ({filtersOpen, handleFiltersOpen, filtersCa
 
                 <div className="filters_tagSearch">
 
-                    <SearchBar tagInput = {tagInput} tags = {tags} handleTagInputCallBack = {handleTagInputCallBack} tagsFetched = {tagsFetched}/>
+                    <SearchBar tagInput = {tagInput} tags = {tags} handleTagInputCallBack = {handleTagInputCallBack} tagsFetched = {tagsFetched} handleTagInputSubmitCallBack = {handleTagInputSubmitCallBack}/>
 
                     {chosenTags.length > 0 && <div className="filters_tagSearch_tags">
                         {chosenTags.map((text: string, index: number) => (

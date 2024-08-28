@@ -9,16 +9,13 @@ import { Tag } from "@/interfaces/interface";
 
 interface SearchBar {
     tagInput: string,
-    tags: Tag[] | null,
+    tags: Tag[] | undefined,
     handleTagInputCallBack: (text: string) => void,
     tagsFetched: boolean
+    handleTagInputSubmitCallBack: (text: string) => void
 }
 
-const SearchBar: FC <SearchBar> = ({tagInput, tags, handleTagInputCallBack}) => {
-
-    // тестовые результаты
-    // const results: string[] = ['музыка', 'технологии', 'спорт', 'математика', 'биология']
-
+const SearchBar: FC <SearchBar> = ({tagInput, tags, handleTagInputCallBack, tagsFetched, handleTagInputSubmitCallBack}) => {
 
     // отловить фокус инпута
     const [inputFocus, setInputFocus] = useState<boolean>(false)
@@ -33,12 +30,9 @@ const SearchBar: FC <SearchBar> = ({tagInput, tags, handleTagInputCallBack}) => 
 
     const [chosenResultIndex, setChosenResultIndex] = useState<number>(-1)
 
-    // отловить изменение текста 
-    const [inputText, setInputText] = useState<string>('')
-
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setInputText(event.target.value)
         handleTagInputCallBack(event.target.value)
+        setChosenResultIndex(-1)
     }
 
     // отлавливание нажатий в инпуте (вверх вниз энтер)
@@ -47,33 +41,44 @@ const SearchBar: FC <SearchBar> = ({tagInput, tags, handleTagInputCallBack}) => 
             console.error('Массив tags пуст или равен null');
             return;
         }
-
-        if ()
-
+    
+        let newIndex = chosenResultIndex;
+    
         switch (event.key) {
             case 'Enter':
-                console.log('Нажата клавиша Enter');
-                // ОБРАБОТКА ДОБАВЛЕНИЯ ТЕГА В МАССИВ
+                if (newIndex >= 0 && newIndex < tags.length) {
+                    handleTagInputCallBack(tags[newIndex].text); // Вызываем коллбэк
+                }
                 break;
             case 'ArrowUp':
-                if (chosenResultIndex > 0) {
-                    setChosenResultIndex(chosenResultIndex - 1);
-                } else if (chosenResultIndex === 0) {
-                    setChosenResultIndex(tags.length - 1);
+                if (newIndex > 0) {
+                    newIndex = newIndex - 1;
+                } else {
+                    newIndex = tags.length - 1;
                 }
-                console.log(tags[chosenResultIndex].text); // Используем строковое свойство name или другое свойство
+                setChosenResultIndex(newIndex);
                 break;
             case 'ArrowDown':
-                if (chosenResultIndex < tags.length - 1) {
-                    setChosenResultIndex(chosenResultIndex + 1);
-                } else if (chosenResultIndex === tags.length - 1) {
-                    setChosenResultIndex(0);
+                if (newIndex < tags.length - 1) {
+                    newIndex = newIndex + 1;
+                } else {
+                    newIndex = 0;
                 }
-                console.log(tags[chosenResultIndex].text); // Аналогично используем строковое свойство
+                setChosenResultIndex(newIndex);
                 break;
+            default:
+                break;
+        }
+    
+        // Выводим обновленный индекс и текст, если индекс допустим
+        if (newIndex >= 0 && newIndex < tags.length) {
+            console.log(tags[newIndex].text); // Лог выбранного тега
         }
     };
     
+    const handleSubmit = (text: string) => {
+        console.log(1)
+    }
 
 
 
@@ -89,11 +94,9 @@ const SearchBar: FC <SearchBar> = ({tagInput, tags, handleTagInputCallBack}) => 
 
                 <input type="text" placeholder="Введіть тег" onFocus={handleFocus} onBlur={handleUnFocus} value={tagInput} onChange={(event) => handleInputChange(event)} onKeyDown={(event) => handleSpecialKeyDown(event)}/>
  
-
-                {/* убирать при расфокусе и когда нету результатов */}
-                {tags && inputFocus && tags?.length > 0 && <div className="searchBar_results">
+                {tags && tagsFetched && inputFocus && tags?.length > 0 && <div className="searchBar_results">
                     {tags && tags.map((data, index) => (
-                        <button key={index} className={index === chosenResultIndex?"active" : ""}>{data.text}</button>
+                        <button key={index} className={index === chosenResultIndex?"active" : ""} onClick={() => handleSubmit(data.text)} >{data.text}</button>
                     ))}
                 </div>}
             </div>

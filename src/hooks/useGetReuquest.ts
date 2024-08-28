@@ -10,7 +10,7 @@ interface UseGetRequestInterface <T>{
 }
 
 export const useGetRequest = <T>({fetchFunc, key, enabled, mutationFunc}: UseGetRequestInterface<T>) => {
-    const [data, setData] = useState<T | null>(null)
+    const [data, setData] = useState<T | undefined>(undefined)
     const [isFetched, setIsFetched] = useState<boolean>(false)
 
     useEffect(() => {

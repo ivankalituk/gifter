@@ -5,7 +5,6 @@ interface useUpdateRequest <T,F> {
     fetchFunc: (data: F) => Promise<T>
 }
 
-
 export const useUpdateRequest = <T,F>({fetchFunc}:useUpdateRequest<T,F>) =>{
     const[data, setData] = useState<any | null>(null)
     const[isFetched, setIsFetched] = useState<boolean>(false)
