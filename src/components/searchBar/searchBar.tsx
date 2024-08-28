@@ -16,7 +16,7 @@ interface SearchBar {
 }
 
 const SearchBar: FC <SearchBar> = ({tagInput, tags, handleTagInputCallBack, tagsFetched, handleTagInputSubmitCallBack}) => {
-
+ 
     // отловить фокус инпута
     const [inputFocus, setInputFocus] = useState<boolean>(false)
 
