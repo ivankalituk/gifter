@@ -1,9 +1,6 @@
 import { ChangeEvent, FC, KeyboardEvent, useEffect, useState } from "react";
 import './searchBar.scss'
 
-// необходимо сделать компонент универсальным
-// сделать так, чтоб при нажатии вниз, выбирался и заносился в инпут текст, также можно было б выбирать при повтоном нажатии вниз вверх
-
 import searchSign from '@/assets/images/Search.svg'
 import { Tag } from "@/interfaces/interface";
 
@@ -42,7 +39,14 @@ const SearchBar: FC <SearchBar> = ({tagInput, tags, handleTagInputCallBack, tags
     const handleSpecialKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
 
         if (event.key === 'Enter'){
-            handleSubmit(tagInput)
+            
+            //если выбран тег из резалтов и после нажат энтер 
+            if(chosenResultIndex > -1 && tags){
+                handleTagInputCallBack(tags[chosenResultIndex].text)
+                setChosenResultIndex(-1)
+            } else {
+                handleSubmit(tagInput)
+            }
         } else {
 
             // возможно сделать тут иф только для эрроу ап и эрроу даун

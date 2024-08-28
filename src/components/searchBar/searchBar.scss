@@ -60,6 +60,13 @@
                     opacity: 1;
                     background-color: $color-grey;
                 }
+
+                &:hover{
+                    opacity: 1;
+                    background-color: $color-grey;
+                    transition: opacity 0.5s ease;
+                    transition: background-color 0.5s ease;
+                }
             }
         }
     }
