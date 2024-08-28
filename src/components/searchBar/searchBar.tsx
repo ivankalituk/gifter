@@ -49,40 +49,35 @@ const SearchBar: FC <SearchBar> = ({tagInput, tags, handleTagInputCallBack, tags
             }
         } else {
 
-            // возможно сделать тут иф только для эрроу ап и эрроу даун
-            if (!tags) {
-                console.error('Массив tags пуст или равен null');
-                return;
+            if(event.key === 'ArrowUp' || event.key === 'ArrowDown'){
+                if (!tags) {
+                    // console.error('Массив tags пуст или равен null');
+                    return;
+                }
+
+                let newIndex = chosenResultIndex;
+            
+                switch (event.key) {
+                    case 'ArrowUp':
+                        if (newIndex > 0) {
+                            newIndex = newIndex - 1;
+                        } else {
+                            newIndex = tags.length - 1;
+                        }
+                        setChosenResultIndex(newIndex);
+                        break;
+                    case 'ArrowDown':
+                        if (newIndex < tags.length - 1) {
+                            newIndex = newIndex + 1;
+                        } else {
+                            newIndex = 0;
+                        }
+                        setChosenResultIndex(newIndex);
+                        break;
+                    default:
+                        break;
+                }
             }
-        
-            let newIndex = chosenResultIndex;
-        
-            switch (event.key) {
-                case 'ArrowUp':
-                    if (newIndex > 0) {
-                        newIndex = newIndex - 1;
-                    } else {
-                        newIndex = tags.length - 1;
-                    }
-                    setChosenResultIndex(newIndex);
-                    break;
-                case 'ArrowDown':
-                    if (newIndex < tags.length - 1) {
-                        newIndex = newIndex + 1;
-                    } else {
-                        newIndex = 0;
-                    }
-                    setChosenResultIndex(newIndex);
-                    break;
-                default:
-                    break;
-            }
-        
-            // добавление в инпут резалта по айди
-            // возможно работает и без этого ифа (переделывал) 
-            // if (newIndex >= 0 && newIndex < tags.length) {
-            //     // ТУТ ДОЛЖНО БЫТЬ ДЕЙСТВИЕ С ТЕГОМ ИЗ РЕЗАЛТС
-            // }
         }
     };
 
