@@ -133,6 +133,8 @@ const Filters: FC <FilterInterface>= ({filtersOpen, handleFiltersOpen, filtersCa
     // окончательное добавление тега через сёрчбар
     const handleTagInputSubmitCallBack = (text: string) => {
         setTagInput('')
+
+        // внесение тега
         console.log(text)
     }
 

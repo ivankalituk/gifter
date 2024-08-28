@@ -38,6 +38,7 @@
             border-radius: 0 0 0.57rem 0.57rem;
             border: 1px $color-grey solid; 
             width: calc(100% + 2px);
+            z-index: 1200;
 
             > button{
                 padding: 0 10px;

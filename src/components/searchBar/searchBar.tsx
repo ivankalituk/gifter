@@ -28,8 +28,11 @@ const SearchBar: FC <SearchBar> = ({tagInput, tags, handleTagInputCallBack, tags
         setInputFocus(false)
     }
 
+    // индекс текущего выбранного результата (вверх вниз)
     const [chosenResultIndex, setChosenResultIndex] = useState<number>(-1)
 
+
+    // отловить изменение инпута 
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         handleTagInputCallBack(event.target.value)
         setChosenResultIndex(-1)
@@ -37,52 +40,54 @@ const SearchBar: FC <SearchBar> = ({tagInput, tags, handleTagInputCallBack, tags
 
     // отлавливание нажатий в инпуте (вверх вниз энтер)
     const handleSpecialKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
-        if (!tags || tags.length === 0) {
-            console.error('Массив tags пуст или равен null');
-            return;
-        }
-    
-        let newIndex = chosenResultIndex;
-    
-        switch (event.key) {
-            case 'Enter':
-                if (newIndex >= 0 && newIndex < tags.length) {
-                    handleTagInputCallBack(tags[newIndex].text); // Вызываем коллбэк
-                }
-                break;
-            case 'ArrowUp':
-                if (newIndex > 0) {
-                    newIndex = newIndex - 1;
-                } else {
-                    newIndex = tags.length - 1;
-                }
-                setChosenResultIndex(newIndex);
-                break;
-            case 'ArrowDown':
-                if (newIndex < tags.length - 1) {
-                    newIndex = newIndex + 1;
-                } else {
-                    newIndex = 0;
-                }
-                setChosenResultIndex(newIndex);
-                break;
-            default:
-                break;
-        }
-    
-        // Выводим обновленный индекс и текст, если индекс допустим
-        if (newIndex >= 0 && newIndex < tags.length) {
-            console.log(tags[newIndex].text); // Лог выбранного тега
+
+        if (event.key === 'Enter'){
+            handleSubmit(tagInput)
+        } else {
+
+            // возможно сделать тут иф только для эрроу ап и эрроу даун
+            if (!tags) {
+                console.error('Массив tags пуст или равен null');
+                return;
+            }
+        
+            let newIndex = chosenResultIndex;
+        
+            switch (event.key) {
+                case 'ArrowUp':
+                    if (newIndex > 0) {
+                        newIndex = newIndex - 1;
+                    } else {
+                        newIndex = tags.length - 1;
+                    }
+                    setChosenResultIndex(newIndex);
+                    break;
+                case 'ArrowDown':
+                    if (newIndex < tags.length - 1) {
+                        newIndex = newIndex + 1;
+                    } else {
+                        newIndex = 0;
+                    }
+                    setChosenResultIndex(newIndex);
+                    break;
+                default:
+                    break;
+            }
+        
+            // добавление в инпут резалта по айди
+            // возможно работает и без этого ифа (переделывал) 
+            // if (newIndex >= 0 && newIndex < tags.length) {
+            //     // ТУТ ДОЛЖНО БЫТЬ ДЕЙСТВИЕ С ТЕГОМ ИЗ РЕЗАЛТС
+            // }
         }
     };
-    
-    const handleSubmit = (text: string) => {
-        console.log(1)
+
+    // для занесения тега в массив тегов для поиска
+    const handleSubmit = (tag: string) => {
+        setChosenResultIndex(-1)
+        handleTagInputSubmitCallBack(tag)
+        handleTagInputCallBack('')
     }
-
-
-
-    // что я должен сюда получить: тут должен быть сам текст, результаты поиска
 
     return(
         <div className="searchBar">
@@ -96,7 +101,7 @@ const SearchBar: FC <SearchBar> = ({tagInput, tags, handleTagInputCallBack, tags
  
                 {tags && tagsFetched && inputFocus && tags?.length > 0 && <div className="searchBar_results">
                     {tags && tags.map((data, index) => (
-                        <button key={index} className={index === chosenResultIndex?"active" : ""} onClick={() => handleSubmit(data.text)} >{data.text}</button>
+                        <button key={index} className={index === chosenResultIndex?"active" : ""} onMouseDown={() => handleSubmit(data.text)} >{data.text}</button>
                     ))}
                 </div>}
             </div>
