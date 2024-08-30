@@ -9,6 +9,7 @@ import logo from '@/assets/images/logo.svg'
 import SearchBar from '@/components/header/components/searchBar/searchBar'
 import burger from '@/assets/images/burgerMenu.svg'
 import Account from "./components/account/account";
+import SearchBarBig from "../searchBarBig/searchBarBig";
 
 interface HeaderProps {
     scrollCallback: (block: boolean) => void
@@ -35,7 +36,8 @@ const Header: FC<HeaderProps> = ({scrollCallback, nameSearchCallBack}) =>{
                         <h1>gifter</h1>
                     </Link>
 
-                    <SearchBar nameSearchCallBack = {nameSearchCallBack} />
+                    {/* <SearchBar nameSearchCallBack = {nameSearchCallBack} /> */}
+                    <SearchBarBig />
                 </div>
                 
                 <div className="header_profile">
