@@ -24,7 +24,7 @@ const Filters: FC <FilterInterface>= ({filtersOpen, handleFiltersOpen, filtersCa
     // для бургер фильтра
     const [burgerFilter, setBurgerFilter] = useState<boolean>(false)
 
-    // для чекбокса гендера
+    // отловить нажатия на чекбоксы гендера
     const handleChangeGender = (event: ChangeEvent<HTMLInputElement>, gender: string) => {
         
         const isChecked = event.target.checked;
@@ -48,13 +48,12 @@ const Filters: FC <FilterInterface>= ({filtersOpen, handleFiltersOpen, filtersCa
     
         // Добавляем или удаляем тег 
         if (isChecked) {
-            handleAddTag(gender);
+            addTag(gender);
         } else {
-            handleRemoveTag(gender); 
+            removeTag(gender); 
         }
     };
     
-
     // для инпут ренджа
     const [rangeValue, setRangeValue] = useState<number>(0)
 
@@ -70,51 +69,33 @@ const Filters: FC <FilterInterface>= ({filtersOpen, handleFiltersOpen, filtersCa
         setAgeInputSwitch(!ageInputSwitch)
     }
 
+    // ЗАМЕНИТЬ
+    // -----------------------------------------------------------------------------------------------------
+    // Обработка тегов
+    // -----------------------------------------------------------------------------------------------------
 
-    // отловить изменение в поиске тегов 
-    const handleTagInputChange = (event: React.ChangeEvent<HTMLInputElement>) =>{    
-        setTagInput(event.target.value)
-        
-        setTagInputKey(tagInputKey + 1)
-    }
-
-    // отловить выбор тега пользователем
-    const handleSearchTag = (text: string) => {
-
-        // сделать проверку на такие же теги
-        if(!chosenTags.includes(text)){
-            handleAddTag(text)
-
-            if (text === "#дляВсіх"){setCheckboxGenderAll(true)}
-            if (text === "#дляЧоловіків"){setCheckboxGenderMen(true)}
-            if (text === "#дляЖінок"){setCheckboxGenderWoman(true)}
+    // добавление тега, если он не добавлен
+    const addTag = (tag: string) =>{
+        if (!chosenTags.includes(tag)){
+            setChosenTags((prevTag) => [... prevTag, tag])
         }
-
-        setTagInput('')
-        setTagInputKey(tagInputKey + 1)
     }
 
-    // убрать тег по нажатию на него
-    const handleRemoveTag = (text: string) => {
-        setChosenTags(prevTags => prevTags.filter(tag => tag !== text))
-        if (text === "#дляВсіх"){setCheckboxGenderAll(false)}
-        if (text === "#дляЧоловіків"){setCheckboxGenderMen(false)}
-        if (text === "#дляЖінок"){setCheckboxGenderWoman(false)}
+    // удаление тега
+    const removeTag = (tag: string) => {
+        setChosenTags(chosenTags.filter((chosenTag) => chosenTag !== tag))
     }
 
-    // добавление тега в массив
-    const handleAddTag = (text: string) => {
-        setChosenTags(prevTags => [...prevTags, text])
-    }
-
-    // начать поиск по тегам
+    // нажатие Застосувати, поиск по фильтрам
     const handleSearchByFilters = () =>{
         console.log(1)
         filtersCallback(chosenTags)
     }
 
+    // -----------------------------------------------------------------------------------------------------
+    // SEARCHBAR
+    // -----------------------------------------------------------------------------------------------------
 
-    // ЗАНОВО СОЗДАННЫЕ ТЕГИ 
     const [chosenTags, setChosenTags] = useState<string[]>([])              //хранение выбранных тегов
     const [tagInput, setTagInput] = useState<string>('')                    //сохранение инпута сёрчбара
     const [tagInputKey, setTagInputKey] = useState<number>(1)               //ключ обновления инпута тегов
@@ -135,8 +116,30 @@ const Filters: FC <FilterInterface>= ({filtersOpen, handleFiltersOpen, filtersCa
         setTagInput('')
 
         // внесение тега
-        console.log(text)
+        addTag(text)
     }
+
+    // изменение чека кастомных чекбоксов, если тег был удалён из массива тегов нажатием
+    useEffect(() => {
+        if (chosenTags.includes("#дляВсіх")){
+            setCheckboxGenderAll(true)
+        } else {
+            setCheckboxGenderAll(false)
+        }
+
+        if (chosenTags.includes("#дляЖінок")){
+            setCheckboxGenderWoman(true)
+        } else {
+            setCheckboxGenderWoman(false)
+        }
+
+        if (chosenTags.includes("#дляЧоловіків")){
+            setCheckboxGenderMen(true)
+        } else {
+            setCheckboxGenderMen(false)
+        }
+    }, [chosenTags])
+    
 
     return(
         <div className="filters">
@@ -148,7 +151,7 @@ const Filters: FC <FilterInterface>= ({filtersOpen, handleFiltersOpen, filtersCa
 
                     {chosenTags.length > 0 && <div className="filters_tagSearch_tags">
                         {chosenTags.map((text: string, index: number) => (
-                            <button className="tag" key={index} onClick={() => handleRemoveTag(text)}>{text}</button>
+                            <button className="tag" key={index} onClick={() => removeTag(text)}>{text}</button>
                         ))}
                     </div>}
 
