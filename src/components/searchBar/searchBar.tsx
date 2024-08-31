@@ -100,7 +100,7 @@ const SearchBar: FC <SearchBar> = ({tagInput, tags, handleTagInputCallBack, tags
  
                 {tags && tagsFetched && inputFocus && tags?.length > 0 && <div className="searchBar_results">
                     {tags && tags.map((data, index) => (
-                        <button key={index} className={index === chosenResultIndex?"active" : ""} onMouseDown={() => handleSubmit(data.text)} >{data.text}</button>
+                        <button key={index} className={index === chosenResultIndex? "active" : ""} onMouseDown={() => handleSubmit(data.text)} >{data.text}</button>
                     ))}
                 </div>}
             </div>

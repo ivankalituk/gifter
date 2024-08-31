@@ -1,4 +1,4 @@
-import { FC, useState, KeyboardEvent } from "react";
+import { FC, useState, KeyboardEvent, ChangeEvent } from "react";
 
 import './searchBarBig.scss'
 
@@ -22,8 +22,69 @@ const SearchBarBig: FC = () =>{
 
     const [chosenResultIndex, setChosenResultIndex] = useState<number>(-1)
 
+    const [searchInput, setSearchInput] = useState<string>('')
+
+    const handleChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
+        setSearchInput(event.target.value)
+    }
+
+
+    // отлавливание нажатия на кнопку
     const handleSpecialKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
-        
+
+        if (event.key === 'Enter'){
+            
+            //если выбран тег из резалтов и после нажат энтер 
+            if(chosenResultIndex > -1 && results){
+                setSearchInput(results[chosenResultIndex])
+                setChosenResultIndex(-1)
+            } else {
+                handleSubmit()
+            }
+        } else {
+
+            if(event.key === 'ArrowUp' || event.key === 'ArrowDown'){
+                if (!results) {
+                    // console.error('Массив tags пуст или равен null');
+                    return;
+                }
+
+                let newIndex = chosenResultIndex;
+            
+                switch (event.key) {
+                    case 'ArrowUp':
+                        if (newIndex > 0) {
+                            newIndex = newIndex - 1;
+                        } else {
+                            newIndex = results.length - 1;
+                        }
+                        setChosenResultIndex(newIndex);
+                        break;
+                    case 'ArrowDown':
+                        if (newIndex < results.length - 1) {
+                            newIndex = newIndex + 1;
+                        } else {
+                            newIndex = 0;
+                        }
+                        setChosenResultIndex(newIndex);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    };
+
+    // по нажатию на результат, вносить его в инпут
+    const handleResultClick = (index: number) => {
+        setSearchInput(results[index])
+    }
+
+    // начать поиск по слову
+    const handleSubmit = () => {
+        // ОТПРАВКА ДАННЫХ В ФИЛЬТРЫ
+        console.log("SEARCHING: ", searchInput)
+        setSearchInput('')
     }
 
     return(
@@ -31,13 +92,13 @@ const SearchBarBig: FC = () =>{
             <div className="searchBarBig_bar">
                 <img src={search} alt="search" />
 
-                <input type="text" placeholder='Введіть назву подарунку' onFocus={handleInputFocus} onBlur={handleUnFocus} onKeyDown={(event) => {}}/>
+                <input type="text" placeholder='Введіть назву подарунку' value={searchInput} onFocus={handleInputFocus} onBlur={handleUnFocus} onKeyDown={(event) => {handleSpecialKeyDown(event)}} onChange={(event) => handleChangeInput(event)}/>
 
-                <button>Пошук</button>
+                <button onClick={handleSubmit}>Пошук</button>
 
-                {results && results.length > 0 && <div className="searchBarBig_results">
+                {inputFocus && results && results.length > 0 && <div className="searchBarBig_results">
                     {results && results.length > 0 && results.map((data, index) => (
-                        <button key={index}>{data}</button>
+                        <button key={index} className={index === chosenResultIndex? "active": ""} onMouseDown={() => handleResultClick(index)}>{data}</button>
                     ))}
 
                 </div>}
