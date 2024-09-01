@@ -11,13 +11,20 @@ const SearchBarBig: FC = () =>{
     const results: string [] = ['name1', 'randomName gay sex', 'sescs', 'sdadadasdadcva', 'vavasdfwa']
 
     const [inputFocus, setInputFocus] = useState<boolean>(false)
-
+    const [inputShow, setInputShow] = useState<boolean>(false)          //для назначения z-index
+    
     const handleInputFocus = () => {
         setInputFocus(true)
+        setInputShow(true)      //добавляем класс, который увеличивает z-index
     }
 
     const handleUnFocus = () => {
         setInputFocus(false)
+
+        // убираем z-index после анимации затухания фона
+        setTimeout(() => {
+            setInputShow(false)
+        }, 500);
     }
 
     const [chosenResultIndex, setChosenResultIndex] = useState<number>(-1)
@@ -87,9 +94,13 @@ const SearchBarBig: FC = () =>{
         setSearchInput('')
     }
 
+
+    // задержка для добавления z-index
+    
+
     return(
         <div className="searchBarBig">
-            <div className="searchBarBig_bar">
+            <div className={inputShow? "searchBarBig_bar show" : "searchBarBig_bar"}>
                 <img src={search} alt="search" />
 
                 <input type="text" placeholder='Введіть назву подарунку' value={searchInput} onFocus={handleInputFocus} onBlur={handleUnFocus} onKeyDown={(event) => {handleSpecialKeyDown(event)}} onChange={(event) => handleChangeInput(event)}/>

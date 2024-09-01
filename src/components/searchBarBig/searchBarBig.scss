@@ -8,7 +8,7 @@
     // flex: 1;
 
     > .searchBarBig_bar{
-        z-index: 10000;
+        z-index: 0;
         position: relative;
         flex: 1;
         display: flex;
@@ -16,6 +16,10 @@
         background-color: $color-white;
         height: 2.714rem;
         border-radius: 0.571rem;
+
+        &.show{
+            z-index: 10000;
+        }
 
         > img{
             margin-left: 0.42rem;

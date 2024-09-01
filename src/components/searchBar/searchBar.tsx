@@ -16,13 +16,20 @@ const SearchBar: FC <SearchBar> = ({tagInput, tags, handleTagInputCallBack, tags
  
     // отловить фокус инпута
     const [inputFocus, setInputFocus] = useState<boolean>(false)
+    const [inputShow, setInputShow] = useState<boolean>(false)          //для назначения z-index
 
     const handleFocus = () => {
         setInputFocus(true)
+
+        setInputShow(true)      //добавляем класс, который увеличивает z-index
     }
 
     const handleUnFocus = () => {
         setInputFocus(false)
+        // убираем z-index после анимации затухания фона
+        setTimeout(() => {
+            setInputShow(false)
+        }, 500);
     }
 
     // индекс текущего выбранного результата (вверх вниз)
@@ -92,7 +99,7 @@ const SearchBar: FC <SearchBar> = ({tagInput, tags, handleTagInputCallBack, tags
         <div className="searchBar">
             
             {/* когда фокус и есть результаты.ленгз > 1, то добавить резултс в классы*/}
-            <div className={(inputFocus && tags && tags.length > 0)? "searchBar_container results" : "searchBar_container"}>
+            <div className={`${(inputFocus && tags && tags.length > 0)? "searchBar_container results" : "searchBar_container"} ${inputShow? 'show' : ''}`}>
 
                 <img src={searchSign} alt="search" />
 
