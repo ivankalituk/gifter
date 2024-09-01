@@ -1,14 +1,21 @@
 import { FC, useState, KeyboardEvent, ChangeEvent } from "react";
-
+import { giftName } from "@/interfaces/interface";
 import './searchBarBig.scss'
 
 import search from '@/assets/images/Search.svg'
 import random from '@/assets/images/Random.svg'
 
 
-const SearchBarBig: FC = () =>{
+interface SearchBarBigInterface {
+    handleSearchSubmitCallBack: (text: string) => void,
+    handleSearchInputCallBack: (text: string) => void,
+    giftNames: giftName[] | undefined,
+    searchInput: string,
+}
 
-    const results: string [] = ['name1', 'randomName gay sex', 'sescs', 'sdadadasdadcva', 'vavasdfwa']
+const SearchBarBig: FC <SearchBarBigInterface> = ({handleSearchSubmitCallBack, handleSearchInputCallBack, giftNames, searchInput}) =>{
+
+    // const results: string [] = ['name1', 'randomName gay sex', 'sescs', 'sdadadasdadcva', 'vavasdfwa']
 
     const [inputFocus, setInputFocus] = useState<boolean>(false)
     const [inputShow, setInputShow] = useState<boolean>(false)          //для назначения z-index
@@ -29,10 +36,10 @@ const SearchBarBig: FC = () =>{
 
     const [chosenResultIndex, setChosenResultIndex] = useState<number>(-1)
 
-    const [searchInput, setSearchInput] = useState<string>('')
+    // const [searchInput, setSearchInput] = useState<string>('')
 
     const handleChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
-        setSearchInput(event.target.value)
+        handleSearchInputCallBack(event.target.value)
     }
 
 
@@ -42,16 +49,17 @@ const SearchBarBig: FC = () =>{
         if (event.key === 'Enter'){
             
             //если выбран тег из резалтов и после нажат энтер 
-            if(chosenResultIndex > -1 && results){
-                setSearchInput(results[chosenResultIndex])
+            if(chosenResultIndex > -1 && giftNames){
+                handleSearchInputCallBack(giftNames[chosenResultIndex].name)
                 setChosenResultIndex(-1)
             } else {
                 handleSubmit()
+                handleSearchInputCallBack('')
             }
         } else {
 
             if(event.key === 'ArrowUp' || event.key === 'ArrowDown'){
-                if (!results) {
+                if (!giftNames) {
                     // console.error('Массив tags пуст или равен null');
                     return;
                 }
@@ -63,12 +71,12 @@ const SearchBarBig: FC = () =>{
                         if (newIndex > 0) {
                             newIndex = newIndex - 1;
                         } else {
-                            newIndex = results.length - 1;
+                            newIndex = giftNames.length - 1;
                         }
                         setChosenResultIndex(newIndex);
                         break;
                     case 'ArrowDown':
-                        if (newIndex < results.length - 1) {
+                        if (newIndex < giftNames.length - 1) {
                             newIndex = newIndex + 1;
                         } else {
                             newIndex = 0;
@@ -84,14 +92,14 @@ const SearchBarBig: FC = () =>{
 
     // по нажатию на результат, вносить его в инпут
     const handleResultClick = (index: number) => {
-        setSearchInput(results[index])
+        if(giftNames){
+            handleSearchInputCallBack(giftNames[index].name)
+        }
     }
 
     // начать поиск по слову
     const handleSubmit = () => {
-        // ОТПРАВКА ДАННЫХ В ФИЛЬТРЫ
-        console.log("SEARCHING: ", searchInput)
-        setSearchInput('')
+        handleSearchSubmitCallBack(searchInput)
     }
 
 
@@ -107,9 +115,9 @@ const SearchBarBig: FC = () =>{
 
                 <button onClick={handleSubmit}>Пошук</button>
 
-                {inputFocus && results && results.length > 0 && <div className="searchBarBig_results">
-                    {results && results.length > 0 && results.map((data, index) => (
-                        <button key={index} className={index === chosenResultIndex? "active": ""} onMouseDown={() => handleResultClick(index)}>{data}</button>
+                {inputFocus && giftNames && giftNames.length > 0 && <div className="searchBarBig_results">
+                    {giftNames && giftNames.length > 0 && giftNames.map((data, index) => (
+                        <button key={index} className={index === chosenResultIndex? "active": ""} onMouseDown={() => handleResultClick(index)}>{data.name}</button>
                     ))}
 
                 </div>}

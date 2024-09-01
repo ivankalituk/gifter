@@ -75,6 +75,8 @@ function App() {
     checkUser()
   }, [])
 
+
+  // для поиска по названию подарка
   const [nameSearch, setNameSearch] = useState<string>('')
 
   const nameSearchCallBack = (name: string) => {

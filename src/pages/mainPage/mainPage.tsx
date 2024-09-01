@@ -31,10 +31,6 @@ const MainPage: FC <MainPageInterface>= ({scrollCallback, nameSearch}) => {
     // НЕ ТОЛЬКО ТЕГИ НО И ФИЛЬТРЫ И ТЕКСТ
     const {data: gifts, isFetched: giftsFetched} = useGetRequest<Gift[] | undefined>({fetchFunc: () => getAllGiftsByTags(giftTags, selector, nameSearch), key: [giftKey], enabled: true})
 
-    useEffect(()=> {
-        setGiftKey(giftKey + 1)
-    }, [nameSearch])
-
     // колбек для селектора
     const selecrotCallBack = (selectedSelector: string) => {
         setSelector(selectedSelector)
@@ -56,7 +52,7 @@ const MainPage: FC <MainPageInterface>= ({scrollCallback, nameSearch}) => {
         <div className="mainPage">
             <div className="mainPage_container">
 
-                <Filters filtersOpen = {filtersOpen} handleFiltersOpen ={handleFiltersOpen} filtersCallback = {filtersCallBack}/>
+                <Filters filtersOpen = {filtersOpen} handleFiltersOpen ={handleFiltersOpen} filtersCallback = {filtersCallBack} nameSearch = {nameSearch}/>
 
                 <div className="mainPage_giftContent">
 

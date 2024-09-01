@@ -11,10 +11,11 @@ import SearchBar from "@/components/searchBar/searchBar";
 interface FilterInterface {
     handleFiltersOpen: ()=> void,
     filtersCallback: (tags: string[]) => void,
-    filtersOpen: boolean
+    filtersOpen: boolean,
+    nameSearch: string
 }
 
-const Filters: FC <FilterInterface>= ({filtersOpen, handleFiltersOpen, filtersCallback}) =>{
+const Filters: FC <FilterInterface>= ({filtersOpen, handleFiltersOpen, filtersCallback, nameSearch}) =>{
 
     // для чекбокса гендера
     const [checkboxGenderAll, setCheckboxGenderAll] = useState<boolean>(false)
@@ -28,8 +29,6 @@ const Filters: FC <FilterInterface>= ({filtersOpen, handleFiltersOpen, filtersCa
     const handleChangeGender = (event: ChangeEvent<HTMLInputElement>, gender: string) => {
         
         const isChecked = event.target.checked;
-    
-        const NEWFKNCOMMITFORGITFKNHUB = true
 
         // Обновляем состояние чекбокса
         switch (gender) {
@@ -156,6 +155,12 @@ const Filters: FC <FilterInterface>= ({filtersOpen, handleFiltersOpen, filtersCa
                     </div>}
 
                 </div>
+
+                {nameSearch && <div className="filters_nameSearch">
+                    <div className="filters_nameSearch_heading">Пошук за іменем подарунку:</div>
+                    <div className="filters_nameSearch_name">...{nameSearch}...</div>
+                </div>}
+
 
                 <div className="filters_gender">
                     <div className="filters_gender_heading">Стать</div>

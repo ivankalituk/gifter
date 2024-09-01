@@ -10,6 +10,9 @@ import SearchBar from '@/components/header/components/searchBar/searchBar'
 import burger from '@/assets/images/burgerMenu.svg'
 import Account from "./components/account/account";
 import SearchBarBig from "../searchBarBig/searchBarBig";
+import { useGetRequest } from "@/hooks/useGetReuquest";
+import { getGiftNameByName } from "@/api/gifts";
+import { giftName } from "@/interfaces/interface";
 
 interface HeaderProps {
     scrollCallback: (block: boolean) => void
@@ -26,6 +29,25 @@ const Header: FC<HeaderProps> = ({scrollCallback, nameSearchCallBack}) =>{
         scrollCallback(burgerMenu)
     }
 
+
+    // обработка сёрчбара
+    const [searchInput, setSearchInput] = useState<string>('')
+    const [giftNamesKey, setGiftNamesKey] = useState<number>(1)
+
+
+    const {data: giftNames} = useGetRequest<giftName[]>({fetchFunc: () => getGiftNameByName(searchInput), key: [giftNamesKey], enabled: true})
+
+    const handleSearchInputCallBack = (text: string) => {
+        setSearchInput(text)
+
+        setGiftNamesKey(giftNamesKey + 1)
+    }
+
+    const handleSearchSubmitCallBack = (text: string) => {
+        nameSearchCallBack(text)
+    }
+
+
     return (
         <header>
             <div className="header_container">
@@ -37,7 +59,7 @@ const Header: FC<HeaderProps> = ({scrollCallback, nameSearchCallBack}) =>{
                     </Link>
 
                     {/* <SearchBar nameSearchCallBack = {nameSearchCallBack} /> */}
-                    <SearchBarBig />
+                    <SearchBarBig handleSearchSubmitCallBack = {handleSearchSubmitCallBack} handleSearchInputCallBack = {handleSearchInputCallBack} giftNames = {giftNames} searchInput = {searchInput}/>
                 </div>
                 
                 <div className="header_profile">
