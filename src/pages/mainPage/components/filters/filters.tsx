@@ -12,10 +12,11 @@ interface FilterInterface {
     handleFiltersOpen: ()=> void,
     filtersCallback: (tags: string[]) => void,
     filtersOpen: boolean,
-    nameSearch: string
+    nameSearch: string,
+    deleteSearchCallBack: () => void
 }
 
-const Filters: FC <FilterInterface>= ({filtersOpen, handleFiltersOpen, filtersCallback, nameSearch}) =>{
+const Filters: FC <FilterInterface>= ({filtersOpen, handleFiltersOpen, filtersCallback, nameSearch, deleteSearchCallBack}) =>{
 
     // для чекбокса гендера
     const [checkboxGenderAll, setCheckboxGenderAll] = useState<boolean>(false)
@@ -159,6 +160,7 @@ const Filters: FC <FilterInterface>= ({filtersOpen, handleFiltersOpen, filtersCa
                 {nameSearch && <div className="filters_nameSearch">
                     <div className="filters_nameSearch_heading">Пошук за іменем подарунку:</div>
                     <div className="filters_nameSearch_name">...{nameSearch}...</div>
+                    <button onClick={deleteSearchCallBack}>Видалити</button>
                 </div>}
 
 

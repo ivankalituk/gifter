@@ -12,9 +12,10 @@ import { Gift } from "@/interfaces/interface";
 interface MainPageInterface {
     scrollCallback: (block: boolean)=> void
     nameSearch: string
+    deleteSearchCallBack: () => void
 }
 
-const MainPage: FC <MainPageInterface>= ({scrollCallback, nameSearch}) => {
+const MainPage: FC <MainPageInterface>= ({scrollCallback, nameSearch, deleteSearchCallBack}) => {
 
     const [filtersOpen, setFiltersOpen] = useState<boolean>(false)
 
@@ -52,7 +53,7 @@ const MainPage: FC <MainPageInterface>= ({scrollCallback, nameSearch}) => {
         <div className="mainPage">
             <div className="mainPage_container">
 
-                <Filters filtersOpen = {filtersOpen} handleFiltersOpen ={handleFiltersOpen} filtersCallback = {filtersCallBack} nameSearch = {nameSearch}/>
+                <Filters filtersOpen = {filtersOpen} handleFiltersOpen ={handleFiltersOpen} filtersCallback = {filtersCallBack} nameSearch = {nameSearch} deleteSearchCallBack = {deleteSearchCallBack}/>
 
                 <div className="mainPage_giftContent">
 

@@ -81,7 +81,10 @@ function App() {
 
   const nameSearchCallBack = (name: string) => {
     setNameSearch(name)
-    console.log(nameSearch)
+  }
+
+  const deleteSearchCallBack = () => {
+    setNameSearch('')
   }
 
 
@@ -100,7 +103,7 @@ function App() {
 
         <main>
           <Routes>
-            <Route path='/' element={<MainPage scrollCallback = {scrollCallback} nameSearch = {nameSearch}/>} />
+            <Route path='/' element={<MainPage scrollCallback = {scrollCallback} nameSearch = {nameSearch} deleteSearchCallBack = {deleteSearchCallBack}/>} />
             <Route path='/auth' element = {<AuthPage/>}></Route>
 
             {/* PROTECTED AUTH */}
