@@ -163,15 +163,15 @@ $transition-speed-button: 0.5s;
 
 // кастомный инпут свитч
 .custom_switch{
-  width: 2.28rem;
-  height: 1.24rem;
+  width: 36px; /* Заменено на пиксели */
+  height: 20px; /* Заменено на пиксели */
   background-color: $color-white;
   border: 1px $color-red solid;
-  border-radius: 0.64rem;
+  border-radius: 10px; /* Округление границы в пикселях */
   position: relative;
   box-sizing: border-box;
   animation: inputSwitchUnactive 0.5s forwards;
-  
+
   &.active{
       animation: inputSwitchActive 0.5s forwards;
   }
@@ -181,17 +181,17 @@ $transition-speed-button: 0.5s;
       position: absolute;
       width: 100%;
       height: 100%;
-      border-radius: 0.57rem;
+      border-radius: 9px;
       cursor: pointer;
   }
 
   > .custom_switch_thumb{
-      height: 0.85rem;
-      width: 0.85rem;
+      height: 14px; /* Заменено на пиксели */
+      width: 14px; /* Заменено на пиксели */
       border-radius: 50%;
       background-color: $color-red;
       position: absolute;
-      top: 2px;
+      top: 2px; /* Оставляем пиксели для точности */
       left: 2px;
       animation: inputSwitchThumbUnactive forwards 0.5s;
 

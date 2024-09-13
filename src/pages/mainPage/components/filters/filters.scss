@@ -4,7 +4,7 @@
     
     > .filters_container{
         background-color: $color-white;
-        width: 16rem;
+        width: 224px;
         padding: 1.42rem 0.71rem;
         box-sizing: border-box;
         min-height: 100vh;
@@ -136,8 +136,8 @@
                     }
 
                     > .gender_customCheck{
-                        height: 1.14rem;
-                        width: 1.14rem;
+                        height: 16px;
+                        width: 16px;
                         border-radius: 0.35rem;
                         border: 1px $color-red solid;
                         display: flex;
