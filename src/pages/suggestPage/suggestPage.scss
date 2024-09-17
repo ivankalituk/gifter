@@ -112,51 +112,6 @@
                         font-size: 1.2rem;
                     }
 
-                    > .filters_tagSearch_searchBar{
-                        position: relative;
-                        display: flex;
-                        align-items: center;
-                        border: 1px $color-grey solid; 
-                        height: 2.71rem;
-                        box-sizing: border-box;
-                        padding: 0.42rem;
-                        border-radius: 0.57rem;
-                        width: 100%;
-        
-                        > input{
-                            margin-left: 0.85rem;
-                            outline: none;
-                            border: none;
-                            flex: 1;
-                            font-size: 1rem;
-                        }
-        
-                        > .filters_tagSearch_results{
-                            padding: 0.7rem;
-                            box-sizing: border-box;
-                            top: 2.7rem;
-                            left: -1px;
-                            position: absolute;
-                            width: 100%;
-                            background-color: $color-white;
-                            border-radius: 0 0 0.75rem 0.75rem;
-                            z-index: 999;
-        
-                            > .filters_tagSearch_result{
-                                color: $color-black;
-                                font-size: 1rem;
-                                height: 2rem;
-                                display: flex;
-                                align-items: center;
-                                cursor: pointer;
-                                border: none;
-                                outline: none;
-                                background-color: $color-white;
-                                width: 100%;
-                            }
-                        }
-                    }
-
                     > .dataUpload_addTags_tags{
                         margin-top: 0.35rem;
 

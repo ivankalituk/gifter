@@ -10,9 +10,11 @@
         opacity: 0.5;
         z-index: 1000; /* Высокий z-index, чтобы перекрыть остальное содержимое */
         animation: modalBackShow 0.5s forwards;
+        pointer-events: auto;
     
         &.hide{
           animation: modalBackHide 0.5s forwards;
+          pointer-events: none;
         }
     }
 
@@ -23,9 +25,11 @@
         transform: translate(-50%, -50%);
         z-index: 2000;
         animation: modalShow 0.5s forwards;
+        
 
         &.hide{
         animation: modalHide 0.5s forwards;
+        
         }
     }
 }

@@ -12,12 +12,17 @@ import { createSuggest } from '@/api/suggest';
 import { useGetRequest } from '@/hooks/useGetReuquest';
 import { getTagByInput } from '@/api/tags';
 import { useNavigate } from 'react-router-dom';
+import SearchBar from '@/components/searchBar/searchBar';
 
 const  SuggestPage: FC  = () => {
 
     const navigate = useNavigate()
 
-    // ОБРАБОТКА ФОТО
+
+    // ----------------------------------------------
+    // Photo upload
+    // ----------------------------------------------
+    
     const [selectedImgFile, setSelectedImgFile] = useState<any>(null)           //сохранение файла фото
     const [selectedImg, setSelectedImg] = useState<any>(null)                   //сохранение ссылки на файл фото
 
@@ -35,7 +40,10 @@ const  SuggestPage: FC  = () => {
         console.log(typeof(selectedImgFile))
     }
     
-    // РАБОТА С ЗАПРОСАМИ ДЛЯ САГГЕСТА
+    // ----------------------------------------------
+    // POST SUGGEST
+    // ----------------------------------------------
+
     const {mutatedFunc: postSuggest} = useUpdateRequest({fetchFunc: createSuggest})
 
     const [suggestName, setSuggestName] = useState<string>('')
@@ -45,7 +53,6 @@ const  SuggestPage: FC  = () => {
     const handleCreateSuggest = () =>{
         if (suggestDesc === '' || suggestName === ''){
             setHelp(true)
-            console.log("HELP")
         } else {
 
             // в формдату залить массив тегов
@@ -75,44 +82,40 @@ const  SuggestPage: FC  = () => {
     // МАССИВ ТЕГОВ
     const [tagArray, setTagArray] = useState<string[]>([])
 
-    // для запроса на теги
+    // для удаления тега из списка выбранных тегов
+    const handleRemoveTag = (newTag: string) => {
+        setTagArray(prevTags => prevTags.filter(tag => tag !== newTag))
+    }
+
+    // добавление тега в выбранные теги
+    const handleAddtag = (newTag: string) => {
+        if (!tagArray.includes(newTag)){
+            setTagArray(prevTags => [... prevTags, newTag])
+        }
+    }
+
+    // ----------------------------------------------
+    // SearchBar
+    // ----------------------------------------------
+
     const [tagInput, setTagInput] = useState<string>('')
     const [tagInputKey, setTagInputKey] = useState<number>(1)
     const [tagInputEnabled, setTagInputEnabled] = useState<boolean>(true)
 
     // сделать добавление тегов через поиск и так далее
     const {data: tags, isFetched: tagsFetched} = useGetRequest<Tag[]>({fetchFunc: () => getTagByInput({text: tagInput}), enabled: tagInputEnabled, key: [tagInputKey]})
-
-    // отловить изменения инпута
-    const handleTagInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setTagInput(event.target.value)
-        console.log(tagInput)
-        setTagInputKey(tagInputKey + 1)
-        console.log(tags)
-    }
-
-    // для добавления неопределённого тега по нажатию на энтер
-    const handleEnterTagInput = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        if (event.key === 'Enter' && tagInput !== ''){
-            handleTag(tagInput)
-            setTagInput('')
-            setTagInputKey(tagInputKey + 1)
-        }
-    }
     
-    // для удаления тега из списка выбранных тегов
-    const handleRemoveTag = (newTag: string) => {
-        setTagArray(prevTags => prevTags.filter(tag => tag !== newTag))
-    }
-
-    // для добавления тега из списка результатов
-    const handleTag = (tag: string) => {
-        if (!tagArray.includes(tag)){
-            setTagArray(prevTags => [...prevTags, tag])
-        }
-        setTagInput('')
+    // колбек для изменения поискового запроса
+    const handleTagInputCallBack = (text: string) => {
+        setTagInput(text)
         setTagInputKey(tagInputKey + 1)
     }
+
+    // окончательное добавление тега
+    const handleTagInputSubmitCallBack = (tag: string) => {
+        handleAddtag(tag)
+    }
+
 
     return(
         <div className="suggestPage">
@@ -147,22 +150,15 @@ const  SuggestPage: FC  = () => {
                             <span>Введіть теги, котрі відповідают товару</span>
                             
 
-                        <div className="filters_tagSearch_searchBar">
-                            <img src={search} alt="search" />
-                            <input type="text" placeholder="Введіть тег" value={tagInput} onChange={handleTagInput} onKeyDown={(event) => handleEnterTagInput(event)}/>
-
-                            {(tagsFetched && tags && tags.length > 0) && <div className="filters_tagSearch_results">
-                                {tags.map((data: any, index: number) => (
-                                    <button className="filters_tagSearch_result" onClick={() =>handleTag(data.text)} key={index}>{data.text}</button>
-                                    ))}
-                            </div>}
-                        </div>
+                            <div className="filters_tagSearch">
+                                <SearchBar tagInput={tagInput} tags = {tags} handleTagInputCallBack = {handleTagInputCallBack} tagsFetched = {tagsFetched} handleTagInputSubmitCallBack = {handleTagInputSubmitCallBack}/>
+                            </div>
 
                             <div className="dataUpload_addTags_tags">
                                 <span>Додані теги:</span>
 
-                                <div>{tagArray.map((tag) => (
-                                     <button onClick={() => handleRemoveTag(tag)}>{tag}</button>
+                                <div>{tagArray.map((tag, index) => (
+                                    <button onClick={() => handleRemoveTag(tag)} key={index}>{tag}</button>
                                 ))}
                                 </div>
                             </div>

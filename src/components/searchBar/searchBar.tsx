@@ -5,11 +5,11 @@ import searchSign from '@/assets/images/Search.svg'
 import { Tag } from "@/interfaces/interface";
 
 interface SearchBar {
-    tagInput: string,
-    tags: Tag[] | undefined,
-    handleTagInputCallBack: (text: string) => void,
-    tagsFetched: boolean
-    handleTagInputSubmitCallBack: (text: string) => void
+    tagInput: string,                                           //валью инпута, которое меняется с каждым символом
+    tags: Tag[] | undefined,                                    //список вариантов ответов
+    handleTagInputCallBack: (text: string) => void,             //колбек для выбора тега по вверх вниз
+    tagsFetched: boolean                                        //прогружен ли список ответов
+    handleTagInputSubmitCallBack: (text: string) => void        //окончательный выбор тега
 }
 
 const SearchBar: FC <SearchBar> = ({tagInput, tags, handleTagInputCallBack, tagsFetched, handleTagInputSubmitCallBack}) => {
