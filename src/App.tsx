@@ -111,7 +111,7 @@ function App() {
       
             <Route path='/profile' element={<ProfilePage scrollCallback = {scrollCallback} type={'privateUser'}/>} />
             <Route path='/account/:user_id' element={<ProfilePage scrollCallback = {scrollCallback} type={'anyUser'}/>} />
-            <Route path='profile/settings' element={<SettingsPage />}/>
+            <Route path='/settings' element={<SettingsPage />}/>
             
             {/* PROTECRED AUTH ROLE */}
             <Route path='/adminPanel/suggests' element={<AdminSuggestsPage />}/>

@@ -1,0 +1,14 @@
+@import '@/assets/styles/veriables';
+
+.settingsPage{
+    flex: 1;
+    background-color: $color-grey;
+
+    > .settingsPage_container{
+        max-width: 102.85rem;
+        margin: 0 auto;
+        display: flex;
+        padding: 0 2.57rem;
+        box-sizing: border-box;
+    }
+}
