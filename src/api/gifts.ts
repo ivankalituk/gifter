@@ -48,3 +48,18 @@ export async function getAllGiftsByTags(tags: string[], sort: string, byName: st
         }
     }
 }
+
+// получение всех данных по айди создателя
+export async function getAllGiftsByCreatorId(creator_id: number | null): Promise<Gift[]> {
+    try {
+        const response = await axios.get<Gift[]>(`http://192.168.0.105:1000/gift/creator/${creator_id}`);
+        return response.data; 
+    } catch (error) {
+        if (axios.isAxiosError(error)) {
+            console.error("Ошибка при получении данных:", error.message);
+        } else {
+            console.error("Неожиданная ошибка:", error);
+        }
+        return [];
+    }
+}

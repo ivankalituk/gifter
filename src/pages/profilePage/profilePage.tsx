@@ -7,7 +7,9 @@ import './profilePage.scss'
 import MarkedList from "./components/markedList/markedList";
 import GiftCard from "@/components/giftCard/giftCard";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
-import { RootState } from "@/interfaces/interface";
+import { Gift, RootState } from "@/interfaces/interface";
+import { useGetRequest } from "@/hooks/useGetReuquest";
+import { getAllGiftsByCreatorId } from "@/api/gifts";
 
 interface ProfilePageInterface {
     type: string;
@@ -18,6 +20,9 @@ const ProfilePage: FC <ProfilePageInterface> = ({type, scrollCallback}) => {
 
     const useTypeSelector: TypedUseSelectorHook <RootState> = useSelector
     const user = useTypeSelector((state) => state.user)
+
+    const {data: gifts, isFetched: giftsFetched} = useGetRequest<Gift[] | undefined>({fetchFunc:  () => getAllGiftsByCreatorId(user.user_id), enabled: true, key: [1]})
+
 
     return(
         <div className="profilePage">
@@ -108,10 +113,10 @@ const ProfilePage: FC <ProfilePageInterface> = ({type, scrollCallback}) => {
                     {type == 'privateUser' && <Link to={'/suggest'} className="link_button">Запропонувати</Link>}
 
                     <div className="profilePage_rightColumn_gifts_list">
-                        {/* <GiftCard scrollCallback={scrollCallback}/>
-                        <GiftCard scrollCallback={scrollCallback}/>
-                        <GiftCard scrollCallback={scrollCallback}/>
-                        <GiftCard scrollCallback={scrollCallback}/> */}
+                        {gifts && giftsFetched && gifts.map((data, index) => (
+                            
+                            <GiftCard scrollCallback={scrollCallback} data = {data} key={index} />
+                        ))}
                     </div>
                 </div>
 

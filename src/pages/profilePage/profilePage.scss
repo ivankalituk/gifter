@@ -17,9 +17,12 @@
         padding: 1rem;
         box-sizing: border-box;
         max-width: 30rem;
+        display: flex;
+        flex-direction: column;
 
         > .profilePage_leftColumn_avatar{
             aspect-ratio: 1 / 1;
+            flex: 1;
             width: 100%;
             height: auto;
             object-fit: cover;
