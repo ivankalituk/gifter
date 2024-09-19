@@ -30,7 +30,7 @@ export const useGetRequest = <T>({fetchFunc, key, enabled, mutationFunc}: UseGet
         }
     }, key)
 
-    console.log(data)
+    // console.log(data)
 
     return{data, isFetched}
 }

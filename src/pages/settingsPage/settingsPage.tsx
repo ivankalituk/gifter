@@ -112,17 +112,24 @@ const SettingsPage: FC = () => {
     }
 
     const handleTagInputSubmitCallBack = (text: string) =>{
-        console.log(text)
+        handleAddUserTag(text)
     }
     
     const [userTags, setUserTags] = useState<string[]>([])
 
     const handleAddUserTag = (tag: string) => {
-        setUserTags(prevTags => [... prevTags, tag])
+        if (!userTags.includes(tag)){
+            setUserTags(prevTags => [... prevTags, tag])
+        }
+        console.log(userTags)
     }
 
     const handleRemoveUserTag = (tag: string) =>{
         setUserTags(prevTags => userTags.filter(filtredTag => filtredTag !== tag) )
+    }
+
+    const handleTagsSubmit = () => {
+        console.log("SUBMIT TAGS: ", userTags)
     }
 
     return(
@@ -163,6 +170,14 @@ const SettingsPage: FC = () => {
 
                     <div className="settingsPage_tagsChange">
                         <SearchBar tagInput={tagInput} handleTagInputCallBack = {handleTagInputCallBack} tags = {tags} tagsFetched = {tagsFetched} handleTagInputSubmitCallBack = {handleTagInputSubmitCallBack}/>
+                        
+                        <div className="settingsPage_tagsChange_tagList">
+                            {userTags.map((tag, index) => (
+                                <button key={index} onClick={() => handleRemoveUserTag(tag)}>{tag}</button>
+                            ))}
+                        </div>
+
+                        <button className="button_preset" onClick={handleTagsSubmit}>Підтвердити</button>
                     </div>
 
                     <div className="settingsPage_accountExit">
