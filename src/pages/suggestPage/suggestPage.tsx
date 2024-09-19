@@ -36,8 +36,6 @@ const  SuggestPage: FC  = () => {
         }
 
         reader.readAsDataURL(file)
-        console.log(typeof(selectedImg))
-        console.log(typeof(selectedImgFile))
     }
     
     // ----------------------------------------------
