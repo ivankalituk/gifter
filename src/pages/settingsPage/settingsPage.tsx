@@ -1,16 +1,18 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import './settingsPage.scss'
 
-import sampleLogo from '@/assets/images/logoSample.jpg'
 import insertPhoto from '@/assets/images/insertPhoto.svg'
 import editPen from '@/assets/images/editPen.svg'
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { RootState, Tag } from "@/interfaces/interface";
-import { clearUser, setUser } from "@/redux/userSlice";
+import { clearUser, setUser, setUserImgPath, setUserNickname } from "@/redux/userSlice";
 import { useNavigate } from "react-router-dom";
 import SearchBar from "@/components/searchBar/searchBar";
 import { useGetRequest } from "@/hooks/useGetReuquest";
 import { getTagByInput } from "@/api/tags";
+import { useUpdateRequest } from "@/hooks/useUpdateRequest";
+import { getUserTags, putUserBio, putUserNickname, putUserPhoto, putUserTags } from "@/api/user";
+import { createSuggest } from "@/api/suggest";
 
 // СМЕНА НИКА +
 // СМЕНА АВЫ +
@@ -36,26 +38,35 @@ const SettingsPage: FC = () => {
     const [selectedImgFile, setSelectedImgFile] = useState<any>(null)           //сохранение файла фото
     const [selectedImg, setSelectedImg] = useState<any>(null)                   //сохранение ссылки на файл фото
 
-    const handleImageUpload = (event: any)=>{
+    const {mutatedFunc: changeUserPhoto} = useUpdateRequest({fetchFunc: putUserPhoto})
+
+    const handleImageUpload = async(event: any) => {
         const file = event.target.files[0]
         setSelectedImgFile(file)
+    
         const reader = new FileReader()
-
-        reader.onload = () =>{
+        reader.onload = () => {
             setSelectedImg(reader.result)
         }
-
         reader.readAsDataURL(file)
-
-        // тут же отправлять фото на сервер
+    
+        console.log(file) // Логируй напрямую `file`
+    
+        const imgData = new FormData()
+        imgData.append('user_id', String(user.user_id))
+        imgData.append('image', file) // Используй `file`, а не `selectedImgFile`
+    
+        await changeUserPhoto(imgData) // Ожидаем завершения запроса
     }
-
+    
     // ---------------
     // NICKNAME CHANGE
     // ---------------
 
     const [nichnameChange, setNicknameChange] = useState<boolean>(false)
     const [nicknameInput, setNicknameInput] = useState<string>('')
+
+    const {mutatedFunc: changeName} = useUpdateRequest({fetchFunc: putUserNickname})
 
     const handleNicknameInput = (event: React.ChangeEvent<HTMLInputElement>) => {
         setNicknameInput(event.target.value)
@@ -65,10 +76,11 @@ const SettingsPage: FC = () => {
         setNicknameChange(true)
     }
 
-    const handleNicknameSubmit = () => {
-        console.log("SUBMIT NEW NICKNAME: ", nicknameInput)
-        // добавление логина в бд
+    const handleNicknameSubmit = async () => {
+        changeName({nickname: nicknameInput, user_id: user.user_id})
+        dispatch(setUserNickname({user_nickName: nicknameInput}))
         setNicknameChange(false)
+        console.log(user.user_nickName)
     }
 
     // ---------------
@@ -77,13 +89,15 @@ const SettingsPage: FC = () => {
 
     const [bioArea, setBioArea] = useState<string>('')
     
+    const {mutatedFunc: changeBio} = useUpdateRequest({fetchFunc: putUserBio})
+
     const handleBioChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         setBioArea(event.target.value)
     }
 
     const handleBioSubmit = () => {
-        console.log("BIO SUBMIT: ", bioArea)
-        // добавление био на бд
+        setBioArea('')
+        changeBio({bio: bioArea, user_id: user.user_id})
     }
 
     // ---------------
@@ -100,6 +114,9 @@ const SettingsPage: FC = () => {
     // USER TAG LIST
     // ---------------
 
+    // получение уже созданных тегов
+    const {data: initialTags, isFetched: initialTagsFetched} = useGetRequest({fetchFunc: ()=> getUserTags({user_id: user.user_id}), enabled: true, key: [1]})
+
     const [tagInput, setTagInput] = useState<string>('')
     const [tagInputEnabled, setTagInputEnabled] = useState<boolean>(true)
     const [tagInputKey, setTagInputKey] = useState(1)
@@ -115,7 +132,14 @@ const SettingsPage: FC = () => {
         handleAddUserTag(text)
     }
     
-    const [userTags, setUserTags] = useState<string[]>([])
+    const [userTags, setUserTags] = useState<string[]>(initialTags || [])
+
+    // Обновляем состояние tags, когда initialTagsFetched становится true и initialTags меняются
+    useEffect(() => {
+        if (initialTagsFetched && initialTags) {
+            setUserTags(initialTags); // Устанавливаем начальные теги
+        }
+    }, [initialTagsFetched, initialTags]); 
 
     const handleAddUserTag = (tag: string) => {
         if (!userTags.includes(tag)){
@@ -128,8 +152,10 @@ const SettingsPage: FC = () => {
         setUserTags(prevTags => userTags.filter(filtredTag => filtredTag !== tag) )
     }
 
+    const {mutatedFunc: changeTags} = useUpdateRequest({fetchFunc: putUserTags})
+
     const handleTagsSubmit = () => {
-        console.log("SUBMIT TAGS: ", userTags)
+        changeTags({tags: userTags, user_id: user.user_id})
     }
 
     return(
@@ -155,7 +181,7 @@ const SettingsPage: FC = () => {
                         </div>}
 
                         {nichnameChange && <div className="settingsPage_nameChange_change">
-                            <input type="text" className="inputText_preset" value={nicknameInput} onChange={(event) => handleNicknameInput(event)}/>
+                            <input type="text" className="inputText_preset" placeholder="Введіть нікнейм" value={nicknameInput} onChange={(event) => handleNicknameInput(event)}/>
                             <button className="button_preset" onClick={handleNicknameSubmit}>Submit</button>
                         </div>}
 
@@ -172,7 +198,7 @@ const SettingsPage: FC = () => {
                         <SearchBar tagInput={tagInput} handleTagInputCallBack = {handleTagInputCallBack} tags = {tags} tagsFetched = {tagsFetched} handleTagInputSubmitCallBack = {handleTagInputSubmitCallBack}/>
                         
                         <div className="settingsPage_tagsChange_tagList">
-                            {userTags.map((tag, index) => (
+                            {initialTagsFetched && userTags.length > 0 && userTags.map((tag: string, index: number) => (
                                 <button key={index} onClick={() => handleRemoveUserTag(tag)}>{tag}</button>
                             ))}
                         </div>
