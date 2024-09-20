@@ -58,3 +58,13 @@ export async function putUserPhoto(data: any) {
         console.log("ERROR WHITE GETTING DATA")
     }
 }
+
+export async function getUserBio(data:any) {
+    try{
+        const response = await axios.get('http://192.168.0.105:1000/user/bio/' + data.user_id);
+        console.log(response.data)
+        return response.data
+    } catch (error){
+        console.log("ERROR WHITE GETTING DATA")
+    }
+}

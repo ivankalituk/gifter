@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import profilePhoto from "@/assets/images/logoSample.jpg"
@@ -10,6 +10,7 @@ import { TypedUseSelectorHook, useSelector } from "react-redux";
 import { Gift, RootState } from "@/interfaces/interface";
 import { useGetRequest } from "@/hooks/useGetReuquest";
 import { getAllGiftsByCreatorId } from "@/api/gifts";
+import { getUserBio, getUserTags } from "@/api/user";
 
 interface ProfilePageInterface {
     type: string;
@@ -20,36 +21,37 @@ const ProfilePage: FC <ProfilePageInterface> = ({type, scrollCallback}) => {
 
     const useTypeSelector: TypedUseSelectorHook <RootState> = useSelector
     const user = useTypeSelector((state) => state.user)
-
+    
     const {data: gifts, isFetched: giftsFetched} = useGetRequest<Gift[] | undefined>({fetchFunc:  () => getAllGiftsByCreatorId(user.user_id), enabled: true, key: [1]})
 
-
+    const {data: bio, isFetched: bioFetched} = useGetRequest<any>({fetchFunc:  () => getUserBio({user_id: user.user_id}), enabled: true, key: [1]})
+    const {data: tags, isFetched: tagsFetched} = useGetRequest<any>({fetchFunc:  () => getUserTags({user_id: user.user_id}), enabled: true, key: [1]})
+    
+    useEffect(() => {
+        console.log(tags)
+    }, [tagsFetched])
     return(
         <div className="profilePage">
             <div className="profilePage_leftColumn">
 
-                <img className="profilePage_leftColumn_avatar" src={user.user_imgUrl? user.user_imgUrl :profilePhoto} alt="profile photo" />
+                <img className="profilePage_leftColumn_avatar" src={user.user_imgUrl? 'http://192.168.0.105:1000/' + user.user_imgUrl :profilePhoto} alt="profile photo" />
 
                 <div className="profilePage_leftColumn_nickname">{user.user_nickName}</div>
 
-                <div className="profilePage_leftColumn_description">
+                {bioFetched && bio[0].bio.length > 0 && <div className="profilePage_leftColumn_description">
                     <div className="profilePage_leftColumn_description_heading">Біо:</div>
-                    <div className="profilePage_leftColumn_description_text">Текс описания аккаунта гифтера для пользователя бла бла бла бла бла блядт бля бла</div>
-                </div>
+                    <div className="profilePage_leftColumn_description_text">{bio[0].bio}</div>
+                </div>}
 
-                <div className="profilePage_leftColumn_usedTags">
-                    <div className="profilePage_leftColumn_usedTags_heading">Використані теги:</div>
-                    
-                    <div className="profilePage_leftColumn_usedTags_tags">
-                        <div>#Тег</div>
-                        <div>#Довгий тег</div>
-                        <div>#ДУЖЕ ДОВГИЙ ТЕГ</div>
-                        <div>#Тегггггггггггггеггггггггггг</div>
-                        <div>#Тег</div>
-                        <div>#Тег</div>
-                        <div>#Тег</div>
-                    </div>
-                </div>
+                {tagsFetched && tags.length > 0 && <div className="profilePage_leftColumn_usedTags">
+                        <div className="profilePage_leftColumn_usedTags_heading">Використані теги</div>
+
+                        <div className="profilePage_leftColumn_usedTags_tags">
+                            {tags.map((tag: string, index: number) => (
+                                <div key={index}>{tag}</div>
+                            ))}
+                        </div>
+                    </div>}
 
                 {type == 'privateUser' && <Link className="link_button" to={'/settings'}>Редагувати</Link>}
                 
@@ -73,20 +75,18 @@ const ProfilePage: FC <ProfilePageInterface> = ({type, scrollCallback}) => {
                     <div className="profilePage_rightColumn_description">
                         <div className="profilePage_rightColumn_description_heading">Біо:</div>
 
-                        <div className="profilePage_rightColumn_description_text">Текс описания аккаунта гифтера для пользователя бла бла бла бла бла блядт бля бла</div>
+                        {bioFetched && bio && <div className="profilePage_rightColumn_description_text">{bio[0].bio}</div>}
                     </div>
 
-                    <div className="profilePage_rightColumn_usedTags">
+                    {tagsFetched && tags.length > 0 && <div className="profilePage_rightColumn_usedTags">
                         <div className="profilePage_rightColumn_usedTags_heading">Використані теги</div>
 
                         <div className="profilePage_rightColumn_usedTags_list">
-                            <div>#Тег</div>
-                            <div>#Тег</div>
-                            <div>#Тег</div>
-                            <div>#Тег</div>
-                            <div>#Тег</div>
+                            {tags.map((tag: string, index: number) => (
+                                <div key={index}>{tag}</div>
+                            ))}
                         </div>
-                    </div>
+                    </div>}
 
                     <div className="profilePage_rightColumn_addedTags">
                         <div className="profilePage_rightColumn_addedTags_heading">Додані теги:</div>
