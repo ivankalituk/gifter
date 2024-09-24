@@ -1,12 +1,18 @@
 import AdminPanelAdditional from "@/components/adminPanelAditional/adminPanelAdditional";
-import { FC } from "react";
+import { FC, useState } from "react";
 
 import './adminBlacklistPage.scss'
 import User from "./components/user/user";
 
 import search from '@/assets/images/Search.svg'
+import SearchBar from "@/components/searchBar/searchBar";
 
 const AdminBlacklistPage: FC = () => {
+
+    const [searchInput, setSearchInput] = useState<string>('')
+
+    
+
     return(
         <div className="adminBlacklistPage">
             <AdminPanelAdditional page="blacklist"/>
@@ -18,11 +24,7 @@ const AdminBlacklistPage: FC = () => {
 
                     {/* переделать */}
 
-                    <div className="custom_search">
-                        <button><img src={search} alt="search" /></button>
-                        <input type="text" placeholder="Введіть пошту користувача" />
-                    </div>
-
+                    {/* <SearchBar searchInput = {searchInput}/> */}
 
                     {/* <input type="text" className="inputText_preset" placeholder="Введіть пошту адміна"/> */}
                 </div>

@@ -5,14 +5,14 @@ import searchSign from '@/assets/images/Search.svg'
 import { Tag } from "@/interfaces/interface";
 
 interface SearchBar {
-    tagInput: string,                                           //валью инпута, которое меняется с каждым символом
-    tags: Tag[] | undefined,                                    //список вариантов ответов
-    handleTagInputCallBack: (text: string) => void,             //колбек для выбора тега по вверх вниз
-    tagsFetched: boolean                                        //прогружен ли список ответов
-    handleTagInputSubmitCallBack: (text: string) => void        //окончательный выбор тега
+    searchInput: string,                                           //валью инпута, которое меняется с каждым символом
+    results: Tag[] | undefined,                                    //список вариантов ответов
+    handleSearchInputCallBack: (text: string) => void,             //колбек для выбора тега по вверх вниз
+    resultsFetched: boolean                                        //прогружен ли список ответов
+    handleSearchInputSubmitCallBack: (text: string) => void        //окончательный выбор тега
 }
 
-const SearchBar: FC <SearchBar> = ({tagInput, tags, handleTagInputCallBack, tagsFetched, handleTagInputSubmitCallBack}) => {
+const SearchBar: FC <SearchBar> = ({searchInput, results, handleSearchInputCallBack, resultsFetched, handleSearchInputSubmitCallBack}) => {
  
     // отловить фокус инпута
     const [inputFocus, setInputFocus] = useState<boolean>(false)
@@ -38,7 +38,7 @@ const SearchBar: FC <SearchBar> = ({tagInput, tags, handleTagInputCallBack, tags
 
     // отловить изменение инпута 
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-        handleTagInputCallBack(event.target.value)
+        handleSearchInputCallBack(event.target.value)
         setChosenResultIndex(-1)
     }
 
@@ -48,17 +48,17 @@ const SearchBar: FC <SearchBar> = ({tagInput, tags, handleTagInputCallBack, tags
         if (event.key === 'Enter'){
             
             //если выбран тег из резалтов и после нажат энтер 
-            if(chosenResultIndex > -1 && tags){
-                handleTagInputCallBack(tags[chosenResultIndex].text)
+            if(chosenResultIndex > -1 && results){
+                handleSearchInputCallBack(results[chosenResultIndex].text)
                 setChosenResultIndex(-1)
             } else {
-                handleSubmit(tagInput)
+                handleSubmit(searchInput)
             }
         } else {
 
             if(event.key === 'ArrowUp' || event.key === 'ArrowDown'){
-                if (!tags) {
-                    // console.error('Массив tags пуст или равен null');
+                if (!results) {
+                    // console.error('Массив results пуст или равен null');
                     return;
                 }
 
@@ -69,12 +69,12 @@ const SearchBar: FC <SearchBar> = ({tagInput, tags, handleTagInputCallBack, tags
                         if (newIndex > 0) {
                             newIndex = newIndex - 1;
                         } else {
-                            newIndex = tags.length - 1;
+                            newIndex = results.length - 1;
                         }
                         setChosenResultIndex(newIndex);
                         break;
                     case 'ArrowDown':
-                        if (newIndex < tags.length - 1) {
+                        if (newIndex < results.length - 1) {
                             newIndex = newIndex + 1;
                         } else {
                             newIndex = 0;
@@ -91,22 +91,22 @@ const SearchBar: FC <SearchBar> = ({tagInput, tags, handleTagInputCallBack, tags
     // для занесения тега в массив тегов для поиска
     const handleSubmit = (tag: string) => {
         setChosenResultIndex(-1)
-        handleTagInputSubmitCallBack(tag)
-        handleTagInputCallBack('')
+        handleSearchInputSubmitCallBack(tag)
+        handleSearchInputCallBack('')
     }
 
     return(
         <div className="searchBar">
             
             {/* когда фокус и есть результаты.ленгз > 1, то добавить резултс в классы*/}
-            <div className={`${(inputFocus && tags && tags.length > 0)? "searchBar_container results" : "searchBar_container"} ${inputShow? 'show' : ''}`}>
+            <div className={`${(inputFocus && results && results.length > 0)? "searchBar_container results" : "searchBar_container"} ${inputShow? 'show' : ''}`}>
 
                 <img src={searchSign} alt="search" />
 
-                <input type="text" placeholder="Введіть тег" onFocus={handleFocus} onBlur={handleUnFocus} value={tagInput} onChange={(event) => handleInputChange(event)} onKeyDown={(event) => handleSpecialKeyDown(event)}/>
+                <input type="text" placeholder="Введіть тег" onFocus={handleFocus} onBlur={handleUnFocus} value={searchInput} onChange={(event) => handleInputChange(event)} onKeyDown={(event) => handleSpecialKeyDown(event)}/>
  
-                {tags && tagsFetched && inputFocus && tags?.length > 0 && <div className="searchBar_results">
-                    {tags && tags.map((data, index) => (
+                {results && resultsFetched && inputFocus && results?.length > 0 && <div className="searchBar_results">
+                    {results && results.map((data, index) => (
                         <button key={index} className={index === chosenResultIndex? "active" : ""} onMouseDown={() => handleSubmit(data.text)} >{data.text}</button>
                     ))}
                 </div>}

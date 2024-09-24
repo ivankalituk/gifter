@@ -149,7 +149,7 @@ const  SuggestPage: FC  = () => {
                             
 
                             <div className="filters_tagSearch">
-                                <SearchBar tagInput={tagInput} tags = {tags} handleTagInputCallBack = {handleTagInputCallBack} tagsFetched = {tagsFetched} handleTagInputSubmitCallBack = {handleTagInputSubmitCallBack}/>
+                                <SearchBar searchInput={tagInput} results = {tags} handleSearchInputCallBack = {handleTagInputCallBack} resultsFetched = {tagsFetched} handleSearchInputSubmitCallBack = {handleTagInputSubmitCallBack}/>
                             </div>
 
                             <div className="dataUpload_addTags_tags">

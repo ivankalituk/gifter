@@ -195,7 +195,7 @@ const SettingsPage: FC = () => {
                     </div>
 
                     <div className="settingsPage_tagsChange">
-                        <SearchBar tagInput={tagInput} handleTagInputCallBack = {handleTagInputCallBack} tags = {tags} tagsFetched = {tagsFetched} handleTagInputSubmitCallBack = {handleTagInputSubmitCallBack}/>
+                        <SearchBar searchInput={tagInput} handleSearchInputCallBack = {handleTagInputCallBack} results = {tags} resultsFetched = {tagsFetched} handleSearchInputSubmitCallBack = {handleTagInputSubmitCallBack}/>
                         
                         <div className="settingsPage_tagsChange_tagList">
                             {initialTagsFetched && userTags.length > 0 && userTags.map((tag: string, index: number) => (
