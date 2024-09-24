@@ -43,7 +43,7 @@ function App() {
     const checkUser = async () => {
       // если токен существует
       const token = localStorage.getItem('access_token')
-      console.log(token)
+      // console.log(token)
 
       if (token){
         try {
@@ -51,7 +51,7 @@ function App() {
           
           const response = await axios.post('http://localhost:1000/user', {access_token: token});
           const data = response.data
-          console.log(data)
+          // console.log(data)
 
           // заполнение редакс стора
 

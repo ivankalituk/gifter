@@ -38,12 +38,12 @@ const ProfilePage: FC <ProfilePageInterface> = ({type, scrollCallback}) => {
 
                 <div className="profilePage_leftColumn_nickname">{user.user_nickName}</div>
 
-                {bioFetched && bio[0].bio.length > 0 && <div className="profilePage_leftColumn_description">
+                {bioFetched && bio[0].bio !== null && <div className="profilePage_leftColumn_description">
                     <div className="profilePage_leftColumn_description_heading">Біо:</div>
                     <div className="profilePage_leftColumn_description_text">{bio[0].bio}</div>
                 </div>}
 
-                {tagsFetched && tags.length > 0 && <div className="profilePage_leftColumn_usedTags">
+                {tagsFetched && tags !== null && tags.length > 0 && <div className="profilePage_leftColumn_usedTags">
                         <div className="profilePage_leftColumn_usedTags_heading">Використані теги</div>
 
                         <div className="profilePage_leftColumn_usedTags_tags">

@@ -68,3 +68,12 @@ export async function getUserBio(data:any) {
         console.log("ERROR WHITE GETTING DATA")
     }
 }
+
+export async function getUserById(data:any) {
+    try{
+        const response = await axios.get('http://192.168.0.105:1000/user/' + data.user_id);
+        return response.data
+    } catch (error){
+        console.log("ERROR WHITE GETTING DATA")
+    }
+}
