@@ -51,3 +51,16 @@ export interface suggestForPost {
 export interface giftName{
         name: string
 }
+
+export interface admin{
+        addData: string,
+        admin_level: number,
+        bio: string | null,
+        email: string,
+        id: number,
+        imgPath: string | null,
+        nickname: string,
+        role: number,
+        tags: string[] | null,
+        user_id: number
+}
