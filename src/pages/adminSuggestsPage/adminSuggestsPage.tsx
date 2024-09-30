@@ -14,6 +14,7 @@ const AdminSuggestsPage: FC = () =>{
 
                 <div className="adminSuggestsPage_content_suggests">
                     <AnySuggest />
+                    <AnySuggest />
                 </div>
             </div>
         </div>

@@ -23,6 +23,12 @@
             font-weight: 700;
             font-size: 1.2rem;
         }
+
+        > .adminSuggestsPage_content_suggests{
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
     }
 }
 

@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 import './anySuggest.scss'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import sampleAvatar from '@/assets/images/logoSample.jpg'
 import sampleGift from '@/assets/images/Sample Gift Photo.png'
@@ -14,6 +14,14 @@ const AnySuggest: FC = () => {
     // предложение не имеющее фото будет добавлено заглушку
     // далее предложение будет выглядеть ровно так же, как и на главной страниые
     // по нажатию на одобрить будет открыто модальное окно изменения
+
+    const navigate = useNavigate()
+
+    // лень переделывать стили ссылки
+    const handleChangeLink = () =>{
+        navigate('/adminPanel/suggests/submit/' + 1)
+    }
+
 
     return(
         <div className="suggest">
@@ -42,7 +50,7 @@ const AnySuggest: FC = () => {
             </div>
 
             <div className="suggest_buttons">
-                <button className="button_preset">Редактор</button>
+                <button className="button_preset" onClick={handleChangeLink}>Редактор</button>
                 <button className="button_preset">Відмовити</button>
             </div>
         </div>

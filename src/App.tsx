@@ -22,6 +22,7 @@ import { RootState, UserState } from './interfaces/interface';
 import { setUser } from './redux/userSlice';
 import logo from '@/assets/images/logoRed.svg'
 import AuthPage from './pages/authPage/authPage';
+import GiftCreationPage from './pages/giftCreationPage/giftCreationPage';
 
 function App() {
 
@@ -118,6 +119,8 @@ function App() {
             <Route path='/adminPanel/reports' element={<AdminReportsPage />}/>   
             <Route path='/adminPanel/admins' element={<AdminAdminsPage />}/>
             <Route path='/adminPanel/blacklist' element={<AdminBlacklistPage />}/>
+            <Route path='/adminPanel/suggests/submit/:suggest_id' element={<GiftCreationPage />}></Route>
+            <Route path='/adminPanel/reports/submit/:report_id' element={<GiftCreationPage />}></Route>
           </Routes>
         </main>
       </>}
