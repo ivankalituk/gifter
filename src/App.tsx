@@ -119,8 +119,8 @@ function App() {
             <Route path='/adminPanel/reports' element={<AdminReportsPage />}/>   
             <Route path='/adminPanel/admins' element={<AdminAdminsPage />}/>
             <Route path='/adminPanel/blacklist' element={<AdminBlacklistPage />}/>
-            <Route path='/adminPanel/suggests/submit/:suggest_id' element={<GiftCreationPage />}></Route>
-            <Route path='/adminPanel/reports/submit/:report_id' element={<GiftCreationPage />}></Route>
+            <Route path='/adminPanel/suggests/submit/:suggest_id' element={<GiftCreationPage type={'suggest'} />}></Route>
+            <Route path='/adminPanel/reports/submit/:report_id' element={<GiftCreationPage type={'report'}/>}></Route>
           </Routes>
         </main>
       </>}
