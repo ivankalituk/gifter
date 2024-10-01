@@ -11,7 +11,7 @@ import Account from "@/components/account/account";
 const Report: FC = () => {
     return(
         <div className="report">
-            <Account />
+            {/* <Account /> */}
 
             <div className="report_text">РАНДОМ ТЕКСТ РЕПОРТА</div>
 

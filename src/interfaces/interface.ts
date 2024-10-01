@@ -64,3 +64,13 @@ export interface admin{
         tags: string[] | null,
         user_id: number
 }
+
+export interface suggest{
+        id: number,
+        addDate: string,
+        content: string,
+        name: string,
+        photiPath: null | string,
+        tags: string[] | null,
+        user_id: string
+}
