@@ -39,7 +39,7 @@ export async function getGiftNameByName(name: string): Promise<giftName[]> {
 export async function getAllGiftsByTags(tags: string[], sort: string, byName: string):Promise<Gift[] | undefined> {
     try{
         console.log(byName)
-        return await axios.post<Gift[] | undefined>('http://localhost:1000/gift/tags', {tags: tags, sort: sort, byName: byName}).then(({data}) => data);
+        return await axios.post<Gift[] | undefined>(serverUrl + '/gift/tags', {tags: tags, sort: sort, byName: byName}).then(({data}) => data);
     } catch (error){
         if (axios.isAxiosError(error)){
             console.log("ERROR WHITE GETTING DATA:", error.message)
