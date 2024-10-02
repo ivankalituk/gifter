@@ -6,6 +6,8 @@ import { Link, useNavigate } from "react-router-dom";
 import sampleAvatar from '@/assets/images/logoSample.jpg'
 import sampleGift from '@/assets/images/Sample Gift Photo.png'
 import Account from "../account/account";
+import { useUpdateRequest } from "@/hooks/useUpdateRequest";
+import { deleteSuggest } from "@/api/suggest";
 
 interface AnySuggestInterface{
     data: any,
@@ -21,6 +23,8 @@ const AnySuggest: FC <AnySuggestInterface>= ({data, handleDeleteSuggestCallBack}
 
     const navigate = useNavigate()
 
+    const {mutatedFunc: deleteSuggestFunc} = useUpdateRequest({fetchFunc: deleteSuggest})
+
     // лень переделывать стили ссылки
     const handleChangeLink = () =>{
         navigate('/adminPanel/suggests/submit/' + data.id)
@@ -29,6 +33,7 @@ const AnySuggest: FC <AnySuggestInterface>= ({data, handleDeleteSuggestCallBack}
     const handleDelete = () => {
         handleDeleteSuggestCallBack(data.id)
         // также сделать удаление 
+        deleteSuggestFunc({suggest_id: data.id})
     }
 
     console.log(data)

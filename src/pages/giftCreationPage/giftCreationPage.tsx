@@ -11,7 +11,8 @@ import { useParams } from "react-router-dom";
 import { Tag } from "@/interfaces/interface";
 import { getTagByInput } from "@/api/tags";
 import SearchBar from "@/components/searchBar/searchBar";
-import { getGiftById } from "@/api/gifts";
+import { getGiftById, postGift } from "@/api/gifts";
+import { useUpdateRequest } from "@/hooks/useUpdateRequest";
 
 interface giftCreationPage {
     type: string
@@ -137,9 +138,32 @@ const GiftCreationPage : FC <giftCreationPage> = ({type}) => {
     // окончательное добавление подарка 
     // --------------------------------
 
+    const {mutatedFunc: createGift} = useUpdateRequest({fetchFunc: postGift})
+
     const handleAddGift = () =>{
         if(tagArray.length <= 3 && nameInput !== '' && (selectedImgFile !== null || suggest[0].photoPath !== null)){
-            console.log("CORRECT, GIFT WILL BE ADDED")
+
+            if(type = 'report'){
+                // отправить пост запрос на добавление подарка
+                const data = new FormData()
+                data.append('name', nameInput)
+                data.append('creator_id', '2')
+                data.append('admin_id', '2')
+                tagArray?.forEach((tag) => (data.append('tags', tag)))
+                if(suggest[0].photoPath !== null && selectedImgFile === null){
+                    data.append('imagePath', suggest[0].photoPath)
+                } else {
+                    data.append('image', selectedImgFile)
+                    if(suggest[0].photoPath !== null) {
+                        data.append('imagePath', suggest[0].photoPath)
+                    }
+                }
+
+                createGift(data)
+            } else {
+                // отправить пут запрос на обновление подарка
+            }
+
         } else {
             setHelp(true)
         }

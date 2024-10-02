@@ -30,3 +30,12 @@ export async function getSuggestById(data: any) {
         console.log("ERROR WHITE GETTING DATA")
     }
 }
+
+export async function deleteSuggest(data: any) {
+    try{
+        const response = await axios.delete('http://localhost:1000/suggest/' + data.suggest_id);
+        return response.data
+    } catch (error){
+        console.log("ERROR WHITE GETTING DATA")
+    }
+}

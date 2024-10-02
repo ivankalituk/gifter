@@ -73,3 +73,14 @@ export async function getGiftById(data: any) {
         console.log("ERROR WHITE GETTING DATA")
     }
 }
+
+// создание подарка 
+export async function postGift(data: any) {
+    try{
+        await axios.post('http://localhost:1000/gift', data, {
+            headers: { 'Content-Type': 'multipart/form-data' },
+          })
+    } catch (error){
+        console.log("ERROR WHITE GETTING DATA")
+    }
+}
