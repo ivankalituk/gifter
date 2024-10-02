@@ -27,9 +27,6 @@ const ProfilePage: FC <ProfilePageInterface> = ({type, scrollCallback}) => {
     const {data: bio, isFetched: bioFetched} = useGetRequest<any>({fetchFunc:  () => getUserBio({user_id: user.user_id}), enabled: true, key: [1]})
     const {data: tags, isFetched: tagsFetched} = useGetRequest<any>({fetchFunc:  () => getUserTags({user_id: user.user_id}), enabled: true, key: [1]})
     
-    useEffect(() => {
-        console.log(tags)
-    }, [tagsFetched])
     return(
         <div className="profilePage">
             <div className="profilePage_leftColumn">

@@ -11,6 +11,7 @@ import { useParams } from "react-router-dom";
 import { Tag } from "@/interfaces/interface";
 import { getTagByInput } from "@/api/tags";
 import SearchBar from "@/components/searchBar/searchBar";
+import { getGiftById } from "@/api/gifts";
 
 interface giftCreationPage {
     type: string
@@ -30,7 +31,7 @@ const GiftCreationPage : FC <giftCreationPage> = ({type}) => {
 
 
     const {data: suggest, isFetched: suggestFetched} = useGetRequest({fetchFunc: ()=> getSuggestById({suggest_id: suggest_id}), key: [], enabled: suggestEnabled})
-    const {data: report, isFetched: reportFetched} = useGetRequest({fetchFunc: ()=> getReportById({report_id: report_id}), key: [], enabled: reportEnabled})
+    const {data: report, isFetched: reportFetched} = useGetRequest({fetchFunc: ()=> getGiftById({gift_id: report_id}), key: [], enabled: reportEnabled})
 
     // --------------
     // обраюотка фото
@@ -70,6 +71,7 @@ const GiftCreationPage : FC <giftCreationPage> = ({type}) => {
             if (report && reportFetched){
                 setAreaInput('')
                 setNameInput(report[0].name)
+                console.log(report)
             }
         }
     }, [suggest, report, suggestFetched, reportFetched])
@@ -199,8 +201,10 @@ const GiftCreationPage : FC <giftCreationPage> = ({type}) => {
                             </div>
                         </div>
 
-
-                        <button className='button_preset' onClick={handleAddGift}>Додати подарунок</button>
+                        <div className="giftCreationPage_gift_dataUpload_buttons">
+                            <button className='button_preset' onClick={handleAddGift}>{type === 'report'? 'Оновити подарунок' : 'Додати подарунок'}</button>
+                            {type === 'report' && <button className='button_preset'>Видалити подарунок</button>}
+                        </div>
                     </div>
                 </div>
 

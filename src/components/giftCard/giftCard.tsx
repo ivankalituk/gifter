@@ -96,7 +96,7 @@ const GiftCard: FC <GiftCardInterface> = ({scrollCallback, data}) =>{
                     <div className="giftCard_views">{data.userViews} перегляди</div>
 
                     <div className="giftCard_tags">
-                        { data.tags.split(', ').map((tag: string, index:number) => (
+                        {data.tags.length > 0 && data.tags && data.tags.map((tag: string, index:number) => (
                             <div className="giftCard_tags_tag" key={index}>{tag}</div>
                         ))}
                     </div>
@@ -114,7 +114,7 @@ const GiftCard: FC <GiftCardInterface> = ({scrollCallback, data}) =>{
                 <div className="giftCard_mark"><img src={mark}  alt="mark" className={marked? "active": ""} onClick={handleMarked}/></div>
             </div>
 
-            {report && <Modal onClose = {handleReportClose} Component={ModalReport}/>}
+            {report && <Modal onClose = {handleReportClose} Component={ModalReport} modalProps={{gift_id: data.id}}/>}
 
             {giftModal && <Modal onClose = {handleGiftModalClose} Component={ModalGift}/>}
         </div>

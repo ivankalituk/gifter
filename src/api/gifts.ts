@@ -63,3 +63,13 @@ export async function getAllGiftsByCreatorId(creator_id: number | null): Promise
         return [];
     }
 }
+
+// получение подарка по его айди
+export async function getGiftById(data: any) {
+    try{
+        const response = await axios.get('http://localhost:1000/gift/' + data.gift_id);
+        return response.data
+    } catch (error){
+        console.log("ERROR WHITE GETTING DATA")
+    }
+}

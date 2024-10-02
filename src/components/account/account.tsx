@@ -20,8 +20,7 @@ const Account: FC <Account>= ({user_id, date}) => {
     // -------------------
 
     const {data: user, isFetched: userFetched} = useGetRequest({fetchFunc: () => getUserById({user_id: user_id}), key: [], enabled: true})
-
-    console.log(user_id)
+    
     // --------------------------------------------------------
     // открыть дополнительные настройки (добавление админа, чс)
     // --------------------------------------------------------

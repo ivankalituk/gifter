@@ -2,13 +2,14 @@ import "./modal.scss"
 
 import React, { FC, useState } from "react";
 
-interface ModalInterface {
+interface ModalInterface<T> {
     onClose: () => void;
     Component: React.ComponentType<any>;
-
+    modalProps? : T
 }
 
-const Modal: FC <ModalInterface> = ({onClose, Component}) => {
+const Modal: FC <ModalInterface<any>> = ({onClose, Component, modalProps}) => {
+
 
     const [modalAimation, setModalAnimation] = useState<boolean>(true)
 
@@ -25,7 +26,7 @@ const Modal: FC <ModalInterface> = ({onClose, Component}) => {
             <div className={modalAimation? "modal_background" : "modal_background hide"} onClick={handleClose}/>
 
             <div className={modalAimation? "modal_modalOverlay" : "modal_modalOverlay hide"}>
-                <Component />
+                <Component modalProps = {modalProps} handleReportClose={handleClose}/>
             </div>
         </div>
     )

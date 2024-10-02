@@ -31,6 +31,7 @@ function App() {
 
   // блокировка скролла
   const [blockScroll, setBlockScroll] = useState<boolean>(false)
+
   const scrollCallback = (block: boolean) =>{
     setBlockScroll(block)
   }
@@ -116,7 +117,7 @@ function App() {
             
             {/* PROTECRED AUTH ROLE */}
             <Route path='/adminPanel/suggests' element={<AdminSuggestsPage />}/>
-            <Route path='/adminPanel/reports' element={<AdminReportsPage />}/>   
+            <Route path='/adminPanel/reports' element={<AdminReportsPage scrollCallback={scrollCallback}/>}/>   
             <Route path='/adminPanel/admins' element={<AdminAdminsPage />}/>
             <Route path='/adminPanel/blacklist' element={<AdminBlacklistPage />}/>
             <Route path='/adminPanel/suggests/submit/:suggest_id' element={<GiftCreationPage type={'suggest'} />}></Route>
