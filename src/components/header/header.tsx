@@ -71,21 +71,7 @@ const Header: FC<HeaderProps> = ({scrollCallback, nameSearchCallBack}) =>{
                 <div className="burgerMenu_Menu">
                     <div className={burgerMenu? "burgerMenu_Menu_background show" : "burgerMenu_Menu_background"} onClick={handleBurger}></div>
                     <div className={burgerMenu? "burgerMenu_Menu_content show" : "burgerMenu_Menu_content" }>
-                        <div className="burger_profile">
-                            <Account />
-                        </div>
-
-                        <div className="burger_mainLinks">
-                            <Link to={'/suggest'}>Запропонувати</Link>
-                        </div>
-
-                        <div className="burger_aditionalLinks">
-                            <Link to={'/adminPanel/suggests'}>Пропозиції</Link>
-                            <Link to={'/adminPanel/reports'}>Скарги</Link>
-                            <Link to={'/adminPanel/blacklist'}>Чорний список</Link>
-                            <Link to={'/adminPanel/admins'}>Адміни</Link>
-                            <Link to={'/'}>Статистика</Link>
-                        </div>
+                        
                     </div>
                 </div>
             </div>

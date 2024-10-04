@@ -71,6 +71,7 @@ header{
                 animation: opacityFadeBG 0.5s forwards;
 
                 &.show{
+                    pointer-events: none;
                     animation: opacityUnFadeBG 0.5s forwards;
                 }
             }

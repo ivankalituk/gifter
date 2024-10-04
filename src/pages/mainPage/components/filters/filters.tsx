@@ -160,7 +160,7 @@ const Filters: FC <FilterInterface>= ({filtersOpen, handleFiltersOpen, filtersCa
                 {nameSearch && <div className="filters_nameSearch">
                     <div className="filters_nameSearch_heading">Пошук за іменем подарунку:</div>
                     <div className="filters_nameSearch_name">...{nameSearch}...</div>
-                    <button onClick={deleteSearchCallBack}>Видалити</button>
+                    <button onClick={deleteSearchCallBack} className="button_preset">Видалити</button>
                 </div>}
 
 

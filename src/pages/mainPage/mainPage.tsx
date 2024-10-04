@@ -43,11 +43,7 @@ const MainPage: FC <MainPageInterface>= ({scrollCallback, nameSearch, deleteSear
         // сначала добавить новые фильтры, потом обновить ключ
         setGiftTags(tags)
         setGiftKey(giftKey + 1)
-        console.log(2)
-        console.log(giftTags, giftKey)
     }
-
-    console.log(gifts)
 
     return (
         <div className="mainPage">

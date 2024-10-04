@@ -61,11 +61,6 @@ const GiftCard: FC <GiftCardInterface> = ({scrollCallback, data}) =>{
         setMarked(!marked)
     }
 
-    // переносим строку тегов подарка в массив для отображения
-
-
-    console.log('http://localhost:1000/' + data.photoPath)
-
     return(
         <div className="giftCard">
 

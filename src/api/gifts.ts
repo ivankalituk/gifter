@@ -38,11 +38,10 @@ export async function getGiftNameByName(name: string): Promise<giftName[]> {
 // получение всех подарков по массиву тегов (если массив пуст, то любые подарки)
 export async function getAllGiftsByTags(tags: string[], sort: string, byName: string):Promise<Gift[] | undefined> {
     try{
-        console.log(byName)
         return await axios.post<Gift[] | undefined>(serverUrl + '/gift/tags', {tags: tags, sort: sort, byName: byName}).then(({data}) => data);
     } catch (error){
         if (axios.isAxiosError(error)){
-            console.log("ERROR WHITE GETTING DATA:", error.message)
+            console.error("ERROR WHITE GETTING DATA:", error.message)
         } else {
             console.error("UNEXPECRED ERROR:", error)
         }

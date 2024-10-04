@@ -69,23 +69,29 @@
             top: 1.5rem;
             left: 0;
             z-index: 99;
-            height: 6.14rem;
+            height: 6.2rem;
             border-radius: 0 0 0.57rem 0.57rem;
             box-sizing: border-box;
             overflow: hidden;
             opacity: 0;
             transform: translateY(-20%);
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
         
             > button {
                 cursor: pointer;
+                text-align: left;
                 display: block;
                 flex: 1;
                 outline: none;
                 border: none;
-                background-color: $color-grey-hover;
+                background-color: transparent;
                 font-weight: 700;
                 margin: 0.35rem 0 0 0;
                 box-sizing: border-box;
+
+
             }
         }
     }

@@ -45,7 +45,6 @@ function App() {
     const checkUser = async () => {
       // если токен существует
       const token = localStorage.getItem('access_token')
-      // console.log(token)
 
       if (token){
         try {
@@ -53,16 +52,15 @@ function App() {
           
           const response = await axios.post('http://localhost:1000/user', {access_token: token});
           const data = response.data
-          // console.log(data)
 
           // заполнение редакс стора
 
           const newUser: UserState = {
-            user_nickName: data.nickname,
-            user_imgUrl: data.imgPath,
-            user_role: data.role,
-            user_id: data.id,
-            user_email: data.email,
+            user_nickName: data[0].nickname,
+            user_imgUrl: data[0].imgPath,
+            user_role: data[0].role,
+            user_id: data[0].id,
+            user_email: data[0].email,
           }
 
           dispatch(setUser(newUser))
@@ -71,6 +69,8 @@ function App() {
         } catch (error) {
           console.error('Error:', error);
         }
+      } else {
+        setReady(true)
       }
     }
 

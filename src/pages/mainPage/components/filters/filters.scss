@@ -7,54 +7,11 @@
         width: 224px;
         padding: 1.42rem 0.71rem;
         box-sizing: border-box;
+        height: 100%;
         min-height: 100vh;
         // z-index: ;
 
         > .filters_tagSearch{
-
-            > .filters_tagSearch_searchBar{
-                position: relative;
-                display: flex;
-                align-items: center;
-                border: 1px $color-grey solid; 
-                height: 2.71rem;
-                box-sizing: border-box;
-                padding: 0.42rem;
-                border-radius: 0.57rem;
-
-                > input{
-                    margin-left: 0.85rem;
-                    outline: none;
-                    border: none;
-                    flex: 1;
-                    font-size: 1rem;
-                }
-
-                > .filters_tagSearch_results{
-                    padding: 0.7rem;
-                    box-sizing: border-box;
-                    top: 2.7rem;
-                    left: -1px;
-                    position: absolute;
-                    width: 205px;
-                    background-color: $color-white;
-                    border-radius: 0 0 0.75rem 0.75rem;
-                    z-index: 999;
-
-                    > .filters_tagSearch_result{
-                        color: $color-black;
-                        font-size: 1rem;
-                        height: 2rem;
-                        display: flex;
-                        align-items: center;
-                        cursor: pointer;
-                        border: none;
-                        outline: none;
-                        background-color: $color-white;
-                        width: 100%;
-                    }
-                }
-            }
 
             > .filters_tagSearch_tags{
                 margin-top: 0.35rem;
@@ -95,6 +52,12 @@
             > .filters_nameSearch_heading{
                 font-weight: 700;
                 font-size: 1rem;
+            }
+
+            > .filters_nameSearch_name{
+                margin: 0.5rem 0;
+                overflow-wrap: break-word;
+                word-wrap: break-word;
             }
         }
 
@@ -232,6 +195,7 @@
 
         &.show{
             animation: opacityUnFadeBG 0.5s forwards;
+            pointer-events: none;
         }
     }
 }
@@ -364,10 +328,10 @@
         z-index: 1000;
 
         >.filters_container{
-            animation: fadeAndSlideFilter 1s forwards;
+            animation: fadeAndSlideFilter 0.5s forwards;
 
             &.show{
-                animation: fadeAndHideFilter 1s forwards;
+                animation: fadeAndHideFilter 0.5s forwards;
             }
         }
     }
