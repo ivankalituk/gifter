@@ -113,7 +113,7 @@ const GiftCard: FC <GiftCardInterface> = ({scrollCallback, data}) =>{
 
             {report && <Modal onClose = {handleReportClose} Component={ModalReport} modalProps={{gift_id: data.id}}/>}
 
-            {giftModal && <Modal onClose = {handleGiftModalClose} Component={ModalGift}/>}
+            {giftModal && <Modal onClose = {handleGiftModalClose} Component={ModalGift} modalProps={{gift_id: data.id}}/>}
         </div>
     )
 }

@@ -63,6 +63,11 @@
 @media (max-width: 1000px) {
     .account{
         flex: 1;
-        background-color:$color-grey;
+        
+        > a{
+            width: 100%;
+        }
+
+        // background-color:$color-grey;
     }
 }

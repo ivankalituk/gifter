@@ -71,6 +71,7 @@ export async function getUserBio(data:any) {
 
 export async function getUserById(data:any) {
     try{
+        console.log(data)
         const response = await axios.get('http://localhost:1000/user/' + data.user_id);
         console.log(response.data)
         return response.data

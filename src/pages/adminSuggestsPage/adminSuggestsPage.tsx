@@ -15,7 +15,7 @@ const AdminSuggestsPage: FC = () =>{
 
     const {data: suggests, isFetched: suggestsFetched} = useGetRequest({fetchFunc: () => getAllSuggests(), key: [], enabled: true})
 
-    const [initialSuggests, setInitialSuggests] = useState<suggest[]>(null || suggests)
+    const [initialSuggests, setInitialSuggests] = useState<suggest[]>(suggests)
 
     useEffect(() => {
         if (suggests && suggestsFetched){

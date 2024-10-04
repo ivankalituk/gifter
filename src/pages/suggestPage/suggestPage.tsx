@@ -6,18 +6,22 @@ import search from '@/assets/images/Search.svg'
 
 import insertPhoto from '@/assets/images/insertPhoto.svg'
 import giftPreInsertPhoto from '@/assets/images/giftPreInsertPhoto.svg'
-import { suggestForPost, Tag } from '@/interfaces/interface';
+import { RootState, suggestForPost, Tag } from '@/interfaces/interface';
 import { useUpdateRequest } from '@/hooks/useUpdateRequest';
 import { createSuggest } from '@/api/suggest';
 import { useGetRequest } from '@/hooks/useGetReuquest';
 import { getTagByInput } from '@/api/tags';
 import { useNavigate } from 'react-router-dom';
 import SearchBar from '@/components/searchBar/searchBar';
+import { TypedUseSelectorHook, useSelector } from 'react-redux';
 
 const  SuggestPage: FC  = () => {
 
     const navigate = useNavigate()
 
+    const useTypeSelector: TypedUseSelectorHook <RootState> = useSelector
+    const user = useTypeSelector((state) => state.user)
+    
 
     // ----------------------------------------------
     // Photo upload
@@ -56,7 +60,7 @@ const  SuggestPage: FC  = () => {
             // в формдату залить массив тегов
             const data = new FormData()
             data.append('name', suggestName)
-            data.append('user_id', '2')
+            data.append('user_id', String(user.user_id))
             data.append('content', suggestDesc)
             tagArray?.forEach((tag) => (data.append('tagArray', tag)))
             

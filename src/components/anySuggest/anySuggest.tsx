@@ -41,7 +41,7 @@ const AnySuggest: FC <AnySuggestInterface>= ({data, handleDeleteSuggestCallBack}
     return(
         <div className="suggest">
 
-            <Account user_id={data.user_id} date={data.addDate}/>
+            {/* <Account user_id={data.user_id} date={data.addDate}/> */}
 
             <div className="suggest_comment">{data.content}</div>
 

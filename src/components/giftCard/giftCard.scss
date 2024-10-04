@@ -16,6 +16,13 @@
         
         > .giftCard_inner{
 
+            > img{
+                width: 100%;
+                height: auto;
+                aspect-ratio: 280/155;
+                object-fit: contain;
+            }
+
             > .giftCard_name{
                 margin-top: 0.714rem;
                 font-weight: 700;
