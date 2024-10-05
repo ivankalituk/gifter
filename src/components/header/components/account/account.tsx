@@ -24,7 +24,7 @@ const  Account: FC = () =>{
                 <div className="header_profile_nickname">{user.user_nickName}</div>
 
                 <div className="header_profile_img">
-                    <img src={user.user_imgUrl? 'http://192.168.0.105:1000/'+ user.user_imgUrl : profileLogo} alt="avatar" />
+                    <img src={user.user_imgUrl? 'http://localhost:1000/'+ user.user_imgUrl : profileLogo} alt="avatar" />
                 </div>
             </Link>}
         </div>

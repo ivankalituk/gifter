@@ -53,23 +53,8 @@ const Filters: FC <FilterInterface>= ({filtersOpen, handleFiltersOpen, filtersCa
             removeTag(gender); 
         }
     };
-    
-    // для инпут ренджа
-    const [rangeValue, setRangeValue] = useState<number>(0)
 
-    // для инпут ренджа
-    const handleRangeChange = (event: ChangeEvent<HTMLInputElement>) =>{
-        setRangeValue(Number(event.target.value))
-    }
 
-    // для инпут свитч
-    const [ageInputSwitch, setAgeInputSwitch] = useState<boolean>(false)
-
-    const handleAgeInputSwitch = () =>{
-        setAgeInputSwitch(!ageInputSwitch)
-    }
-
-    // ЗАМЕНИТЬ
     // -----------------------------------------------------------------------------------------------------
     // Обработка тегов
     // -----------------------------------------------------------------------------------------------------
@@ -140,7 +125,72 @@ const Filters: FC <FilterInterface>= ({filtersOpen, handleFiltersOpen, filtersCa
         }
     }, [chosenTags])
     
+    // -------------------------------------
+    // input range для возраста пользователя
+    // -------------------------------------
 
+    // ЕСЛИ 0 ТО #дляМолождих; ЕСЛИ 1 ТО #дляСередньогоВіку; ЕСЛИ 2 ТО #дляЛітніх 
+
+    // ИНПУТ СВИЧ
+    const [ageInputSwitch, setAgeInputSwitch] = useState<boolean>(false)
+
+    const [rangeValue, setRangeValue] = useState<number>(0)
+
+    const handleRangeChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const rangeValue: number = Number(event.target.value);
+        const maxValue: number = Number(event.target.max);
+        const percentage: number = (rangeValue / maxValue) * 100;
+    
+        // Устанавливаем CSS переменную --val для изменения градиента
+        event.target.style.setProperty('--val', `${percentage}%`);
+
+        setRangeValue(Number(event.target.value))
+        console.log(rangeValue)
+        handleAgeChange()
+    }
+
+    const handleAgeInputSwitch = () =>{
+        setAgeInputSwitch(!ageInputSwitch)
+
+        handleAgeChange()
+    }
+
+    // вспомогательная функция отлавливания изменений
+    const handleAgeChange = () => {
+        // если свич виключен, удаляем вибор возраста
+        if (!ageInputSwitch){
+            switch (rangeValue) {
+                case 0:
+                    removeTag('#дляМолодих')
+                    break;
+                case 1:
+                    removeTag('#дляСередньогоВіку')
+                    break;
+                case 2:
+                    removeTag('#дляЛітніх')
+                    break;
+                default:
+                    break;
+            }
+        }
+    
+        if (ageInputSwitch){
+            switch (rangeValue) {
+                case 0:
+                    addTag('#дляМолодих')
+                    break;
+                case 1:
+                    addTag('#дляСередньогоВіку')
+                    break;
+                case 2:
+                    addTag('#дляЛітніх')
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+    
     return(
         <div className="filters">
             <div className= {filtersOpen? "filters_container" : "filters_container show"}>
@@ -210,12 +260,18 @@ const Filters: FC <FilterInterface>= ({filtersOpen, handleFiltersOpen, filtersCa
                             <div className={ageInputSwitch? "custom_switch_thumb active" : "custom_switch_thumb "} />
                             <input type="checkbox" checked={ageInputSwitch} onChange={handleAgeInputSwitch}/>
                         </div>
+                        
                     </div>
 
                     <div className="filters_age_customRange">
                         <input type="range" min={0} max={2} step={1} value={rangeValue} onChange={handleRangeChange} />
                     </div>
                     
+                    <div className="filters_age_explenation">
+                            <div>10+</div>
+                            <div>30+</div>
+                            <div>60+</div>
+                        </div>
 
                 </div>
 
