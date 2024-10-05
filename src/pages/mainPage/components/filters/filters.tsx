@@ -145,51 +145,13 @@ const Filters: FC <FilterInterface>= ({filtersOpen, handleFiltersOpen, filtersCa
         event.target.style.setProperty('--val', `${percentage}%`);
 
         setRangeValue(Number(event.target.value))
-        console.log(rangeValue)
-        handleAgeChange()
     }
 
     const handleAgeInputSwitch = () =>{
         setAgeInputSwitch(!ageInputSwitch)
 
-        handleAgeChange()
     }
 
-    // вспомогательная функция отлавливания изменений
-    const handleAgeChange = () => {
-        // если свич виключен, удаляем вибор возраста
-        if (!ageInputSwitch){
-            switch (rangeValue) {
-                case 0:
-                    removeTag('#дляМолодих')
-                    break;
-                case 1:
-                    removeTag('#дляСередньогоВіку')
-                    break;
-                case 2:
-                    removeTag('#дляЛітніх')
-                    break;
-                default:
-                    break;
-            }
-        }
-    
-        if (ageInputSwitch){
-            switch (rangeValue) {
-                case 0:
-                    addTag('#дляМолодих')
-                    break;
-                case 1:
-                    addTag('#дляСередньогоВіку')
-                    break;
-                case 2:
-                    addTag('#дляЛітніх')
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
     
     return(
         <div className="filters">
