@@ -1,142 +1,106 @@
 @import '@/assets/styles/veriables';
 
-.modalGift {
+.modalGift{
+  max-width: 300px;
+  background-color: white;
+  height: auto;
+  max-height: 500px;
+  border-radius: 15px;
 
-  > .modalGift_container {
-    position: relative;
-    background: white;
-    border-radius: 8px;
+  > .modalGift_container{
+    
+    >img {
+      width: 100%;
+      object-fit: cover;
+      aspect-ratio: 280/200;
+      border-radius: 15px 15px 0 0;
+      object-position: bottom; /* Это изменяет позицию изображения */
+    }
 
-    > .modalGift_content {
-      width: 50rem;
-      // height: 21.42rem;
-      height: 100%;
-      max-height: 50rem;
-      padding: 1.14rem;
+    > .modalGift_content{
+      padding: 1rem;
       box-sizing: border-box;
-      border-radius: 0.85rem;
-      // display: flex;
-      gap: 0.5rem;
+      overflow: scroll;
+      overflow-y: auto;
+      overflow-x: auto;
 
-      > .modalGift_img{
+      > .modalGift_name{
+        font-weight: 700;
+        font-size: 1.8rem;
+        max-height: 64px;
+        // для трёх точек и ограничения в 2 строки:
+        overflow: hidden;
+        display: -webkit-box; 
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        line-clamp: 2; 
+        text-overflow: ellipsis; 
+      }
+
+      > .modalGift_creator{
+        padding: 5px;
+        box-sizing: border-box;
+        background-color: $color-grey-hover;
+        display: flex;
         width: 100%;
-        aspect-ratio: 670/370;
-        height: auto;
-        object-fit: contain;
-        
+        align-items: center;
+        gap: 0.5rem;
+        text-decoration: none;
+        border-radius: 50px;
+        transition: 0.5s;
+
+        &:hover{
+          background-color: $color-grey-active;
+          transition: 0.5s;
+        }
+
+        >img{
+          width: 30px;
+          height: auto;
+          aspect-ratio: 1/1;
+          border: 1px $color-grey solid;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+
+        > .modalGift_creator_name{
+          color: $color-black;
+          font-weight: 700;
+          font-size: 1rem;
+        }
+      }
+
+      > .modalGift_reating{
+        margin-top: 0.5rem;
+        display: flex;
+        gap: 0.35rem;
 
         > img{
-          width: 100%;
-          height: 100%;
-          object-fit: cover;  
+          width: 25px;
         }
       }
 
-      > .modalGift_info{
-        height: 100%;
-        flex: 1;
-        overflow: scroll;
-        overflow: auto;
+      > .modalGift_views{
+        font-weight: 700;
+        font-size: 1rem;
+      }
+
+      > .modalGift_tags{
         display: flex;
-        flex-direction: column;
         gap: 0.5rem;
-        scrollbar-width: none; /* для Firefox */
-        
-        &::-webkit-scrollbar{
-          display: none;
-        }
+        flex-wrap: wrap;
 
-        > .modalGift_info_name{
-          margin-top: 0.714rem;
-          font-weight: 700;
-          font-size: 1.714rem;
-          line-height: 2.14rem;
-          width: 100%; 
-          word-wrap: break-word;
-          overflow-wrap: break-word;
-        }
-
-        > .modalGift_info_views{
-          margin-top: 0.35rem;
-          font-weight: 700;
-          color: $color-black;
-          opacity: 0.5;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
-
-        > .modalGift_info_tags{
-          height: 4.28rem;
-          display: flex;
-          flex-wrap: wrap;
-          gap: 0.35rem;
-
-          > .modalGift_info_tag{
-              max-height: 2rem;
-              box-sizing: border-box;
-              padding: 0.35rem;
-              background-color: $color-red;
-              border-radius: 0.42rem;
-              color: $color-white;
-              font-weight: 700;
-              overflow: hidden;
-              text-overflow: ellipsis;
-              white-space: nowrap;
-          }
-        }
-
-        > .modalGift_info_creator{
-          text-decoration: none;
-          color: $color-white;
+        > .modalGift_tags_tag{
+          max-height: 2rem;
+          box-sizing: border-box;
           padding: 0.35rem;
           background-color: $color-red;
-          // width: 300px;
-          max-width: 200px;
+          border-radius: 0.42rem;
+          color: $color-white;
           font-weight: 700;
-          border-radius: 0.35rem;
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          flex: 1;
-
-          > img{
-            width: 2rem;
-            height: auto;
-            aspect-ratio: 1/1;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 1px $color-grey solid;
-            box-sizing: border-box;
-          }
-          
-          > span{
-            text-overflow: ellipsis;
-            overflow: hidden;
-            white-space: nowrap;
-          }
         }
       }
     }
-  }
-}
-
-@media (max-width: 1000px) {
-  .modalGift{
-    > .modalGift_container{
-      > .modalGift_content{
-        width: 500px
-      }
-    }
-  }
-}
-
-@media (max-width: 550px) {
-  .modalGift{
-    > .modalGift_container{
-      > .modalGift_content{
-        width: 300px
-      }
-    }
+  
   }
 }

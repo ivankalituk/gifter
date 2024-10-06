@@ -9,6 +9,9 @@ import { FC, useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import { getUserById } from '@/api/user';
 
+import starYellow from '@/assets/images/StarYellow.svg'
+import starGrey from '@/assets/images/StarGrey.svg'
+
 interface ModalGiftInterface {
     handleGiftModalClose: () => void
     modalProps: any
@@ -52,36 +55,39 @@ const ModalGift: FC <ModalGiftInterface>= ({handleGiftModalClose, modalProps}) =
 
     return (
         <div className="modalGift">
+            {giftFetched && <div className="modalGift_container">
+                <img src={'http://localhost:1000/' + gift[0].photoPath} alt="giftPhoto" />
+                
+                <div className="modalGift_content customScrollbar">
+                    <div className="modalGift_name">{gift[0].name}</div>
 
-            { giftFetched && <div className="modalGift_container">
-                <div className="modalGift_content">
+                    {userFetched &&<Link to={'/'} className="modalGift_creator">
+                        <img src={'http://localhost:1000/' + user[0].imgPath} alt="userAvatar" />
+                        
+                        <div className="modalGift_creator_name">{user[0].nickname}</div>
+                    </Link>}
+
+                    <div className="modalGift_reating">
+                        <img src={starYellow} alt="star" />
+                        <img src={starYellow} alt="star" />
+                        <img src={starGrey} alt="star" />
+                        <img src={starGrey} alt="star" />
+                        <img src={starGrey} alt="star" />
+                    </div>
                     
-                    <div className="modalGift_img"><img src={gift[0].photoPath !== null? 'http://localhost:1000/' + gift[0].photoPath : sampleGiftPhoto} alt="giftPhoto" /></div>
+                    <div className="modalGift_views">{gift[0].userViews} переглянуло</div>
 
-                    <div className="modalGift_info">
-                        <div className="modalGift_info_name">{gift[0].name}</div>
-
-                        {/* ЛИНК НА ПОЛЬЗОВАТЕЛЯ */}
-                        {userFetched && <Link to={'/account/' + user[0].id} className='modalGift_info_creator'>
-                            <img src={user[0].imgPath !== null? 'http://localhost:1000/' + user[0].imgPath : sampleAvatar} alt="creatorAvatar" />
-                            <span>{user[0].nickname}</span>
-                        </Link>}
-
-                        <div className="modalGift_info_reating">Рейтинг Большие звёзды</div>
-
-                        <div className="modalGift_info_views">{gift[0].userViews} користувачів переглянуло</div>
-
-                        <div className="modalGift_info_tags">
-                            {gift[0].tags.length > 0 && gift[0].tags.map((tag: string, index: number) => (
-                                <div className="modalGift_info_tag" key={index}>{tag}</div>
-                            ))}
-                        </div>
-
+                    <div className="modalGift_tags">
+                        {gift[0].tags.length > 0 && gift[0].tags.map((tag: string, index: number) =>(
+                            <div className="modalGift_tags_tag" key={index}>{tag}</div>
+                        ))}
                     </div>
 
-                </div>
-            </div>}
 
+                </div>
+
+
+            </div>}
         </div>
     )
 }

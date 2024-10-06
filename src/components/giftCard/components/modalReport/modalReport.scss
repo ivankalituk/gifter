@@ -62,19 +62,10 @@
 
 @media (max-width: 1000px) {
   .modalReport{
+    width: 100%;
     > .modalReport_container{
       > .modalReport_content{
-        width: 500px
-      }
-    }
-  }
-}
-
-@media (max-width: 550px) {
-  .modalReport{
-    > .modalReport_container{
-      > .modalReport_content{
-        width: 300px
+        width: 100%;
       }
     }
   }

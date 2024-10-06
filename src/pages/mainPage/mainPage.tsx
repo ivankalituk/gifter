@@ -17,7 +17,7 @@ interface MainPageInterface {
 
 const MainPage: FC <MainPageInterface>= ({scrollCallback, nameSearch, deleteSearchCallBack}) => {
 
-    const [filtersOpen, setFiltersOpen] = useState<boolean>(false)
+    const [filtersOpen, setFiltersOpen] = useState<boolean>(true)
 
     const handleFiltersOpen = () =>{
         setFiltersOpen(!filtersOpen)
