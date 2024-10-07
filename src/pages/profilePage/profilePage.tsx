@@ -31,7 +31,7 @@ const ProfilePage: FC <ProfilePageInterface> = ({type, scrollCallback}) => {
         <div className="profilePage">
             <div className="profilePage_leftColumn">
 
-                <img className="profilePage_leftColumn_avatar" src={user.user_imgUrl? 'http://192.168.0.105:1000/' + user.user_imgUrl :profilePhoto} alt="profile photo" />
+                <img className="profilePage_leftColumn_avatar" src={user.user_imgUrl? 'http://localhost:1000/' + user.user_imgUrl :profilePhoto} alt="profile photo" />
 
                 <div className="profilePage_leftColumn_nickname">{user.user_nickName}</div>
 
@@ -61,7 +61,7 @@ const ProfilePage: FC <ProfilePageInterface> = ({type, scrollCallback}) => {
                 <div className="profilePage_rightColumn_info">
 
                     <div className="profilePage_rightColumn_accountInfo">
-                        <img src={profilePhoto} alt="avatar" />
+                        <img src={user.user_imgUrl? 'http://localhost:1000/' + user.user_imgUrl :profilePhoto} alt="avatar" />
 
                         <div className="profilePage_rightColumn_accountInfo_info">
                              <div>Nigname</div>

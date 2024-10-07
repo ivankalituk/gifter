@@ -20,8 +20,8 @@ const User: FC <UserInterface> = ({user, handleUnblockUserCallBack}) => {
         <div className="user">
 
             <div className="user_left">
-                <img src={'http://192.168.0.105:1000/' + user.imgPath} alt="avatar" />
-                <Link to={'/account/' + user.user_id}>{user.nickname}</Link>
+                <img src={user.imgPath !== null? 'http://localhost:1000/' + user.imgPath: avatarSample} alt="avatar" />
+                <Link to={'/account/' + user.user_id}>{user.email}</Link>
             </div>
 
             <div className="user_right">

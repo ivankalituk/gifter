@@ -11,12 +11,15 @@ interface AdminInterface {
     handleIncreaseAdmin: (id: number) => void
 }
 
+
 const Admin: FC <AdminInterface>= ({data, handleDecreaseAdmin, handleIncreaseAdmin}) => {
+
+    console.log(data)
     return(
         <div className="admin">
             <div className="admin_left">
-                <img src={avatarSample} alt="avatar" />
-                <Link to={'/account/:user_id'}>{data.nickname}</Link>
+                <img src={data.impPath !== null? 'http://localhost:1000/' + data.imgPath : avatarSample} alt="avatar" />
+                <Link to={'/account/:user_id'}>{data.email}</Link>
             </div>
 
             <div className="admin_right">

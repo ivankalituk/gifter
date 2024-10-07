@@ -16,13 +16,12 @@
         gap: 0.5rem;
 
         > img{
+            height: 2rem;
             width: 2rem;
-            height: auto;
-            aspect-ratio: 1/1;
-            border: 1px solid $color-grey-hover;
-            box-sizing: border-box;
-            border-radius: 50%;
             object-fit: cover;
+            border-radius: 50%;
+            border: 1px $color-grey-active solid;
+            background-color: $color-grey-active;
         }
 
         > a{

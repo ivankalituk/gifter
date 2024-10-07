@@ -22,10 +22,13 @@
         > img{
             height: auto;
             width: 2rem;
+            min-width: 2rem; /* Минимальная ширина */
+            min-height: 2rem; /* Минимальная высота */
             aspect-ratio: 1/1;
             object-fit: cover;
             border-radius: 50%;
             border: 1px $color-grey-active solid;
+            background-color: $color-grey-hover; /* Цвет фона на случай отсутствия изображения */
         }
 
         > .account_profile_info{

@@ -165,7 +165,7 @@ const SettingsPage: FC = () => {
 
                     <div className="settingsPage_settingsPanel_imgUpload">
                         
-                        <img src={selectedImg? selectedImg : user.user_imgUrl? user.user_imgUrl : null} alt="insertPhoto" />
+                        <img src={selectedImg? selectedImg : user.user_imgUrl? 'http://localhost:1000/' + user.user_imgUrl : null} alt="insertPhoto" />
 
                         <div className="settingsPage_settingsPanel_imgUpload_inputGroup">
                             <img src={insertPhoto} alt="insertPhoto" />

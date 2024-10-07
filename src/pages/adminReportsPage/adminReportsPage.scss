@@ -12,16 +12,25 @@
     width: 100%;
 
     > .adminReportsPage_content{
-        background-color: $color-white;
-        box-shadow: 0px 0.57rem 1rem rgba(0, 0, 0, 0.08);
-        padding: 1rem;
         flex: 1;
         overflow: hidden;
-        border-radius: 0.75rem;
+        max-width: 600px;
 
         > .adminReportsPage_heading{
             font-weight: 700;
             font-size: 1.2rem;
+            background-color: $color-white;
+            box-shadow: 0px 0.57rem 1rem rgba(0, 0, 0, 0.08);
+            padding: 1rem;
+            border-radius: 0.75rem;
+            max-width: 600px;
+        }
+
+        > .adminReportsPage_reportList{
+            margin-top: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
         }
     }
 }
