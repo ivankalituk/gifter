@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import './account.scss'
@@ -19,7 +19,8 @@ const Account: FC <Account>= ({user_id, date}) => {
     // данные пользователя
     // -------------------
 
-    const {data: user, isFetched: userFetched} = useGetRequest({fetchFunc: () => getUserById({user_id: user_id}), key: [], enabled: true})
+
+    const {data: user, isFetched: userFetched} = useGetRequest({fetchFunc: () => getUserById({user_id: user_id}), enabled: true, key: []})
     
     // --------------------------------------------------------
     // открыть дополнительные настройки (добавление админа, чс)
@@ -31,10 +32,11 @@ const Account: FC <Account>= ({user_id, date}) => {
         setAditional(!additional)
     }
 
+
     return(
         <div className="account">
             {userFetched && user && <Link to={'/account/' + user_id} className="account_profile">
-                <img src={user[0].imgPath !== null? 'http://localhost:1000/' + user.imgPath : sampleAvatar} alt="avatar" />
+                <img src={user[0].imgPath !== null? 'http://localhost:1000/' + user[0].imgPath : sampleAvatar} alt="avatar" />
 
                 <div className="account_profile_info">
                     <div className="account_profile_nickname">{user[0].nickname}</div>
