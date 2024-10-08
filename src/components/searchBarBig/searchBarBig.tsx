@@ -11,9 +11,10 @@ interface SearchBarBigInterface {
     handleSearchInputCallBack: (text: string) => void,
     giftNames: giftName[] | undefined,
     searchInput: string,
+    handleRandomGiftCallBack: () => void
 }
 
-const SearchBarBig: FC <SearchBarBigInterface> = ({handleSearchSubmitCallBack, handleSearchInputCallBack, giftNames, searchInput}) =>{
+const SearchBarBig: FC <SearchBarBigInterface> = ({handleSearchSubmitCallBack, handleSearchInputCallBack, giftNames, searchInput, handleRandomGiftCallBack}) =>{
 
     // const results: string [] = ['name1', 'randomName gay sex', 'sescs', 'sdadadasdadcva', 'vavasdfwa']
 
@@ -126,7 +127,7 @@ const SearchBarBig: FC <SearchBarBigInterface> = ({handleSearchSubmitCallBack, h
 
             <div className={inputFocus? "searchBig_bar_Background show" : "searchBig_bar_Background"}></div>
 
-            <button><img src={random} alt="random"/></button>
+            <button onClick={handleRandomGiftCallBack}><img src={random} alt="random"/></button>
         </div>
     )
 }

@@ -56,7 +56,6 @@ const ModalGift: FC <ModalGiftInterface>= ({handleGiftModalClose, modalProps, sc
     const handleLinkToUser = () => {
         navigate('/account/' + user[0].id)
 
-        // ТУТ КОЛБЕК ДЛЯ УБИРАНИЯ
         scrollCallback(false)
     }
 

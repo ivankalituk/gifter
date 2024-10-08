@@ -83,3 +83,18 @@ export async function postGift(data: any) {
         console.log("ERROR WHITE GETTING DATA")
     }
 }
+
+// получение айди рандомного подарка
+export async function gerRandomGiftId() {
+    try {
+        const response = await axios.get(`http://localhost:1000/gift-random`);
+        return response.data; 
+    } catch (error) {
+        if (axios.isAxiosError(error)) {
+            console.error("Ошибка при получении данных:", error.message);
+        } else {
+            console.error("Неожиданная ошибка:", error);
+        }
+        return [];
+    }
+}

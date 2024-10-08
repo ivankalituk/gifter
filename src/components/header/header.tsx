@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import './header.scss'
@@ -21,9 +21,11 @@ import burger from '@/assets/images/burgerMenu.svg'
 import Account from "./components/account/account";
 import SearchBarBig from "../searchBarBig/searchBarBig";
 import { useGetRequest } from "@/hooks/useGetReuquest";
-import { getGiftNameByName } from "@/api/gifts";
+import { gerRandomGiftId, getGiftNameByName } from "@/api/gifts";
 import { giftName, RootState } from "@/interfaces/interface";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import Modal from "../modal/modal";
+import ModalGift from "../modalGift/modalGift";
 
 interface HeaderProps {
     scrollCallback: (block: boolean) => void
@@ -62,9 +64,9 @@ const Header: FC<HeaderProps> = ({scrollCallback, nameSearchCallBack}) =>{
     const useTypeSelector: TypedUseSelectorHook <RootState> = useSelector
     const user = useTypeSelector((state) => state.user)
 
-    // 
+    // ------------------------------------------
     // перенаправление на регистрацию или профиль
-    // 
+    // ------------------------------------------
 
     const navigate = useNavigate()
 
@@ -75,6 +77,34 @@ const Header: FC<HeaderProps> = ({scrollCallback, nameSearchCallBack}) =>{
             navigate('/profile')
         }
     }
+
+    // -----------------
+    // рандомный подарок
+    // -----------------
+
+    const [giftModal, setGiftModal] = useState<boolean>(false)
+
+    const [randomGiftEnabled, setRandomGiftEnabled] = useState<boolean>(false)
+    const [randomGiftKey, setRandomGiftKey] = useState<number>(1)
+
+    const {data: randomGift, isFetched: randomGiftFetched} = useGetRequest({fetchFunc: () => gerRandomGiftId(), key: [randomGiftKey], enabled: randomGiftEnabled})
+
+    const handleGiftModalClose = () =>{
+        setGiftModal(false)
+        scrollCallback(false)
+    }
+
+    const handleRandomGiftCallBack = () => {
+        setRandomGiftEnabled(true)
+        setRandomGiftKey(randomGiftKey + 1)
+    } 
+
+    useEffect(() => {
+        if(randomGift && randomGiftFetched){
+            setGiftModal(true)
+            console.log(randomGift)
+        }
+    }, [randomGift, randomGiftFetched])
 
     return (
         <header>
@@ -87,7 +117,7 @@ const Header: FC<HeaderProps> = ({scrollCallback, nameSearchCallBack}) =>{
                     </Link>
 
                     {/* <SearchBar nameSearchCallBack = {nameSearchCallBack} /> */}
-                    <SearchBarBig handleSearchSubmitCallBack = {handleSearchSubmitCallBack} handleSearchInputCallBack = {handleSearchInputCallBack} giftNames = {giftNames} searchInput = {searchInput}/>
+                    <SearchBarBig handleSearchSubmitCallBack = {handleSearchSubmitCallBack} handleSearchInputCallBack = {handleSearchInputCallBack} giftNames = {giftNames} searchInput = {searchInput} handleRandomGiftCallBack={handleRandomGiftCallBack}/>
                 </div>
                 
                 <div className="header_profile">
@@ -170,6 +200,8 @@ const Header: FC<HeaderProps> = ({scrollCallback, nameSearchCallBack}) =>{
                     </div>
                 </div>
             </div>
+
+            {giftModal && <Modal onClose = {handleGiftModalClose} Component={ModalGift} modalProps={{gift_id: randomGift[0].id}} scrollCallback = {scrollCallback}/>}
         </header>
     )
 }
