@@ -1,5 +1,9 @@
 @import '@/assets/styles/veriables';
 
+html{
+    overflow-x: hidden;
+}
+
 .App{
     min-height: 100vh;
     display: flex;
@@ -48,5 +52,4 @@
         position: fixed;
         width: 100%;
     }
-
 }
