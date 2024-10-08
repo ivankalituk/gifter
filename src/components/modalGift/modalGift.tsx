@@ -6,7 +6,7 @@ import sampleAvatar from '@/assets/images/logoSample.jpg'
 import { useGetRequest } from '@/hooks/useGetReuquest';
 
 import { FC, useEffect, useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getUserById } from '@/api/user';
 
 import starYellow from '@/assets/images/StarYellow.svg'
@@ -15,9 +15,10 @@ import starGrey from '@/assets/images/StarGrey.svg'
 interface ModalGiftInterface {
     handleGiftModalClose: () => void
     modalProps: any
+    scrollCallback: (block: boolean) => void
 }
 
-const ModalGift: FC <ModalGiftInterface>= ({handleGiftModalClose, modalProps}) => {
+const ModalGift: FC <ModalGiftInterface>= ({handleGiftModalClose, modalProps, scrollCallback}) => {
 
     // console.log(modalProps)
     const serverUrl = process.env.REACT_APP_API_URL
@@ -41,17 +42,23 @@ const ModalGift: FC <ModalGiftInterface>= ({handleGiftModalClose, modalProps}) =
             setUser_id(gift[0].creatorId)
             setUserEnabled(true)
             setUserKey(userKey + 1)
-
-            console.log(user_id)
         }
     }, [gift, giftFetched])
 
     const {data: user, isFetched: userFetched} = useGetRequest({fetchFunc: () => getUserById({user_id: user_id}), enabled: userEnabled, key: [userKey]})
 
+    // 
+    // ссылка на пользователя
+    // 
 
-    useEffect(() => {
-        console.log(user)
-    }, [user, userFetched])
+    const navigate = useNavigate()
+
+    const handleLinkToUser = () => {
+        navigate('/account/' + user[0].id)
+
+        // ТУТ КОЛБЕК ДЛЯ УБИРАНИЯ
+        scrollCallback(false)
+    }
 
     return (
         <div className="modalGift">
@@ -61,11 +68,11 @@ const ModalGift: FC <ModalGiftInterface>= ({handleGiftModalClose, modalProps}) =
                 <div className="modalGift_content customScrollbar">
                     <div className="modalGift_name">{gift[0].name}</div>
 
-                    {userFetched &&<Link to={'/'} className="modalGift_creator">
+                    {userFetched &&<div onClick={handleLinkToUser} className="modalGift_creator">
                         <img src={'http://localhost:1000/' + user[0].imgPath} alt="userAvatar" />
                         
                         <div className="modalGift_creator_name">{user[0].nickname}</div>
-                    </Link>}
+                    </div>}
 
                     <div className="modalGift_reating">
                         <img src={starYellow} alt="star" />

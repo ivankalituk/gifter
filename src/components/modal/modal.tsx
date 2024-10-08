@@ -6,9 +6,10 @@ interface ModalInterface<T> {
     onClose: () => void;
     Component: React.ComponentType<any>;
     modalProps? : T
+    scrollCallback: (block: boolean) => void
 }
 
-const Modal: FC <ModalInterface<any>> = ({onClose, Component, modalProps}) => {
+const Modal: FC <ModalInterface<any>> = ({onClose, Component, modalProps, scrollCallback}) => {
 
 
     const [modalAimation, setModalAnimation] = useState<boolean>(true)
@@ -26,7 +27,7 @@ const Modal: FC <ModalInterface<any>> = ({onClose, Component, modalProps}) => {
             <div className={modalAimation? "modal_background" : "modal_background hide"} onClick={handleClose}/>
 
             <div className={modalAimation? "modal_modalOverlay" : "modal_modalOverlay hide"}>
-                <Component modalProps = {modalProps} handleReportClose={handleClose}/>
+                <Component modalProps = {modalProps} handleReportClose={handleClose} scrollCallback = {scrollCallback}/>
             </div>
         </div>
     )

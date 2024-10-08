@@ -111,9 +111,9 @@ const GiftCard: FC <GiftCardInterface> = ({scrollCallback, data}) =>{
                 <div className="giftCard_mark"><img src={mark}  alt="mark" className={marked? "active": ""} onClick={handleMarked}/></div>
             </div>
 
-            {report && <Modal onClose = {handleReportClose} Component={ModalReport} modalProps={{gift_id: data.id}}/>}
+            {report && <Modal onClose = {handleReportClose} Component={ModalReport} modalProps={{gift_id: data.id}} scrollCallback = {scrollCallback}/>}
 
-            {giftModal && <Modal onClose = {handleGiftModalClose} Component={ModalGift} modalProps={{gift_id: data.id}}/>}
+            {giftModal && <Modal onClose = {handleGiftModalClose} Component={ModalGift} modalProps={{gift_id: data.id}} scrollCallback = {scrollCallback}/>}
         </div>
     )
 }
