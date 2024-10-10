@@ -7,7 +7,7 @@
 
     > .suggestPage_container{
         max-width: 102.85rem;
-        
+        flex: 1;
         margin: 0 auto;
         box-sizing: border-box;
         padding: 1rem 2.57rem;
@@ -82,9 +82,10 @@
                 justify-content: space-between;
                 gap: 1rem;
 
-                > .dataUpload_photo{
+                > .dataUpload_photo_btn{
                     display: none;
                 }
+
 
                 > .dataUpload_name{
                     > div{
@@ -123,7 +124,6 @@
                         > div{
                             margin-top: 0.35rem;
                             overflow: hidden;
-                            height: 4.28rem;
                             display: flex;
                             flex-wrap: wrap;
                             gap: 0.35rem;
@@ -181,17 +181,50 @@
     .suggestPage{
         .suggestPage_container{
             padding: 1rem;
+            width: 100%;
+
             .suggestPage_suggest{
-                display: block;
-                height: 100%;
 
                 .suggestPage_suggest_imgUpload{
                     display: none;
                 }
 
                 .suggestPage_suggest_dataUpload{
-                    .dataUpload_photo{
+
+                    .dataUpload_photo_btn{
+                        height: 2rem;
                         display: block;
+                        outline: none;
+                        border: none;
+                        padding: 0.35rem;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        background-color: $color-red;
+                        color: $color-white;
+                        font-weight: 700;
+                        border-radius: 0.35rem;
+                        transition:  $transition-speed-button;
+                        cursor: pointer;
+                        text-decoration: none;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-around;
+                        position: relative;
+
+                        .dataUpload_photo{
+                            display: block;
+                            opacity: 0;
+                            position: absolute;
+                            width: 100%;
+                            height: 100%;
+                        }
+
+                        > span{
+                            text-overflow: ellipsis;
+                            overflow: hidden;
+                            max-width: 100%;
+                        }
                     }
                 }
             }

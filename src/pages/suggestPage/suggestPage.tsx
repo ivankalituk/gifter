@@ -136,7 +136,10 @@ const  SuggestPage: FC  = () => {
 
                     <div className="suggestPage_suggest_dataUpload">
 
-                        <input type='file' className="dataUpload_photo" onChange={handleImageUpload}/>
+                        <button className='dataUpload_photo_btn'>
+                            <input type='file' className="dataUpload_photo" onChange={handleImageUpload}/>
+                            <span>{selectedImgFile? 'Фото: ' + selectedImgFile.name: 'Завантажити фото'}</span>
+                        </button>
 
                         <div className="dataUpload_name">
                             <div>Введіть назву подарунку{help && <span className='helpSpan'>*</span>}</div>
