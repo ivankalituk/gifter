@@ -152,6 +152,31 @@ const Filters: FC <FilterInterface>= ({filtersOpen, handleFiltersOpen, filtersCa
 
     }
 
+    // -----------------------
+    // input radio призначення
+    // -----------------------
+
+    const [selectedPurposeValue, setSelectedPurposeValue] = useState<string | null>(null);
+
+    const handlePurposeChange = (value: string) => {
+        setSelectedPurposeValue(value);
+    };
+
+    // -----------------
+    // input switch цена
+    // -----------------
+
+    const [selectedPrices, setSelectedPrices] = useState<string[]>([]);
+
+    const handleTogglePrice = (price: string) => {
+      if (selectedPrices.includes(price)) {
+        // Убираем из массива, если уже есть
+        setSelectedPrices(selectedPrices.filter(item => item !== price));
+      } else {
+        // Добавляем в массив, если нет
+        setSelectedPrices([...selectedPrices, price]);
+      }
+    }
     
     return(
         <div className="filters">
@@ -236,6 +261,74 @@ const Filters: FC <FilterInterface>= ({filtersOpen, handleFiltersOpen, filtersCa
                         </div>
 
                 </div>
+
+                <div className="filters_purpose">
+                    <div className="filters_purpose_heading">Призначення</div>
+
+                    <div className="filters_purpose_customRadioInput">
+                        <span>#ДляНезнайомих</span>
+                        <div className="filters_purpose_customRadioInput_circle">
+                            <div className={selectedPurposeValue === '#ДляНезнайомих'? "filters_purpose_customRadioInput_circleInner checked" : "filters_purpose_customRadioInput_circleInner"}/>
+                        </div>
+                        <input type="radio" name="purpose" value={'#ДляНезнайомих'} checked={selectedPurposeValue === '#ДляНезнайомих'} onChange={() => handlePurposeChange('#ДляНезнайомих')}/>
+                    </div>
+
+                    <div className="filters_purpose_customRadioInput">
+                        <span>#ДляДрузів</span>
+                        <div className="filters_purpose_customRadioInput_circle">
+                            <div className={selectedPurposeValue === '#ДляДрузів'? "filters_purpose_customRadioInput_circleInner checked" : "filters_purpose_customRadioInput_circleInner"}/>
+                        </div>
+                        <input type="radio" name="purpose" value={'#ДляДрузів'} checked={selectedPurposeValue === '#ДляДрузів'} onChange={() => handlePurposeChange('#ДляДрузів')}/>
+                    </div>
+
+                    <div className="filters_purpose_customRadioInput">
+                        <span>#ДляКоханих</span>
+                        <div className="filters_purpose_customRadioInput_circle">
+                            <div className={selectedPurposeValue === '#ДляКоханих'? "filters_purpose_customRadioInput_circleInner checked" : "filters_purpose_customRadioInput_circleInner"}/>
+                        </div>
+                        <input type="radio" name="purpose" value={'#ДляКоханих'} checked={selectedPurposeValue === '#ДляКоханих'} onChange={() => handlePurposeChange('#ДляКоханих')}/>
+                    </div>
+                </div>
+
+                <div className="filters_price">
+                    <div className="filters_price_heading">Ціна</div>
+
+                    <div className="filters_price_item">
+                    <span>Помірна ціна</span>
+                    <div className={selectedPrices.includes('Помірна ціна') ? 'custom_switch active' : 'custom_switch'}>
+                        <div className={selectedPrices.includes('Помірна ціна') ? 'custom_switch_thumb active' : 'custom_switch_thumb'} />
+                        <input
+                        type="checkbox"
+                        checked={selectedPrices.includes('Помірна ціна')}
+                        onChange={() => handleTogglePrice('Помірна ціна')}
+                        />
+                    </div>
+                    </div>
+
+                    <div className="filters_price_item">
+                    <span>Середня ціна</span>
+                    <div className={selectedPrices.includes('Середня ціна') ? 'custom_switch active' : 'custom_switch'}>
+                        <div className={selectedPrices.includes('Середня ціна') ? 'custom_switch_thumb active' : 'custom_switch_thumb'} />
+                        <input
+                        type="checkbox"
+                        checked={selectedPrices.includes('Середня ціна')}
+                        onChange={() => handleTogglePrice('Середня ціна')}
+                        />
+                    </div>
+                    </div>
+
+                    <div className="filters_price_item">
+                    <span>Висока ціна</span>
+                    <div className={selectedPrices.includes('Висока ціна') ? 'custom_switch active' : 'custom_switch'}>
+                        <div className={selectedPrices.includes('Висока ціна') ? 'custom_switch_thumb active' : 'custom_switch_thumb'} />
+                        <input
+                        type="checkbox"
+                        checked={selectedPrices.includes('Висока ціна')}
+                        onChange={() => handleTogglePrice('Висока ціна')}
+                        />
+                    </div>
+                    </div>
+                    </div>
 
                 <button className="button_preset" onClick={handleSearchByFilters}>Застосувати</button>
 

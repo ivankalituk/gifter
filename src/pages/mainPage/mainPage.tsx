@@ -21,7 +21,7 @@ const MainPage: FC <MainPageInterface>= ({scrollCallback, nameSearch, deleteSear
 
     const handleFiltersOpen = () =>{
         setFiltersOpen(!filtersOpen)
-        scrollCallback(!filtersOpen)
+        scrollCallback(filtersOpen)
     }
 
     const [giftKey, setGiftKey] = useState<number>(1)

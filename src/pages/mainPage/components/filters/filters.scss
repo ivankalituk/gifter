@@ -1,13 +1,13 @@
 @import '@/assets/styles/veriables';
 
 .filters{
-    
     > .filters_container{
         background-color: $color-white;
         width: 224px;
         padding: 1.42rem 0.71rem;
         box-sizing: border-box;
         height: 100%;
+        min-height: 100vh;
 
         > .filters_tagSearch{
 
@@ -197,6 +197,85 @@
                     border-radius: 7.5px;
                     font-size: 10px;
                 }
+            }
+        }
+
+        > .filters_purpose{
+            margin-top: 1.42rem;
+
+            > .filters_purpose_heading{
+                font-weight: 700;
+                font-size: 1rem;
+            }
+
+            > .filters_purpose_customRadioInput{
+                margin-top: 5px;
+                position: relative;
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                cursor: pointer;
+
+                > .filters_purpose_customRadioInput_circle{
+                    position: relative;
+                    height: 1.2rem;
+                    width: 1.2rem;
+                    aspect-ratio: 1/1;
+                    background-color: white;
+                    border: 1px solid $color-red;
+                    border-radius: 50%;
+                    box-sizing: border-box;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-around;
+
+                    > .filters_purpose_customRadioInput_circleInner{
+                        transition: transform 0.3s, opacity 0.3s;
+                        transform: scale(0); 
+                        opacity: 0; 
+                        aspect-ratio: 1/1;
+                        height: 0.8rem;
+                        width: 0.8rem;
+                        background-color: $color-red;
+                        border-radius: 50%;
+
+                        &.checked{
+                            transform: scale(1); 
+                            opacity: 1;
+                        }
+                    }
+                }
+
+                > input{
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    opacity: 0;
+                }
+
+                > span{
+                    color: $color-grey-active;
+                }
+            }
+
+        }
+
+        > .filters_price{
+            margin-top: 1.42rem;
+
+            > .filters_price_heading{
+                font-weight: 700;
+                font-size: 1rem;
+            }
+
+            > .filters_price_item{
+                margin-top: 5px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
             }
         }
 
