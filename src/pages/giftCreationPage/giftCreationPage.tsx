@@ -8,11 +8,12 @@ import { useGetRequest } from "@/hooks/useGetReuquest";
 import { getSuggestById } from "@/api/suggest";
 import { getReportById } from "@/api/report";
 import { useParams } from "react-router-dom";
-import { Tag } from "@/interfaces/interface";
+import { RootState, Tag } from "@/interfaces/interface";
 import { getTagByInput } from "@/api/tags";
 import SearchBar from "@/components/searchBar/searchBar";
 import { getGiftById, postGift } from "@/api/gifts";
 import { useUpdateRequest } from "@/hooks/useUpdateRequest";
+import { TypedUseSelectorHook, useSelector } from "react-redux";
 
 interface giftCreationPage {
     type: string
@@ -138,6 +139,9 @@ const GiftCreationPage : FC <giftCreationPage> = ({type}) => {
     // окончательное добавление подарка 
     // --------------------------------
 
+    const useTypeSelector: TypedUseSelectorHook <RootState> = useSelector
+    const user = useTypeSelector((state) => state.user)
+
     const {mutatedFunc: createGift} = useUpdateRequest({fetchFunc: postGift})
 
     const handleAddGift = () =>{
@@ -147,9 +151,10 @@ const GiftCreationPage : FC <giftCreationPage> = ({type}) => {
                 // отправить пост запрос на добавление подарка
                 const data = new FormData()
                 data.append('name', nameInput)
-                data.append('creator_id', '2')
-                data.append('admin_id', '2')
+                data.append('creator_id', String(suggest[0].user_id))
+                data.append('admin_id', String(user.user_id))
                 tagArray?.forEach((tag) => (data.append('tags', tag)))
+                data.append('suggest_id', String(suggest[0].id))
                 if(suggest[0].photoPath !== null && selectedImgFile === null){
                     data.append('imagePath', suggest[0].photoPath)
                 } else {
@@ -195,7 +200,11 @@ const GiftCreationPage : FC <giftCreationPage> = ({type}) => {
 
                     <div className="giftCreationPage_gift_dataUpload">
 
-                        <input type='file' className="dataUpload_photo" onChange={handleImageUpload}/>
+                        {/* ЗАМЕНИТЬ, ЕСЛИ БЫЛО ФОТО ДО ТОГО КАК МЫ ЕГО ДОБАВИЛИ */}
+                        <button className='dataUpload_photo_btn'>
+                            <input type='file' className="dataUpload_photo" onChange={handleImageUpload}/>
+                            <span>{selectedImgFile? 'Фото: ' + selectedImgFile.name: 'Завантажити фото'}</span>
+                        </button>
 
                         <div className="dataUpload_name">
                             <div>Введіть назву подарунку{help && <span className='helpSpan'>*</span>}</div>
@@ -218,7 +227,7 @@ const GiftCreationPage : FC <giftCreationPage> = ({type}) => {
                             <div className="dataUpload_addTags_tags">
                                 <span>Додані теги:{help && <span className='helpSpan'>* не меньше трьох</span>}</span>
 
-                                <div>{tagArray.map((tag, index) => (
+                                <div>{tagArray !== null && tagArray.length > 0 && tagArray.map((tag, index) => (
                                     <button onClick={() => handleRemoveTag(tag)} key={index}>{tag}</button>
                                 ))}
                                 </div>
