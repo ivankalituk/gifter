@@ -7,7 +7,7 @@ import insertPhoto from '@/assets/images/insertPhoto.svg';
 import { useGetRequest } from "@/hooks/useGetReuquest";
 import { getSuggestById } from "@/api/suggest";
 import { getReportById } from "@/api/report";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { RootState, Tag } from "@/interfaces/interface";
 import { getTagByInput } from "@/api/tags";
 import SearchBar from "@/components/searchBar/searchBar";
@@ -139,6 +139,8 @@ const GiftCreationPage : FC <giftCreationPage> = ({type}) => {
     // окончательное добавление подарка 
     // --------------------------------
 
+    const navigate = useNavigate()
+
     const useTypeSelector: TypedUseSelectorHook <RootState> = useSelector
     const user = useTypeSelector((state) => state.user)
 
@@ -165,8 +167,10 @@ const GiftCreationPage : FC <giftCreationPage> = ({type}) => {
                 }
 
                 createGift(data)
+                navigate('/adminPanel/suggests')
             } else {
                 // отправить пут запрос на обновление подарка
+                navigate('/adminPanel/reports')
             }
 
         } else {
@@ -201,10 +205,15 @@ const GiftCreationPage : FC <giftCreationPage> = ({type}) => {
                     <div className="giftCreationPage_gift_dataUpload">
 
                         {/* ЗАМЕНИТЬ, ЕСЛИ БЫЛО ФОТО ДО ТОГО КАК МЫ ЕГО ДОБАВИЛИ */}
-                        <button className='dataUpload_photo_btn'>
+                        {(reportFetched || suggestFetched) && <button className='dataUpload_photo_btn'>
                             <input type='file' className="dataUpload_photo" onChange={handleImageUpload}/>
-                            <span>{selectedImgFile? 'Фото: ' + selectedImgFile.name: 'Завантажити фото'}</span>
-                        </button>
+                            <span>{
+                                type === 'suggest'? 
+                                    (selectedImgFile? ('Фото: ' + selectedImgFile.name) : (suggest[0].photoPath? 'Фото: ' + suggest[0].photoPath : 'Додати фото'))
+                                :
+                                    (selectedImgFile? ('Фото: ' + selectedImgFile.name) : (report[0].photoPath? 'Фото: ' + report[0].photoPath : 'Додати фото'))
+                                }</span>
+                        </button>}
 
                         <div className="dataUpload_name">
                             <div>Введіть назву подарунку{help && <span className='helpSpan'>*</span>}</div>
