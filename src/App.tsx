@@ -23,6 +23,7 @@ import { setUser } from './redux/userSlice';
 import logo from '@/assets/images/logoRed.svg'
 import AuthPage from './pages/authPage/authPage';
 import GiftCreationPage from './pages/giftCreationPage/giftCreationPage';
+import ProtectedRourt from './components/protectedRoute/protectedRoute';
 
 function App() {
 
@@ -107,21 +108,20 @@ function App() {
           <Routes>
             <Route path='/' element={<MainPage scrollCallback = {scrollCallback} nameSearch = {nameSearch} deleteSearchCallBack = {deleteSearchCallBack}/>} />
             <Route path='/auth' element = {<AuthPage/>}></Route>
+            <Route path='/account/:user_id' element={<ProfilePage scrollCallback = {scrollCallback} type={'anyUser'}/>} />
 
             {/* PROTECTED AUTH */}
-            <Route path='/suggest' element={<SuggestPage/>} />
-      
-            <Route path='/profile' element={<ProfilePage scrollCallback = {scrollCallback} type={'privateUser'}/>} />
-            <Route path='/account/:user_id' element={<ProfilePage scrollCallback = {scrollCallback} type={'anyUser'}/>} />
-            <Route path='/settings' element={<SettingsPage />}/>
+            <Route element = {<ProtectedRourt type='user'/>}><Route path='/suggest' element={<SuggestPage/>} /></Route>
+            <Route element = {<ProtectedRourt type='user'/>}><Route path='/profile' element={<ProfilePage scrollCallback = {scrollCallback} type={'privateUser'}/>} /></Route>
+            <Route element = {<ProtectedRourt type='user'/>}><Route path='/settings' element={<SettingsPage />}/></Route>
             
             {/* PROTECRED AUTH ROLE */}
-            <Route path='/adminPanel/suggests' element={<AdminSuggestsPage />}/>
-            <Route path='/adminPanel/reports' element={<AdminReportsPage scrollCallback={scrollCallback}/>}/>   
-            <Route path='/adminPanel/admins' element={<AdminAdminsPage />}/>
-            <Route path='/adminPanel/blacklist' element={<AdminBlacklistPage />}/>
-            <Route path='/adminPanel/suggests/submit/:suggest_id' element={<GiftCreationPage type={'suggest'} />}></Route>
-            <Route path='/adminPanel/reports/submit/:report_id' element={<GiftCreationPage type={'report'}/>}></Route>
+            <Route element = {<ProtectedRourt type='admin'/>}><Route path='/adminPanel/suggests' element={<AdminSuggestsPage />}/></Route>
+            <Route element = {<ProtectedRourt type='admin'/>}><Route path='/adminPanel/reports' element={<AdminReportsPage scrollCallback={scrollCallback}/>}/></Route>
+            <Route element = {<ProtectedRourt type='admin'/>}><Route path='/adminPanel/admins' element={<AdminAdminsPage />}/></Route>
+            <Route element = {<ProtectedRourt type='admin'/>}><Route path='/adminPanel/blacklist' element={<AdminBlacklistPage />}/></Route>
+            <Route element = {<ProtectedRourt type='admin'/>}><Route path='/adminPanel/suggests/submit/:suggest_id' element={<GiftCreationPage type={'suggest'} />} /></Route>
+            <Route element = {<ProtectedRourt type='admin'/>}><Route path='/adminPanel/reports/submit/:report_id' element={<GiftCreationPage type={'report'}/>} /></Route>
           </Routes>
         </main>
       </>}
