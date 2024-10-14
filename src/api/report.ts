@@ -34,3 +34,26 @@ export async function deleteReport(data: any) {
         console.log("ERROR WHITE GETTING DATA")
     }
 }
+
+export async function deleteReportGift(data: any) {
+  try {
+    console.log(data)
+    await axios.delete('http://localhost:1000/report-gift', {
+      data: {
+        gift_id: data.gift_id,
+        report_id: data.report_id
+      }
+    });
+  } catch (error) {
+    console.log("ERROR WHILE GETTING DATA", error);
+  }
+}
+
+export async function getGiftByReport(data: any) {
+    try{
+        const response = await axios.get('http://localhost:1000/report/gift/' + data.report_id);
+        return response.data
+    } catch (error){
+        console.log("ERROR WHITE GETTING DATA")
+    }
+}

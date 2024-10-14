@@ -39,3 +39,12 @@ export async function deleteUserBlacklist(data:any) {
         console.log("ERROR WHITE GETTING DATA")
     }
 }
+
+// добавить в чёрный список
+export async function insertBlacklist(data:any) {
+    try{
+        await axios.post('http://localhost:1000/blacklist-add', {user_id: data.user_id});
+    } catch (error){
+        console.log("ERROR WHITE GETTING DATA")
+    }
+}

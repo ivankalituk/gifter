@@ -37,7 +37,7 @@ const AdminReportsPage: FC <AdminReportsPageInterface>= ({scrollCallback}) => {
 
                 <div className="adminReportsPage_reportList">
                     {reportsFetched && initialReports !== null && initialReports.length > 0 && initialReports.map((report: any, index: number) => (
-                        <Report key={index} user_id={report.user_id} date={'DATE NULL'} gift_id={report.gift_id} scrollCallback={scrollCallback} report_id={report.id}/>
+                        <Report key={index} user_id={report.user_id} date={'DATE NULL'} gift_id={report.gift_id} scrollCallback={scrollCallback} report_id={report.id} data= {report}/>
                     ))}
                 </div>
             </div>

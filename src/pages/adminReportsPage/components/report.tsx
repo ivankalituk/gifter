@@ -17,10 +17,11 @@ interface ReportComponent {
     date: string,
     gift_id: number,
     scrollCallback: (block: boolean) => void
-    report_id: number
+    report_id: number,
+    data: any
 }
 
-const Report: FC <ReportComponent>= ({user_id, date, gift_id, scrollCallback, report_id}) => {
+const Report: FC <ReportComponent>= ({user_id, date, gift_id, scrollCallback, report_id, data}) => {
 
     // -----------------
     // получение подарка
@@ -37,7 +38,7 @@ const Report: FC <ReportComponent>= ({user_id, date, gift_id, scrollCallback, re
     const navigate = useNavigate()
 
     const handleChangeGift = () =>{
-        navigate('/adminPanel/reports/submit/' + gift_id)
+        navigate('/adminPanel/reports/submit/' + report_id)
     }
 
     const handleDeleteReport = () =>{
@@ -49,7 +50,7 @@ const Report: FC <ReportComponent>= ({user_id, date, gift_id, scrollCallback, re
         <div className="report">
             <Account user_id={user_id} date={date}/>
         
-            <div className="report_text">REP</div>
+            <div className="report_text">{data.content}</div>
 
             {/* ДОБАВИТЬ КОЛБЕКИ */}
             {giftFetched && gift && <GiftCard data={gift[0]} scrollCallback={scrollCallback}/>}

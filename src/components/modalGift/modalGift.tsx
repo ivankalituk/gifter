@@ -67,7 +67,7 @@ const ModalGift: FC <ModalGiftInterface>= ({handleGiftModalClose, modalProps, sc
                 <div className="modalGift_content customScrollbar">
                     <div className="modalGift_name">{gift[0].name}</div>
 
-                    {userFetched &&<div onClick={handleLinkToUser} className="modalGift_creator">
+                    {userFetched && user.length >  0 && <div onClick={handleLinkToUser} className="modalGift_creator">
                         <img src={'http://localhost:1000/' + user[0].imgPath} alt="userAvatar" />
                         
                         <div className="modalGift_creator_name">{user[0].nickname}</div>

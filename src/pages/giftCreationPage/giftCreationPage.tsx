@@ -6,7 +6,7 @@ import giftPreInsertPhoto from '@/assets/images/giftPreInsertPhoto.svg';
 import insertPhoto from '@/assets/images/insertPhoto.svg';
 import { useGetRequest } from "@/hooks/useGetReuquest";
 import { getSuggestById } from "@/api/suggest";
-import { getReportById } from "@/api/report";
+import { deleteReportGift, getGiftByReport, getReportById } from "@/api/report";
 import { useNavigate, useParams } from "react-router-dom";
 import { RootState, Tag } from "@/interfaces/interface";
 import { getTagByInput } from "@/api/tags";
@@ -17,9 +17,10 @@ import { TypedUseSelectorHook, useSelector } from "react-redux";
 
 interface giftCreationPage {
     type: string
+    rep_id?: number
 }
 
-const GiftCreationPage : FC <giftCreationPage> = ({type}) => {
+const GiftCreationPage : FC <giftCreationPage> = ({type, rep_id}) => {
 
     // ---------------------------------------------
     // получение начальных данных саггеста и репорта
@@ -33,11 +34,13 @@ const GiftCreationPage : FC <giftCreationPage> = ({type}) => {
 
 
     const {data: suggest, isFetched: suggestFetched} = useGetRequest({fetchFunc: ()=> getSuggestById({suggest_id: suggest_id}), key: [], enabled: suggestEnabled})
-    const {data: report, isFetched: reportFetched} = useGetRequest({fetchFunc: ()=> getGiftById({gift_id: report_id}), key: [], enabled: reportEnabled})
+    const {data: report, isFetched: reportFetched} = useGetRequest({fetchFunc: ()=> getGiftByReport({report_id: report_id}), key: [], enabled: reportEnabled})
 
     // --------------
     // обраюотка фото
     // -------------- 
+
+    console.log(report)
 
     const [selectedImgFile, setSelectedImgFile] = useState<any>(null)           //сохранение файла фото
     const [selectedImg, setSelectedImg] = useState<any>(null)                   //сохранение ссылки на файл фото
@@ -178,6 +181,16 @@ const GiftCreationPage : FC <giftCreationPage> = ({type}) => {
         }
     }
 
+    // ----------------
+    // удаление подарка
+    // ----------------
+
+    const {mutatedFunc: deleteReportedGift} = useUpdateRequest({fetchFunc: deleteReportGift})
+
+    const handleDeleteGift = () => {
+        deleteReportedGift({gift_id: report[0].gift_id, report_id: report_id})
+        navigate('/adminPanel/reports')
+    }
 
     const [help, setHelp] = useState<boolean>(false)
 
@@ -245,7 +258,7 @@ const GiftCreationPage : FC <giftCreationPage> = ({type}) => {
 
                         <div className="giftCreationPage_gift_dataUpload_buttons">
                             <button className='button_preset' onClick={handleAddGift}>{type === 'report'? 'Оновити подарунок' : 'Додати подарунок'}</button>
-                            {type === 'report' && <button className='button_preset'>Видалити подарунок</button>}
+                            {type === 'report' && <button className='button_preset' onClick={handleDeleteGift}>Видалити подарунок</button>}
                         </div>
                     </div>
                 </div>

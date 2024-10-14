@@ -61,6 +61,8 @@ const GiftCard: FC <GiftCardInterface> = ({scrollCallback, data}) =>{
         setMarked(!marked)
     }
 
+    console.log(data)
+
     return(
         <div className="giftCard">
 
@@ -80,14 +82,13 @@ const GiftCard: FC <GiftCardInterface> = ({scrollCallback, data}) =>{
                             <img src={starGrey} alt="star" />
                         </div>
 
-                        <div className="giftCard_reating_reating">
+                        <div className="giftCard_reating_reating" style={data.reating !== null? {width: data.reating*20 +'%'} : {width: '0%'}} >
                             <img src={starYellow} alt="star" />
                             <img src={starYellow} alt="star" />
                             <img src={starYellow} alt="star" />
                             <img src={starYellow} alt="star" />
                             <img src={starYellow} alt="star" />
                         </div>
-                        
                     </div>
 
                     <div className="giftCard_views">{data.userViews} перегляди</div>

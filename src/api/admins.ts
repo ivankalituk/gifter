@@ -27,3 +27,12 @@ export async function patchAdminLevel(data:any) {
         console.log("ERROR WHITE GETTING DATA")
     }
 }
+
+// добавить админа
+export async function insertAdmin(data:any) {
+    try{
+        await axios.post('http://localhost:1000/admin', {user_id: data.user_id});
+    } catch (error){
+        console.log("ERROR WHITE GETTING DATA")
+    }
+}
