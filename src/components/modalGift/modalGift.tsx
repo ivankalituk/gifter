@@ -74,6 +74,15 @@ const ModalGift: FC <ModalGiftInterface>= ({handleGiftModalClose, modalProps, sc
         setHoverStarIndex(null);
     };
 
+    const [starReating, setStarReating] = useState<number>(0)
+
+    const handleNewReating = (index: number) => {
+        setStarReating(index + 1)
+
+        // запрос на смену рейтинга
+    }
+
+
     return (
         <div className="modalGift">
             {giftFetched && <div className="modalGift_container">
@@ -106,17 +115,18 @@ const ModalGift: FC <ModalGiftInterface>= ({handleGiftModalClose, modalProps, sc
                         </div>
                             
                         <div className="modalGift_reating_change">
-                            {[...Array(5)].map((_: any, index: number) => (
-                                <img src={starRed} alt="star" key={index} 
+                        {[...Array(5)].map((_, index: number) => (
+                            <img
+                                src={starRed}
+                                alt="star"
+                                key={index}
                                 onMouseEnter={() => handleMouseEnter(index)}
                                 onMouseLeave={handleMouseLeave}
-                                style={{
-                                    opacity: hoverStarIndex !== null && index <= hoverStarIndex ? 1 : 0,
-                                    // transition: 'opacity 0.1s'
-                                }}  
-                                />
-                            ))}
-                        </div>
+                                style={{opacity: hoverStarIndex !== null? (index <= hoverStarIndex? 1 : 0) : (index < starReating? 1 : 0)}}
+                                onClick={() => handleNewReating(index)}
+                            />
+                        ))}
+        </div>
                     </div>
                     
                     <div className="modalGift_views">{gift[0].userViews} переглянуло</div>
