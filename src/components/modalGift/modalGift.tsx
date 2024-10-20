@@ -11,6 +11,7 @@ import { getUserById } from '@/api/user';
 
 import starYellow from '@/assets/images/StarYellow.svg'
 import starGrey from '@/assets/images/StarGrey.svg'
+import starRed from '@/assets/images/StarRed.svg'
 
 interface ModalGiftInterface {
     handleGiftModalClose: () => void
@@ -47,9 +48,9 @@ const ModalGift: FC <ModalGiftInterface>= ({handleGiftModalClose, modalProps, sc
 
     const {data: user, isFetched: userFetched} = useGetRequest({fetchFunc: () => getUserById({user_id: user_id}), enabled: userEnabled, key: [userKey]})
 
-    // 
+    // ----------------------
     // ссылка на пользователя
-    // 
+    // ----------------------
 
     const navigate = useNavigate()
 
@@ -58,6 +59,20 @@ const ModalGift: FC <ModalGiftInterface>= ({handleGiftModalClose, modalProps, sc
 
         scrollCallback(false)
     }
+
+    // --------------
+    // смена рейтинга
+    // --------------
+
+    const [hoverStarIndex, setHoverStarIndex] = useState<number | null>(null)
+
+    const handleMouseEnter = (index: number) => {
+        setHoverStarIndex(index);
+    };
+
+    const handleMouseLeave = () => {
+        setHoverStarIndex(null);
+    };
 
     return (
         <div className="modalGift">
@@ -74,11 +89,34 @@ const ModalGift: FC <ModalGiftInterface>= ({handleGiftModalClose, modalProps, sc
                     </div>}
 
                     <div className="modalGift_reating">
-                        <img src={starYellow} alt="star" />
-                        <img src={starYellow} alt="star" />
-                        <img src={starGrey} alt="star" />
-                        <img src={starGrey} alt="star" />
-                        <img src={starGrey} alt="star" />
+                        <div className="modalGift_reating_stars">
+                            <img src={starGrey} alt="star" />
+                            <img src={starGrey} alt="star" />
+                            <img src={starGrey} alt="star" />
+                            <img src={starGrey} alt="star" />
+                            <img src={starGrey} alt="star" />
+                        </div>
+
+                        <div className="modalGift_reating_reating" style={gift[0].reating !== null? {width: gift[0].reating*20 +'%'} : {width: '0%'}} >
+                            <img src={starYellow} alt="star" />
+                            <img src={starYellow} alt="star" />
+                            <img src={starYellow} alt="star" />
+                            <img src={starYellow} alt="star" />
+                            <img src={starYellow} alt="star" />
+                        </div>
+                            
+                        <div className="modalGift_reating_change">
+                            {[...Array(5)].map((_: any, index: number) => (
+                                <img src={starRed} alt="star" key={index} 
+                                onMouseEnter={() => handleMouseEnter(index)}
+                                onMouseLeave={handleMouseLeave}
+                                style={{
+                                    opacity: hoverStarIndex !== null && index <= hoverStarIndex ? 1 : 0,
+                                    // transition: 'opacity 0.1s'
+                                }}  
+                                />
+                            ))}
+                        </div>
                     </div>
                     
                     <div className="modalGift_views">{gift[0].userViews} переглянуло</div>

@@ -71,14 +71,50 @@
       }
 
       > .modalGift_reating{
-        margin-top: 0.5rem;
-        display: flex;
-        gap: 0.35rem;
+        margin-top: 0.35rem;
+        position: relative;
+        // width: 145px;
+        display: inline-block;
 
-        > img{
-          width: 25px;
+        > .modalGift_reating_stars{
+            display: flex;
+            
+            > img{
+              width: 25px;
+              padding-right: 0.35rem;
+            }
         }
-      }
+
+        > .modalGift_reating_reating{
+            width: 100%;
+            display: flex;
+            position: absolute;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            
+            > img{
+              padding-right: 0.35rem;
+              height: 25px;
+            }
+        }
+
+        > .modalGift_reating_change{
+          z-index: 100000000000;
+          position: absolute;
+          opacity: 1;
+          top: 0;
+          left: 0;
+          display: flex;
+
+          > img{
+            padding-right: 0.35rem;
+            width: 25px;
+            // opacity: 1;
+
+          }
+        }
+    }
 
       > .modalGift_views{
         font-weight: 700;
