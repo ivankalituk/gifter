@@ -1,4 +1,4 @@
-import { getGiftById } from '@/api/gifts';
+import { getGiftById, getUserGiftMark, setUserGiftMark } from '@/api/gifts';
 import './modalGift.scss'
 
 import sampleGiftPhoto from '@/assets/images/Sample Gift Photo.png'
@@ -12,6 +12,9 @@ import { getUserById } from '@/api/user';
 import starYellow from '@/assets/images/StarYellow.svg'
 import starGrey from '@/assets/images/StarGrey.svg'
 import starRed from '@/assets/images/StarRed.svg'
+import { TypedUseSelectorHook, useSelector } from 'react-redux';
+import { RootState } from '@/interfaces/interface';
+import { useUpdateRequest } from '@/hooks/useUpdateRequest';
 
 interface ModalGiftInterface {
     handleGiftModalClose: () => void
@@ -21,8 +24,10 @@ interface ModalGiftInterface {
 
 const ModalGift: FC <ModalGiftInterface>= ({handleGiftModalClose, modalProps, scrollCallback}) => {
 
-    // console.log(modalProps)
     const serverUrl = process.env.REACT_APP_API_URL
+
+    const useTypeSelector: TypedUseSelectorHook <RootState> = useSelector
+    const user = useTypeSelector((state) => state.user)
 
     // -----------------
     // получение подарка
@@ -38,15 +43,22 @@ const ModalGift: FC <ModalGiftInterface>= ({handleGiftModalClose, modalProps, sc
     const [userKey, setUserKey] = useState<number>(1)
     const [userEnabled, setUserEnabled] = useState<boolean>(false)
 
+    // получение рейтинга пользователя
+    const [userReatingKey, setUserReatingKey] = useState<number>(1)
+    const [userReatingEnabled, setUserReatingEnabled] = useState<boolean>(false)
+    const {data: userReating, isFetched: userReatingFetched} = useGetRequest({fetchFunc: ()=> getUserGiftMark({gift_id: modalProps.gift_id, user_id: user.user_id}), key: [userReatingKey], enabled: userReatingEnabled})
+
     useEffect(() => {
         if(gift && giftFetched){
             setUser_id(gift[0].creatorId)
             setUserEnabled(true)
             setUserKey(userKey + 1)
+            setUserReatingEnabled(true)
+            setUserReatingKey(userReatingKey + 1)
         }
     }, [gift, giftFetched])
 
-    const {data: user, isFetched: userFetched} = useGetRequest({fetchFunc: () => getUserById({user_id: user_id}), enabled: userEnabled, key: [userKey]})
+    const {data: creator, isFetched: creatorFetched} = useGetRequest({fetchFunc: () => getUserById({user_id: user_id}), enabled: userEnabled, key: [userKey]})
 
     // ----------------------
     // ссылка на пользователя
@@ -55,7 +67,7 @@ const ModalGift: FC <ModalGiftInterface>= ({handleGiftModalClose, modalProps, sc
     const navigate = useNavigate()
 
     const handleLinkToUser = () => {
-        navigate('/account/' + user[0].id)
+        navigate('/account/' + creator[0].id)
 
         scrollCallback(false)
     }
@@ -65,6 +77,9 @@ const ModalGift: FC <ModalGiftInterface>= ({handleGiftModalClose, modalProps, sc
     // --------------
 
     const [hoverStarIndex, setHoverStarIndex] = useState<number | null>(null)
+    const [starReating, setStarReating] = useState<number>(0)
+
+    const {mutatedFunc: setReating} = useUpdateRequest({fetchFunc: setUserGiftMark})
 
     const handleMouseEnter = (index: number) => {
         setHoverStarIndex(index);
@@ -74,12 +89,19 @@ const ModalGift: FC <ModalGiftInterface>= ({handleGiftModalClose, modalProps, sc
         setHoverStarIndex(null);
     };
 
-    const [starReating, setStarReating] = useState<number>(0)
+
+    useEffect(() => {
+        if (userReating && userReatingFetched){
+            console.log(userReating)
+            setStarReating(userReating.mark)
+        }
+    }, [userReating, userReatingFetched])
 
     const handleNewReating = (index: number) => {
+                // запрос на смену рейтинга
+        setReating({old_reating: starReating, new_Reating: index + 1, gift_id: modalProps.gift_id, user_id: user.user_id})
+        
         setStarReating(index + 1)
-
-        // запрос на смену рейтинга
     }
 
 
@@ -91,10 +113,10 @@ const ModalGift: FC <ModalGiftInterface>= ({handleGiftModalClose, modalProps, sc
                 <div className="modalGift_content customScrollbar">
                     <div className="modalGift_name">{gift[0].name}</div>
 
-                    {userFetched && user.length >  0 && <div onClick={handleLinkToUser} className="modalGift_creator">
-                        <img src={'http://localhost:1000/' + user[0].imgPath} alt="userAvatar" />
+                    {creatorFetched && creator.length >  0 && <div onClick={handleLinkToUser} className="modalGift_creator">
+                        <img src={'http://localhost:1000/' + creator[0].imgPath} alt="userAvatar" />
                         
-                        <div className="modalGift_creator_name">{user[0].nickname}</div>
+                        <div className="modalGift_creator_name">{creator[0].nickname}</div>
                     </div>}
 
                     <div className="modalGift_reating">
@@ -115,18 +137,18 @@ const ModalGift: FC <ModalGiftInterface>= ({handleGiftModalClose, modalProps, sc
                         </div>
                             
                         <div className="modalGift_reating_change">
-                        {[...Array(5)].map((_, index: number) => (
-                            <img
-                                src={starRed}
-                                alt="star"
-                                key={index}
-                                onMouseEnter={() => handleMouseEnter(index)}
-                                onMouseLeave={handleMouseLeave}
-                                style={{opacity: hoverStarIndex !== null? (index <= hoverStarIndex? 1 : 0) : (index < starReating? 1 : 0)}}
-                                onClick={() => handleNewReating(index)}
-                            />
-                        ))}
-        </div>
+                            {[...Array(5)].map((_, index: number) => (
+                                <img
+                                    src={starRed}
+                                    alt="star"
+                                    key={index}
+                                    onMouseEnter={() => handleMouseEnter(index)}
+                                    onMouseLeave={handleMouseLeave}
+                                    style={{opacity: hoverStarIndex !== null? (index <= hoverStarIndex? 1 : 0) : (index < starReating? 1 : 0)}}
+                                    onClick={() => handleNewReating(index)}
+                                />
+                            ))}
+                        </div>
                     </div>
                     
                     <div className="modalGift_views">{gift[0].userViews} переглянуло</div>
