@@ -51,7 +51,7 @@ const ProfilePage: FC <ProfilePageInterface> = ({type, scrollCallback}) => {
                     </div>}
 
                 {type == 'privateUser' && <Link className="link_button" to={'/settings'}>Редагувати</Link>}
-                
+                {type == 'privateUser' && <Link to={'/suggest'} className="link_button">Запропонувати</Link>}
                 <Link className="link_button" to={'/adminPanel/suggests'}>Адмін панель</Link>
                 
             </div>

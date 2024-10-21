@@ -16,7 +16,7 @@
         border-radius: 0.75rem;
         padding: 1rem;
         box-sizing: border-box;
-        max-width: 30rem;
+        max-width: 25rem;
         display: flex;
         flex-direction: column;
 
@@ -80,7 +80,7 @@
         }
 
         > a{
-            margin-top: 1rem;
+            margin-top: 0.7rem;
         }
 
     }
@@ -194,16 +194,21 @@
         }
 
         > .profilePage_rightColumn_gifts{
-            background-color: $color-white;
-            box-shadow: 0px 0.57rem 1rem rgba(0, 0, 0, 0.08);
+            // background-color: $color-white;
+            // box-shadow: 0px 0.57rem 1rem rgba(0, 0, 0, 0.08);
+            // margin-top: 1rem;
+            // padding: 1rem;
             border-radius: 0.75rem;
-            padding: 1rem;
             box-sizing: border-box;
-            margin-top: 1rem;
+
+            > a{
+                display: none;
+            }
 
             > .profilePage_rightColumn_gifts_list{
                 margin-top: 1rem;
-                display: flex;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
                 // flex-direction: column;
                 flex-wrap: wrap;
                 gap: 1rem;
@@ -227,6 +232,21 @@
         }
 
         
+
+    }
+}
+
+@media (max-width: 1100px) {
+    .profilePage{
+
+        > .profilePage_rightColumn{
+            >.profilePage_rightColumn_gifts{
+                >.profilePage_rightColumn_gifts_list{
+                    display: grid;
+                    grid-template-columns: 1fr;
+                }
+            }
+        }
 
     }
 }
