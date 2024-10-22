@@ -34,7 +34,6 @@ export async function getGiftNameByName(name: string): Promise<giftName[]> {
     }
 }
 
-
 // получение всех подарков по массиву тегов (если массив пуст, то любые подарки)
 export async function getAllGiftsByTags(tags: string[], sort: string, byName: string):Promise<Gift[] | undefined> {
     try{
@@ -124,6 +123,23 @@ export async function setUserGiftMark(data: any) {
             console.error("Ошибка при получении данных:", error.message);
         } else {
             console.error("Неожиданная ошибка:", error);
+        }
+        return [];
+    }
+}
+
+// получение массива имён по фрагменту имени подарка
+export async function putGift(data: any){
+    try {
+        await axios.put('http://localhost:1000/gift', data, {
+            headers: { 'Content-Type': 'multipart/form-data' },
+          })
+
+    } catch (error) {
+        if (axios.isAxiosError(error)) {
+            console.error("Error getting data:", error.message);
+        } else {
+            console.error("Unexpected error:", error);
         }
         return [];
     }

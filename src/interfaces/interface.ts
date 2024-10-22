@@ -74,3 +74,10 @@ export interface suggest{
         tags: string[] | null,
         user_id: string
 }
+
+export interface report{
+        id: number,
+        user_id: number,
+        content: string,
+        gift_id: number
+}

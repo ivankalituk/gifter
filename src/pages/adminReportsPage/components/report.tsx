@@ -19,9 +19,10 @@ interface ReportComponent {
     scrollCallback: (block: boolean) => void
     report_id: number,
     data: any
+    handleDeleteReportCallBack: (id: number) => void
 }
 
-const Report: FC <ReportComponent>= ({user_id, date, gift_id, scrollCallback, report_id, data}) => {
+const Report: FC <ReportComponent>= ({user_id, date, gift_id, scrollCallback, report_id, data, handleDeleteReportCallBack}) => {
 
     // -----------------
     // получение подарка
@@ -44,6 +45,7 @@ const Report: FC <ReportComponent>= ({user_id, date, gift_id, scrollCallback, re
     const handleDeleteReport = () =>{
         // колбек для удаления из массива
         deleteReportFunc({report_id: report_id})
+        handleDeleteReportCallBack(report_id)
     }
 
     return(
