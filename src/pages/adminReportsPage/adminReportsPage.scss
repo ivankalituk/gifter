@@ -38,5 +38,14 @@
 @media (max-width: 1000px) {
     .adminReportsPage{
         padding: 1rem;
+
+        > .adminReportsPage_content{
+            max-width: none;
+
+            > .adminReportsPage_heading{
+                max-width: none;
+            }
+        }
     }
 }
+

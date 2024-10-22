@@ -70,7 +70,7 @@
                 flex-wrap: wrap;
 
                 > div{
-                    background-color: $color-red;
+                    background-color: $color-red-light;
                     color: $color-white;
                     border-radius: 0.35rem;
                     padding: 0.35rem;
@@ -170,7 +170,7 @@
                         flex-wrap: wrap;
     
                         > div{
-                            background-color: $color-red;
+                            background-color: $color-red-light;
                             color: $color-white;
                             border-radius: 0.35rem;
                             padding: 0.35rem;
@@ -194,7 +194,7 @@
                         flex-wrap: wrap;
         
                         > div{
-                            background-color: $color-red;
+                            background-color: $color-red-light;
                             color: $color-white;
                             border-radius: 0.35rem;
                             padding: 0.35rem;
@@ -203,13 +203,37 @@
                     }
                 }
             }
+
+            > .profilePage_rightColumn_addedTags{
+                margin-top: 1rem;
+
+                > .profilePage_rightColumn_addedTags_heading{
+                    font-size: 1.5rem;
+                    font-weight: 700;
+                    opacity: 0.5;
+                }
+    
+                > .profilePage_rightColumn_addedTags_tags{
+                    display: flex;
+                    gap: 0.35rem;
+                    flex-wrap: wrap;
+    
+                    > div{
+                        background-color: $color-red-light;
+                        color: $color-white;
+                        border-radius: 0.35rem;
+                        padding: 0.35rem;
+                        font-weight: 700;
+                    }
+                }
+            }
+
+            > .profilePage_rightColumn_tick{
+                display: none;
+            }
         }
 
         > .profilePage_rightColumn_gifts{
-            // background-color: $color-white;
-            // box-shadow: 0px 0.57rem 1rem rgba(0, 0, 0, 0.08);
-            // margin-top: 1rem;
-            // padding: 1rem;
             border-radius: 0.75rem;
             box-sizing: border-box;
 
@@ -242,9 +266,6 @@
                 }
             }
         }
-
-        
-
     }
 }
 
@@ -287,6 +308,10 @@
                     > .profilePage_rightColumn_usedTags{
                         display: block;
                     }
+                }
+
+                > .profilePage_rightColumn_addedTags{
+                    display: none;
                 }
 
                 > .profilePage_rightColumn_tick{

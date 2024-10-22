@@ -120,6 +120,25 @@ const ProfilePage: FC <ProfilePageInterface> = ({type, scrollCallback}) => {
                             </div>
                         </div>
 
+                        <div className="profilePage_rightColumn_addedTags">
+                                <div className="profilePage_rightColumn_addedTags_heading">Додані теги:</div>
+
+                                <div className="profilePage_rightColumn_addedTags_tags">
+                                    <div>#Гітара</div>
+                                    <div>#Велосипед</div>
+                                    <div>#ЗадняДупа</div>
+                                    <div>#Мешуга</div>
+                                    <div>#Переднядупа</div>
+                                    <div>#ПередняДупа</div>
+                                    <div>#Комп'ютери</div>
+                                    <div>#Робота</div>
+                                    <div>#РоботаДупою</div>
+                                    <div>#Дупа</div>
+                                    <div>#Погода</div>
+                                    <div>#Погода</div>
+                                </div>
+                        </div>
+
                     <div className="profilePage_rightColumn_tick" onClick={handleDropMenu}>
                         <img src={tick} alt="tick" style={dropMenu? {rotate: '-180deg', transition: '0.5s'} : { transition: '0.5s'}}/>
                     </div>

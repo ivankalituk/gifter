@@ -43,7 +43,7 @@
                 max-height: 2rem;
                 box-sizing: border-box;
                 padding: 0.35rem;
-                background-color: $color-red;
+                background-color: $color-red-light;
                 border-radius: 0.42rem;
                 color: $color-white;
                 font-weight: 700;
@@ -56,5 +56,13 @@
         margin-top: 0.5rem;
         display: flex;
         gap: 0.5rem;
+    }
+}
+
+
+@media (max-width: 1000px) {
+    .suggest{
+        max-width: none;
+        
     }
 }

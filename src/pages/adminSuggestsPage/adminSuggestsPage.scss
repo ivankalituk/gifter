@@ -39,5 +39,13 @@
 @media (max-width: 1000px) {
     .adminSuggestsPage{
         padding: 1rem;
+        
+        > .adminSuggestsPage_content{
+            max-width: none;
+
+            > .adminSuggestsPage_heading{
+                max-width: none;
+            }
+        }
     }
 }

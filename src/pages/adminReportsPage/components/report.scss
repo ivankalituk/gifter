@@ -36,3 +36,10 @@
         margin-top: 0.5rem;
     }
 }
+
+
+@media (max-width: 1000px) {
+    .report{
+        max-width: none;
+    }
+}
