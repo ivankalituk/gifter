@@ -20,18 +20,19 @@ const AuthPage: FC = () => {
 
             const response = await axios.post('http://localhost:1000/user', {access_token: data.access_token});
             const res = response.data
-            console.log(res)
+            console.log(res[0])
 
             // получение инфы и занос её в редакс
             const  newUser: UserState = {
-                user_nickName: res.nickname,
-                user_imgUrl: res.imgPath,
-                user_role: res.role,
-                user_id: res.id,
-                user_email: res.email,
+                user_nickName: res[0].nickname,
+                user_imgUrl: res[0].imgPath,
+                user_role: res[0].role,
+                user_id: res[0].id,
+                user_email: res[0].email,
             }
 
             dispatch(setUser(newUser))
+            // window.location.assign('/')
             navigate('/profile')
         },
 

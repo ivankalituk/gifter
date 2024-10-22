@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import profilePhoto from "@/assets/images/logoSample.jpg"
@@ -11,6 +11,7 @@ import { Gift, RootState } from "@/interfaces/interface";
 import { useGetRequest } from "@/hooks/useGetReuquest";
 import { getAllGiftsByCreatorId } from "@/api/gifts";
 import { getUserBio, getUserTags } from "@/api/user";
+import tick from '@/assets/images/tick.svg'
 
 interface ProfilePageInterface {
     type: string;
@@ -27,6 +28,18 @@ const ProfilePage: FC <ProfilePageInterface> = ({type, scrollCallback}) => {
     const {data: bio, isFetched: bioFetched} = useGetRequest<any>({fetchFunc:  () => getUserBio({user_id: user.user_id}), enabled: true, key: [1]})
     const {data: tags, isFetched: tagsFetched} = useGetRequest<any>({fetchFunc:  () => getUserTags({user_id: user.user_id}), enabled: true, key: [1]})
     
+    // ------------------------------------
+    // DropDown список для мобильной версии
+    // ------------------------------------
+
+    const [dropMenu, setDropMenu] = useState<boolean>(false)
+
+    const handleDropMenu = () => {
+        setDropMenu(!dropMenu)
+    }
+
+
+
     return(
         <div className="profilePage">
             <div className="profilePage_leftColumn">
@@ -59,49 +72,56 @@ const ProfilePage: FC <ProfilePageInterface> = ({type, scrollCallback}) => {
             <div className="profilePage_rightColumn">
                 
                 <div className="profilePage_rightColumn_info">
-
+                
                     <div className="profilePage_rightColumn_accountInfo">
                         <img src={user.user_imgUrl? 'http://localhost:1000/' + user.user_imgUrl :profilePhoto} alt="avatar" />
 
                         <div className="profilePage_rightColumn_accountInfo_info">
-                             <div>Nigname</div>
-                             <div>Зареєстрований: 12/12/2012</div>
+                            <div>Nigname</div>
+                            <div>Зареєстрований: 12/12/2012</div>
                         </div>
                     </div>
+                        
+                        <div className={`profilePage_rightColumn_drop ${dropMenu ? 'open' : ''}`}>
 
-                    <div className="profilePage_rightColumn_description">
-                        <div className="profilePage_rightColumn_description_heading">Біо:</div>
+                            <div className="profilePage_rightColumn_description">
+                                <div className="profilePage_rightColumn_description_heading">Біо:</div>
 
-                        {bioFetched && bio && <div className="profilePage_rightColumn_description_text">{bio[0].bio}</div>}
-                    </div>
+                                {bioFetched && bio && <div className="profilePage_rightColumn_description_text">{bio[0].bio}</div>}
+                            </div>
 
-                    {tagsFetched && tags.length > 0 && <div className="profilePage_rightColumn_usedTags">
-                        <div className="profilePage_rightColumn_usedTags_heading">Використані теги</div>
+                            {tagsFetched && tags.length > 0 && <div className="profilePage_rightColumn_usedTags">
+                                <div className="profilePage_rightColumn_usedTags_heading">Використані теги</div>
 
-                        <div className="profilePage_rightColumn_usedTags_list">
-                            {tags.map((tag: string, index: number) => (
-                                <div key={index}>{tag}</div>
-                            ))}
+                                <div className="profilePage_rightColumn_usedTags_list">
+                                    {tags.map((tag: string, index: number) => (
+                                        <div key={index}>{tag}</div>
+                                    ))}
+                                </div>
+                            </div>}
+
+                            <div className="profilePage_rightColumn_addedTags">
+                                <div className="profilePage_rightColumn_addedTags_heading">Додані теги:</div>
+
+                                <div className="profilePage_rightColumn_addedTags_tags">
+                                    <div>#Гітара</div>
+                                    <div>#Велосипед</div>
+                                    <div>#ЗадняДупа</div>
+                                    <div>#Мешуга</div>
+                                    <div>#Переднядупа</div>
+                                    <div>#ПередняДупа</div>
+                                    <div>#Комп'ютери</div>
+                                    <div>#Робота</div>
+                                    <div>#РоботаДупою</div>
+                                    <div>#Дупа</div>
+                                    <div>#Погода</div>
+                                    <div>#Погода</div>
+                                </div>
+                            </div>
                         </div>
-                    </div>}
 
-                    <div className="profilePage_rightColumn_addedTags">
-                        <div className="profilePage_rightColumn_addedTags_heading">Додані теги:</div>
-
-                        <div className="profilePage_rightColumn_addedTags_tags">
-                            <div>#Гітара</div>
-                            <div>#Велосипед</div>
-                            <div>#ЗадняДупа</div>
-                            <div>#Мешуга</div>
-                            <div>#Переднядупа</div>
-                            <div>#ПередняДупа</div>
-                            <div>#Комп'ютери</div>
-                            <div>#Робота</div>
-                            <div>#РоботаДупою</div>
-                            <div>#Дупа</div>
-                            <div>#Погода</div>
-                            <div>#Погода</div>
-                        </div>
+                    <div className="profilePage_rightColumn_tick" onClick={handleDropMenu}>
+                        <img src={tick} alt="tick" style={dropMenu? {rotate: '-180deg', transition: '0.5s'} : { transition: '0.5s'}}/>
                     </div>
                 </div>
 

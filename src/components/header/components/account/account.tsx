@@ -11,7 +11,6 @@ import axios from 'axios';
 
 const  Account: FC = () =>{
 
-    const dispatch = useDispatch()
     const useTypeSelector: TypedUseSelectorHook <RootState> = useSelector
     const user = useTypeSelector((state) => state.user)
 
