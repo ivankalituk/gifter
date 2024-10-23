@@ -4,7 +4,8 @@ export interface UserState {
         user_imgUrl: null | string,
         user_role: null | number,
         user_id: null | number,
-        user_email: null | string
+        user_email: null | string,
+        user_blocked: null | boolean
 }
 
 // для селетора пользователя в редаксе

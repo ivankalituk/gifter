@@ -29,6 +29,7 @@ const AuthPage: FC = () => {
                 user_role: res[0].role,
                 user_id: res[0].id,
                 user_email: res[0].email,
+                user_blocked: res[0].blocked
             }
 
             dispatch(setUser(newUser))

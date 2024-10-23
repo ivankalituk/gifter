@@ -53,7 +53,7 @@ function App() {
           
           const response = await axios.post('http://localhost:1000/user', {access_token: token});
           const data = response.data
-
+          console.log(data)
           // заполнение редакс стора
 
           const newUser: UserState = {
@@ -62,6 +62,7 @@ function App() {
             user_role: data[0].role,
             user_id: data[0].id,
             user_email: data[0].email,
+            user_blocked: data[0].blocked
           }
 
           dispatch(setUser(newUser))

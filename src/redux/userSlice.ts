@@ -6,7 +6,8 @@ const  initialState: UserState = {
     user_imgUrl: null,
     user_role: null,
     user_id: null,
-    user_email: null
+    user_email: null,
+    user_blocked: null
 }
 
 const userSlice = createSlice({
@@ -14,12 +15,13 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         setUser: (state, action: PayloadAction<UserState>) => {
-            console.log('Payload:', action.payload);
+            // console.log('Payload:', action.payload);
             state.user_nickName = action.payload.user_nickName;
             state.user_imgUrl = action.payload.user_imgUrl;
             state.user_role = action.payload.user_role;
             state.user_id = action.payload.user_id;
             state.user_email = action.payload.user_email;
+            state.user_blocked = action.payload.user_blocked
         },
         
         clearUser: (state) => {
@@ -28,6 +30,7 @@ const userSlice = createSlice({
             state.user_role = null;
             state.user_id = null;
             state.user_email = null;
+            state.user_blocked = null
         },
 
         setUserNickname: (state, action) => {
