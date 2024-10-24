@@ -5,7 +5,7 @@ export interface UserState {
         user_role: null | number,
         user_id: null | number,
         user_email: null | string,
-        user_blocked: null | boolean
+        user_blocked: null | number
 }
 
 // для селетора пользователя в редаксе

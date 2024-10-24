@@ -61,8 +61,6 @@ const GiftCard: FC <GiftCardInterface> = ({scrollCallback, data}) =>{
         setMarked(!marked)
     }
 
-    console.log(data)
-
     return(
         <div className="giftCard">
 

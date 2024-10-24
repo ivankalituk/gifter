@@ -3,14 +3,17 @@ import { FC, useEffect } from "react";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
 import { Outlet, useNavigate } from "react-router-dom";
 
-interface ProtectedRourtInterface {
+interface ProtectedRouteInterface {
   type: string;
+  blacklist?: boolean;
 }
 
-const ProtectedRourt: FC<ProtectedRourtInterface> = ({ type }) => {
+const ProtectedRoute: FC<ProtectedRouteInterface> = ({ type, blacklist }) => {
   const useTypeSelector: TypedUseSelectorHook<RootState> = useSelector;
   const user = useTypeSelector((state) => state.user);
   const navigate = useNavigate();
+
+  console.log(type, blacklist);
 
   useEffect(() => {
     if (user.user_email === null) {
@@ -18,17 +21,19 @@ const ProtectedRourt: FC<ProtectedRourtInterface> = ({ type }) => {
       navigate('/auth');
     } else if (type === 'admin' && user.user_role !== 1) {
       alert('Ви не є адміном');
-      navigate('/');
+      navigate('/profile');
+    } else if (blacklist && user.user_blocked === 1) {
+      alert("Ви заблоковані !!?");
+      navigate('/profile');
     }
-  }, [user, type, navigate]);
+  }, [user, type, blacklist, navigate]);
 
   // Если пользователь авторизован и имеет доступ, возвращаем Outlet
   if (user.user_email !== null && (type === 'user' || (type === 'admin' && user.user_role === 1))) {
     return <Outlet />;
   }
 
-  // Пока идет проверка или перенаправление, возвращаем null (или можно вернуть спиннер)
-  return null;
+  return null; // возвращаем null, если ничего не соответствует
 };
 
-export default ProtectedRourt;
+export default ProtectedRoute;

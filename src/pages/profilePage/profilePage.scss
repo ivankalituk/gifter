@@ -96,8 +96,6 @@
             padding: 1rem;
             box-sizing: border-box;
             
-
-
             > .profilePage_rightColumn_accountInfo{
                 display: none;
                 align-items: center;
@@ -122,11 +120,6 @@
                         text-overflow: ellipsis;
                         overflow: hidden;
                         white-space: nowrap;
-                    }
-
-                    > div:last-child{
-                        font-weight: 400;
-                        font-size: 1rem;
                     }
                 }
             }

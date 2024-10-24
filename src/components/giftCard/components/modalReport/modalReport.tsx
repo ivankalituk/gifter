@@ -14,20 +14,6 @@ interface ModalProps {
 
 const Modal: FC<ModalProps> = ({ handleReportClose, modalProps}) => {
 
-  // 
-  // анимация закрытия модального репорта
-  // 
-
-  const [reportAnimation, setReportAnimation] = useState<boolean>(true)
-
-  const handleClose = () => {
-    setReportAnimation(false)
-
-    setTimeout(() => {
-      handleReportClose()
-    }, 500);
-  }
-
   // --------------
   // создать репорт
   // --------------
@@ -47,11 +33,17 @@ const Modal: FC<ModalProps> = ({ handleReportClose, modalProps}) => {
   const handleCreateReport = () => {
     if(textArea !== ''){
       if(user.user_email !== null){
-        createReport({user_id: user.user_id, gift_id: modalProps.gift_id, content: textArea})
-        handleReportClose()
+        if(user.user_blocked){
+          alert('Ви в чорному списку!!?')
+          handleReportClose()
+        } else {
+          createReport({user_id: user.user_id, gift_id: modalProps.gift_id, content: textArea})
+          handleReportClose()
+        }
+
       }
       else{
-        alert('Вы не зареэстровані')
+        alert('Ви не зареэстровані')
       }
     }
   }

@@ -98,10 +98,17 @@ const ModalGift: FC <ModalGiftInterface>= ({handleGiftModalClose, modalProps, sc
     }, [userReating, userReatingFetched])
 
     const handleNewReating = (index: number) => {
-                // запрос на смену рейтинга
-        setReating({old_reating: starReating, new_Reating: index + 1, gift_id: modalProps.gift_id, user_id: user.user_id})
+        if(user.user_email !== null){
+            if(user.user_blocked){
+                alert('ВИ ЗАБЛОКОВАНІ !!!')
+            } else {
+                setReating({old_reating: starReating, new_Reating: index + 1, gift_id: modalProps.gift_id, user_id: user.user_id})
         
-        setStarReating(index + 1)
+                setStarReating(index + 1)
+            }
+        } else {
+            alert('Ви не зареєстровані')
+        }
     }
 
 

@@ -77,8 +77,7 @@ const ProfilePage: FC <ProfilePageInterface> = ({type, scrollCallback}) => {
                         <img src={user.user_imgUrl? 'http://localhost:1000/' + user.user_imgUrl :profilePhoto} alt="avatar" />
 
                         <div className="profilePage_rightColumn_accountInfo_info">
-                            <div>Nigname</div>
-                            <div>Зареєстрований: 12/12/2012</div>
+                            <div>{user.user_nickName}</div>
                         </div>
                     </div>
                         
