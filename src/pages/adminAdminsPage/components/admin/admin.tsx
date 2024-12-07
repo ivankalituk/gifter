@@ -19,7 +19,7 @@ const Admin: FC <AdminInterface>= ({data, handleDecreaseAdmin, handleIncreaseAdm
         <div className="admin">
             <div className="admin_left">
                 <img src={data.impPath !== null? 'http://localhost:1000/' + data.imgPath : avatarSample} alt="avatar" />
-                <Link to={'/account/:user_id'}>{data.email}</Link>
+                <Link to={'/account/' + data.user_id}>{data.email}</Link>
             </div>
 
             <div className="admin_right">
