@@ -19,7 +19,7 @@ const ProtectedRoute: FC<ProtectedRouteInterface> = ({ type, blacklist }) => {
     if (user.user_email === null) {
       alert('Пройдіть авторизацію');
       navigate('/auth');
-    } else if (type === 'admin' && user.user_role !== 1) {
+    } else if (type === 'admin' && user.user_role === 0) {
       alert('Ви не є адміном');
       navigate('/profile');
     } else if (blacklist && user.user_blocked === 1) {
@@ -29,7 +29,7 @@ const ProtectedRoute: FC<ProtectedRouteInterface> = ({ type, blacklist }) => {
   }, [user, type, blacklist, navigate]);
 
   // Если пользователь авторизован и имеет доступ, возвращаем Outlet
-  if (user.user_email !== null && (type === 'user' || (type === 'admin' && user.user_role === 1))) {
+  if (user.user_email !== null && (type === 'user' || (type === 'admin' && user.user_role && user.user_role > 0))) {
     return <Outlet />;
   }
 
