@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import profilePhoto from "@/assets/images/logoSample.jpg"
 
@@ -10,7 +10,7 @@ import { TypedUseSelectorHook, useSelector } from "react-redux";
 import { Gift, RootState } from "@/interfaces/interface";
 import { useGetRequest } from "@/hooks/useGetReuquest";
 import { getAllGiftsByCreatorId } from "@/api/gifts";
-import { getUserBio, getUserTags } from "@/api/user";
+import { getUserBio, getUserById, getUserTags } from "@/api/user";
 import tick from '@/assets/images/tick.svg'
 
 interface ProfilePageInterface {
@@ -22,12 +22,17 @@ const ProfilePage: FC <ProfilePageInterface> = ({type, scrollCallback}) => {
 
     const useTypeSelector: TypedUseSelectorHook <RootState> = useSelector
     const user = useTypeSelector((state) => state.user)
-    
-    const {data: gifts, isFetched: giftsFetched} = useGetRequest<Gift[] | undefined>({fetchFunc:  () => getAllGiftsByCreatorId(user.user_id), enabled: true, key: [1]})
 
-    const {data: bio, isFetched: bioFetched} = useGetRequest<any>({fetchFunc:  () => getUserBio({user_id: user.user_id}), enabled: true, key: [1]})
-    const {data: tags, isFetched: tagsFetched} = useGetRequest<any>({fetchFunc:  () => getUserTags({user_id: user.user_id}), enabled: true, key: [1]})
+    const {user_id} = useParams()
     
+    const {data: gifts, isFetched: giftsFetched} = useGetRequest<Gift[] | undefined>({fetchFunc:  () => getAllGiftsByCreatorId(type === "anyUser"? Number(user_id) : user.user_id), enabled: true, key: [1]})
+
+    const {data: bio, isFetched: bioFetched} = useGetRequest<any>({fetchFunc:  () => getUserBio({user_id: (type === "anyUser"? Number(user_id) : user.user_id)}), enabled: true, key: [1]})
+    const {data: tags, isFetched: tagsFetched} = useGetRequest<any>({fetchFunc:  () => getUserTags({user_id: (type === "anyUser"? Number(user_id) : user.user_id)}), enabled: true, key: [1]})
+
+    // для захода пользователя на чужой аккаунт
+    const {data: account, isFetched: accountFetched} = useGetRequest<any>({fetchFunc: ()=> getUserById({user_id: user_id}), enabled: (type == "anyUser"? true: false), key: [1]})
+
     // ------------------------------------
     // DropDown список для мобильной версии
     // ------------------------------------
@@ -38,15 +43,15 @@ const ProfilePage: FC <ProfilePageInterface> = ({type, scrollCallback}) => {
         setDropMenu(!dropMenu)
     }
 
-
-
     return(
         <div className="profilePage">
             <div className="profilePage_leftColumn">
 
-                <img className="profilePage_leftColumn_avatar" src={user.user_imgUrl? 'http://localhost:1000/' + user.user_imgUrl :profilePhoto} alt="profile photo" />
+                {type === "privateUser" && <img className="profilePage_leftColumn_avatar" src={user.user_imgUrl? 'http://localhost:1000/' + user.user_imgUrl :profilePhoto} alt="profile photo" />}
+                {type !== "privateUser" && accountFetched && <img className="profilePage_leftColumn_avatar" src={account[0].imgPath? 'http://localhost:1000/' + account[0].imgPath :profilePhoto} alt="profile photo" />}
 
-                <div className="profilePage_leftColumn_nickname">{user.user_nickName}</div>
+                {type === "privateUser" && <div className="profilePage_leftColumn_nickname">{user.user_nickName}</div>}
+                {type !== "privateUser" && accountFetched && <div className="profilePage_leftColumn_nickname">{account[0].nickname}</div>}
 
                 {bioFetched && bio[0].bio !== null && <div className="profilePage_leftColumn_description">
                     <div className="profilePage_leftColumn_description_heading">Біо:</div>
@@ -65,7 +70,7 @@ const ProfilePage: FC <ProfilePageInterface> = ({type, scrollCallback}) => {
 
                 {type == 'privateUser' && <Link className="link_button" to={'/settings'}>Редагувати</Link>}
                 {type == 'privateUser' && <Link to={'/suggest'} className="link_button">Запропонувати</Link>}
-                <Link className="link_button" to={'/adminPanel/suggests'}>Адмін панель</Link>
+                {type == 'privateUser' && <Link className="link_button" to={'/adminPanel/suggests'}>Адмін панель</Link>}
                 
             </div>
 
