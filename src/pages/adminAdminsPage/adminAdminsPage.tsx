@@ -7,8 +7,9 @@ import search from '@/assets/images/Search.svg'
 import SearchBar from "@/components/searchBar/searchBar";
 import { useGetRequest } from "@/hooks/useGetReuquest";
 import { getAdminsByEmailFragment, getAdminsDataByEmailFragment, patchAdminLevel } from "@/api/admins";
-import { admin } from "@/interfaces/interface";
+import { admin, RootState } from "@/interfaces/interface";
 import { useUpdateRequest } from "@/hooks/useUpdateRequest";
+import { TypedUseSelectorHook, useSelector } from "react-redux";
 
 
 const AdminAdminsPage: FC = () => {
@@ -39,11 +40,14 @@ const AdminAdminsPage: FC = () => {
     // Отображение админов
     // -------------------
 
-    const {data: admins, isFetched: adminsFetched} = useGetRequest({fetchFunc: ()=>getAdminsDataByEmailFragment({email: submitedAdminEmail}), key: [submitedAdminKey], enabled: true, })
+    const {data: admins, isFetched: adminsFetched} = useGetRequest({fetchFunc: ()=>getAdminsDataByEmailFragment({email: submitedAdminEmail}), key: [submitedAdminKey], enabled: true})
 
     // -----------------------------
     // манипуляции с данными админов
     // -----------------------------
+
+    const useTypeSelector: TypedUseSelectorHook <RootState> = useSelector
+    const user = useTypeSelector((state) => state.user)
 
     const [adminsReal, setAdminsReal] = useState<admin[]>([])
 
@@ -58,35 +62,43 @@ const AdminAdminsPage: FC = () => {
 
     // понизить админа
     const handleDecreaseAdmin = (id: number) => {
+        if (user.user_role && user.user_role === 3){
+            setAdminsReal(prevItems =>
+                prevItems
+                    .map(item =>
+                        item.user_id === id 
+                            ? { ...item, admin_level: item.admin_level - 1 } 
+                            : item
+                    )
+                    .filter(item => item.admin_level > 0) // удаляем элементы с admin_level <= 0
+            );
+    
+            // отправить данные по уменьшению уровня
+            adminLeveling({user_id: id, operation: '-'})
+        } else {
+            alert("Ви на маєте достатнього рівня допуску")
+        }
 
-        setAdminsReal(prevItems =>
-            prevItems
-                .map(item =>
-                    item.user_id === id 
-                        ? { ...item, admin_level: item.admin_level - 1 } 
-                        : item
-                )
-                .filter(item => item.admin_level > 0) // удаляем элементы с admin_level <= 0
-        );
-
-        // отправить данные по уменьшению уровня
-        adminLeveling({user_id: id, operation: '-'})
     };
     
     // повысить админа
     const handleIncreaseAdmin = (id: number) => {
-        setAdminsReal(prevItems =>
-            prevItems.map(item =>
-                item.user_id === id 
-                    ? item.admin_level < 3 
-                        ? { ...item, admin_level: item.admin_level + 1 } 
-                        : item // если admin_level до изменений = 3, то не трогаем так как уровень макс
-                    : item
-            )
-        );
-        
-        // отправить данные по увеличению уровня
-        adminLeveling({user_id: id, operation: '+'})
+        if (user.user_role && user.user_role === 3){
+            setAdminsReal(prevItems =>
+                prevItems.map(item =>
+                    item.user_id === id 
+                        ? item.admin_level < 3 
+                            ? { ...item, admin_level: item.admin_level + 1 } 
+                            : item // если admin_level до изменений = 3, то не трогаем так как уровень макс
+                        : item
+                )
+            );
+            
+            // отправить данные по увеличению уровня
+            adminLeveling({user_id: id, operation: '+'})
+        } else {
+            alert("Ви на маєте достатнього рівня допуску")
+        }
     };
     
 

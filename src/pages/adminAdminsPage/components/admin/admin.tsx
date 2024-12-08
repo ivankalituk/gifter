@@ -14,7 +14,7 @@ interface AdminInterface {
 
 const Admin: FC <AdminInterface>= ({data, handleDecreaseAdmin, handleIncreaseAdmin}) => {
 
-    console.log(data)
+
     return(
         <div className="admin">
             <div className="admin_left">
