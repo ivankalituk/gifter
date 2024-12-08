@@ -24,6 +24,7 @@ import logo from '@/assets/images/logoRed.svg'
 import AuthPage from './pages/authPage/authPage';
 import GiftCreationPage from './pages/giftCreationPage/giftCreationPage';
 import ProtectedRoute from './components/protectedRoute/protectedRoute';
+import BookmarksPage from './pages/bookmarksPage/bookmarksPage';
 
 function App() {
 
@@ -125,6 +126,10 @@ function App() {
             <Route element = {<ProtectedRoute type='admin' blacklist= {true}/>}><Route path='/adminPanel/blacklist' element={<AdminBlacklistPage />}/></Route>
             <Route element = {<ProtectedRoute type='admin' blacklist= {true}/>}><Route path='/adminPanel/suggests/submit/:suggest_id' element={<GiftCreationPage type={'suggest'} />} /></Route>
             <Route element = {<ProtectedRoute type='admin' blacklist= {true}/>}><Route path='/adminPanel/reports/submit/:report_id' element={<GiftCreationPage type={'report'}/>} /></Route>
+
+
+            {/* TEST ROUTE */}
+            <Route path='/bookmarks' element={<BookmarksPage />}></Route>
           </Routes>
         </main>
       </>}
