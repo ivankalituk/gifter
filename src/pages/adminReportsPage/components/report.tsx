@@ -11,6 +11,8 @@ import { useGetRequest } from "@/hooks/useGetReuquest";
 import { getGiftById } from "@/api/gifts";
 import { useUpdateRequest } from "@/hooks/useUpdateRequest";
 import { deleteReport } from "@/api/report";
+import { TypedUseSelectorHook, useSelector } from "react-redux";
+import { RootState } from "@/interfaces/interface";
 
 interface ReportComponent {
     user_id: number, 
@@ -23,6 +25,10 @@ interface ReportComponent {
 }
 
 const Report: FC <ReportComponent>= ({user_id, date, gift_id, scrollCallback, report_id, data, handleDeleteReportCallBack}) => {
+
+
+    const useTypeSelector: TypedUseSelectorHook <RootState> = useSelector
+    const user = useTypeSelector((state) => state.user)
 
     // -----------------
     // получение подарка
@@ -44,8 +50,12 @@ const Report: FC <ReportComponent>= ({user_id, date, gift_id, scrollCallback, re
 
     const handleDeleteReport = () =>{
         // колбек для удаления из массива
-        deleteReportFunc({report_id: report_id})
-        handleDeleteReportCallBack(report_id)
+        if(user.user_role && user.user_role >= 2){
+            deleteReportFunc({report_id: report_id})
+            handleDeleteReportCallBack(report_id)
+        } else {
+            alert("Ви на маєте достатнього рівня допуску")
+        }
     }
 
     return(

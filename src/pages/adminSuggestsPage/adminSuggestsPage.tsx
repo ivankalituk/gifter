@@ -5,9 +5,13 @@ import AdminPanelAdditional from "@/components/adminPanelAditional/adminPanelAdd
 import AnySuggest from "@/components/anySuggest/anySuggest";
 import { useGetRequest } from "@/hooks/useGetReuquest";
 import { getAllSuggests } from "@/api/suggest";
-import { suggest } from "@/interfaces/interface";
+import { RootState, suggest } from "@/interfaces/interface";
+import { TypedUseSelectorHook, useSelector } from "react-redux";
 
 const AdminSuggestsPage: FC = () =>{
+
+    const useTypeSelector: TypedUseSelectorHook <RootState> = useSelector
+    const user = useTypeSelector((state) => state.user)
 
     // -------------------------------
     // Получение данных всех саггестов

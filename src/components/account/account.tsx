@@ -10,6 +10,8 @@ import { getUserById } from "@/api/user";
 import { useUpdateRequest } from "@/hooks/useUpdateRequest";
 import { insertAdmin } from "@/api/admins";
 import { insertBlacklist } from "@/api/blacklist";
+import { TypedUseSelectorHook, useSelector } from "react-redux";
+import { RootState } from "@/interfaces/interface";
 
 interface Account {
     user_id: number,
@@ -18,10 +20,12 @@ interface Account {
 
 const Account: FC <Account>= ({user_id, date}) => {
 
+    const useTypeSelector: TypedUseSelectorHook <RootState> = useSelector
+    const admin = useTypeSelector((state) => state.user)
+
     // -------------------
     // данные пользователя
     // -------------------
-
 
     const {data: user, isFetched: userFetched} = useGetRequest({fetchFunc: () => getUserById({user_id: user_id}), enabled: true, key: []})
     
@@ -44,13 +48,21 @@ const Account: FC <Account>= ({user_id, date}) => {
     const {mutatedFunc: createBlacklist} = useUpdateRequest({fetchFunc: insertBlacklist})
 
     const handleBlacklist = () => {
+        if(admin.user_role && admin.user_role >= 1){
         handleAdditional()
         createBlacklist({user_id: user_id})
+        } else {
+            alert("Ви не маєте достатнього рівня допуску")
+        }
     }
 
     const handleAdminPromote = () => {
-        handleAdditional()
-        createAdmin({user_id: user_id})
+        if(admin.user_role && admin.user_role == 3){
+            handleAdditional()
+            createAdmin({user_id: user_id})
+        } else {
+            alert("Ви не маєте достатнього рівня допуску")
+        }
     }
 
     return(

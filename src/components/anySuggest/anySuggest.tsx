@@ -8,6 +8,8 @@ import sampleGift from '@/assets/images/Sample Gift Photo.png'
 import Account from "../account/account";
 import { useUpdateRequest } from "@/hooks/useUpdateRequest";
 import { deleteSuggest } from "@/api/suggest";
+import { TypedUseSelectorHook, useSelector } from "react-redux";
+import { RootState } from "@/interfaces/interface";
 
 interface AnySuggestInterface{
     data: any,
@@ -16,10 +18,8 @@ interface AnySuggestInterface{
 
 const AnySuggest: FC <AnySuggestInterface>= ({data, handleDeleteSuggestCallBack}) => {
 
-    // сначала должен быть коммент самого предлагающего, далее идёт само предложение
-    // предложение не имеющее фото будет добавлено заглушку
-    // далее предложение будет выглядеть ровно так же, как и на главной страниые
-    // по нажатию на одобрить будет открыто модальное окно изменения
+    const useTypeSelector: TypedUseSelectorHook <RootState> = useSelector
+    const user = useTypeSelector((state) => state.user)
 
     const navigate = useNavigate()
 
@@ -31,9 +31,13 @@ const AnySuggest: FC <AnySuggestInterface>= ({data, handleDeleteSuggestCallBack}
     }
 
     const handleDelete = () => {
-        handleDeleteSuggestCallBack(data.id)
-        // также сделать удаление 
-        deleteSuggestFunc({suggest_id: data.id})
+        if(user.user_role && user.user_role >= 2){
+            handleDeleteSuggestCallBack(data.id)
+            // также сделать удаление 
+            deleteSuggestFunc({suggest_id: data.id})
+        } else {
+            alert("Ви не маєте достатнього рівня допуску")
+        }
     }
 
     return(

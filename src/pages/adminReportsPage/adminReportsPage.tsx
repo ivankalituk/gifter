@@ -5,7 +5,8 @@ import AdminPanelAdditional from "@/components/adminPanelAditional/adminPanelAdd
 import Report from "./components/report";
 import { useGetRequest } from "@/hooks/useGetReuquest";
 import { getAllReports } from "@/api/report";
-import { report } from "@/interfaces/interface";
+import { report, RootState } from "@/interfaces/interface";
+import { TypedUseSelectorHook, useSelector } from "react-redux";
 
 interface AdminReportsPageInterface {
     scrollCallback: (block: boolean) => void
@@ -13,7 +14,6 @@ interface AdminReportsPageInterface {
 
 const AdminReportsPage: FC <AdminReportsPageInterface>= ({scrollCallback}) => {
 
-    // идея следующая: нужно отобразить подарок, как на главной странице, а выше написать сам репорт и аккаунт пользователя, который ему выдал репорт
 
     // 
     // отображение всех репортов

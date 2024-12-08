@@ -154,50 +154,55 @@ const GiftCreationPage : FC <giftCreationPage> = ({type, rep_id}) => {
     const [help, setHelp] = useState<boolean>(false)
 
     const handleAddGift = async () =>{
-    
-        if(type === 'suggest'){
-            if(tagArray.length >= 3 && nameInput !== '' && (selectedImgFile !== null || suggest[0].photoPath !== null)){
-                // отправить пост запрос на добавление подарка
-                const data = new FormData()
-                data.append('name', nameInput)
-                data.append('creator_id', String(suggest[0].user_id))
-                data.append('admin_id', String(user.user_id))
-                tagArray?.forEach((tag) => (data.append('tags', tag)))
-                data.append('suggest_id', String(suggest[0].id))
 
-                if(suggest[0].photoPath !== null && selectedImgFile === null){
-                    data.append('imagePath', suggest[0].photoPath)
-                } else {
-                    data.append('image', selectedImgFile)
-                    if(suggest[0].photoPath !== null) {
+        // проверка на уровень админа
+        if (user.user_role && user.user_role >=2){
+            if(type === 'suggest'){
+                if(tagArray.length >= 3 && nameInput !== '' && (selectedImgFile !== null || suggest[0].photoPath !== null)){
+                    // отправить пост запрос на добавление подарка
+                    const data = new FormData()
+                    data.append('name', nameInput)
+                    data.append('creator_id', String(suggest[0].user_id))
+                    data.append('admin_id', String(user.user_id))
+                    tagArray?.forEach((tag) => (data.append('tags', tag)))
+                    data.append('suggest_id', String(suggest[0].id))
+
+                    if(suggest[0].photoPath !== null && selectedImgFile === null){
                         data.append('imagePath', suggest[0].photoPath)
+                    } else {
+                        data.append('image', selectedImgFile)
+                        if(suggest[0].photoPath !== null) {
+                            data.append('imagePath', suggest[0].photoPath)
+                        }
                     }
-                }
-                
-            await createGift(data)
-            navigate('/adminPanel/suggests')
+                    
+                await createGift(data)
+                navigate('/adminPanel/suggests')
 
+                } else {
+                    setHelp(true)
+                }
             } else {
-                setHelp(true)
+                if(tagArray.length >= 3 && nameInput !== '' && (selectedImgFile !== null || report[0].photoPath !== null)){
+                    // отправить пут запрос на обновление подарка
+                    const data = new FormData()
+                    data.append('name', nameInput)
+                    data.append('id', report[0].gift_id)
+                    data.append('report_id', report[0].id)
+                    tagArray?.forEach((tag) => (data.append('tags', tag)))
+                    if(selectedImgFile !== null){
+                        data.append('image', selectedImgFile)
+                    }
+
+                    // сам запрос
+                    await updateGift(data)
+                    navigate('/adminPanel/reports')
+                } else {
+                    setHelp(true)
+                }
             }
         } else {
-            if(tagArray.length >= 3 && nameInput !== '' && (selectedImgFile !== null || report[0].photoPath !== null)){
-                // отправить пут запрос на обновление подарка
-                const data = new FormData()
-                data.append('name', nameInput)
-                data.append('id', report[0].gift_id)
-                data.append('report_id', report[0].id)
-                tagArray?.forEach((tag) => (data.append('tags', tag)))
-                if(selectedImgFile !== null){
-                    data.append('image', selectedImgFile)
-                }
-
-                // сам запрос
-                await updateGift(data)
-                navigate('/adminPanel/reports')
-            } else {
-                setHelp(true)
-            }
+            alert("Ви на маєте достатнього рівня допуску")
         }
 
     }
@@ -210,8 +215,12 @@ const GiftCreationPage : FC <giftCreationPage> = ({type, rep_id}) => {
     const {mutatedFunc: deleteReportedGift} = useUpdateRequest({fetchFunc: deleteReportGift})
 
     const handleDeleteGift = async () => {
-        await deleteReportedGift({gift_id: report[0].gift_id, report_id: report_id})
-        navigate('/adminPanel/reports')
+        if (user.user_role && user.user_role >= 2){
+            await deleteReportedGift({gift_id: report[0].gift_id, report_id: report_id})
+            navigate('/adminPanel/reports')
+        } else {
+            alert("Ви на маєте достатнього рівня допуску")
+        }
     }
 
     return(

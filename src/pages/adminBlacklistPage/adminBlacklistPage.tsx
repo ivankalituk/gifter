@@ -8,8 +8,13 @@ import SearchBar from "@/components/searchBar/searchBar";
 import { useGetRequest } from "@/hooks/useGetReuquest";
 import { deleteUserBlacklist, getBlacklist, getUsersByEmail, getUsersByEmailPiece } from "@/api/blacklist";
 import { useUpdateRequest } from "@/hooks/useUpdateRequest";
+import { TypedUseSelectorHook, useSelector } from "react-redux";
+import { RootState } from "@/interfaces/interface";
 
 const AdminBlacklistPage: FC = () => {
+
+    const useTypeSelector: TypedUseSelectorHook <RootState> = useSelector
+    const user = useTypeSelector((state) => state.user)
 
     // ----------------------------
     // поиск пользователей по почте
@@ -71,9 +76,14 @@ const AdminBlacklistPage: FC = () => {
 
     const handleUnblockUserCallBack = (id: number) => {
         // запрос на разблок
-        console.log('UNBLOCK USER ', id)
-        deleteUserFromBlacklist({user_id: id})
-        removeUserByUserId(id)
+        
+        if(user.user_role && user.user_role >= 1){
+            console.log('UNBLOCK USER ', id)
+            deleteUserFromBlacklist({user_id: id})
+            removeUserByUserId(id)
+        } else {
+            alert("Ви не маєте достатьного допуску")
+        }
     }
 
     return(
