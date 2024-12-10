@@ -12,6 +12,10 @@ import starYellow from '@/assets/images/StarYellow.svg'
 import ModalReport from "@/components/giftCard/components/modalReport/modalReport";
 import ModalGift from "@/components/modalGift/modalGift";
 import Modal from "@/components/modal/modal";
+import { useUpdateRequest } from "@/hooks/useUpdateRequest";
+import { toggleBookmark } from "@/api/bookmarks";
+import { TypedUseSelectorHook, useSelector } from "react-redux";
+import { RootState } from "@/interfaces/interface";
 
 interface GiftCardInterface  {
     scrollCallback: (block: boolean) => void
@@ -22,7 +26,6 @@ const GiftCard: FC <GiftCardInterface> = ({scrollCallback, data}) =>{
 
     const [additional, setAditional] = useState<boolean>(false)                     //для отображение доп функций (три точки)
     const [report, setReport] = useState<boolean>(false)                            //для открытия модального репорта
-    const [marked, setMarked] = useState<boolean>(false)                            //Отмеченный подарок
     const [giftModal, setGiftModal] = useState<boolean>(false)                      //отображение модального окна подарка
 
     // открытие модального подарка
@@ -56,9 +59,26 @@ const GiftCard: FC <GiftCardInterface> = ({scrollCallback, data}) =>{
         setAditional(!additional)
     }
 
+    // ----------------------------
+    // тогл для отмеченных подарков
+    // ----------------------------
+
+    const {mutatedFunc: setBookmark} = useUpdateRequest({fetchFunc: toggleBookmark})
+
+    const [marked, setMarked] = useState<boolean>(data.marked)      //Отмеченный подарок
+
+    const useTypeSelector: TypedUseSelectorHook <RootState> = useSelector
+    const user = useTypeSelector((state) => state.user)
+
     // отметить подарок (марк)
-    const handleMarked = () => {
-        setMarked(!marked)
+    const handleMarked = async () => {
+        if(user.user_email !== null){
+            await setBookmark({user_id: user.user_id, gift_id: data.id})
+            setMarked(!marked)
+        } else {
+            alert("Ви не зареєстровані!!!")
+        }
+        
     }
 
     return(

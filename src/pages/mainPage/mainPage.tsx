@@ -7,7 +7,8 @@ import GiftCard from "@/components/giftCard/giftCard";
 import Selector from "./components/selector/selector";
 import { useGetRequest } from "@/hooks/useGetReuquest";
 import { getAllGifts, getAllGiftsByTags } from "@/api/gifts";
-import { Gift } from "@/interfaces/interface";
+import { Gift, RootState } from "@/interfaces/interface";
+import { TypedUseSelectorHook, useSelector } from "react-redux";
 
 interface MainPageInterface {
     scrollCallback: (block: boolean)=> void
@@ -18,6 +19,9 @@ interface MainPageInterface {
 const MainPage: FC <MainPageInterface>= ({scrollCallback, nameSearch, deleteSearchCallBack}) => {
 
     const [filtersOpen, setFiltersOpen] = useState<boolean>(true)
+
+    const useTypeSelector: TypedUseSelectorHook <RootState> = useSelector
+    const user = useTypeSelector((state) => state.user)
 
     const handleFiltersOpen = () =>{
         setFiltersOpen(!filtersOpen)
@@ -30,7 +34,7 @@ const MainPage: FC <MainPageInterface>= ({scrollCallback, nameSearch, deleteSear
     const [selector, setSelector] = useState<string>('За датою')              //селектор за датой, за названием, за рейтингом
 
     // НЕ ТОЛЬКО ТЕГИ НО И ФИЛЬТРЫ И ТЕКСТ
-    const {data: gifts, isFetched: giftsFetched} = useGetRequest<Gift[] | undefined>({fetchFunc: () => getAllGiftsByTags(giftTags, selector, nameSearch), key: [giftKey], enabled: true})
+    const {data: gifts, isFetched: giftsFetched} = useGetRequest<Gift[] | undefined>({fetchFunc: () => getAllGiftsByTags(giftTags, selector, nameSearch, user.user_id !== null? user.user_id : 0), key: [giftKey], enabled: true})
 
     // колбек для селектора
     const selecrotCallBack = (selectedSelector: string) => {
