@@ -9,3 +9,13 @@ export async function toggleBookmark(data: any){
         console.log("ERROR WHITE GETTING DATA")
     }
 }
+
+// получение всех отмеченных подарков пользователя
+export async function getUserBookmarks(data: any){
+    try{
+        const response = await axios.get('http://localhost:1000/bookmarks/' + data.user_id);
+        return response.data
+    } catch (error){
+        console.log("ERROR WHITE GETTING DATA")
+    }
+}

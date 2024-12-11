@@ -25,7 +25,7 @@ const ProfilePage: FC <ProfilePageInterface> = ({type, scrollCallback}) => {
 
     const {user_id} = useParams()
     
-    const {data: gifts, isFetched: giftsFetched} = useGetRequest<Gift[] | undefined>({fetchFunc:  () => getAllGiftsByCreatorId(type === "anyUser"? Number(user_id) : user.user_id), enabled: true, key: [1]})
+    const {data: gifts, isFetched: giftsFetched} = useGetRequest<Gift[] | undefined>({fetchFunc:  () => getAllGiftsByCreatorId(type === "anyUser"? Number(user_id) : user.user_id, user.user_id !== null? user.user_id : 0), enabled: true, key: [1]})
 
     const {data: bio, isFetched: bioFetched} = useGetRequest<any>({fetchFunc:  () => getUserBio({user_id: (type === "anyUser"? Number(user_id) : user.user_id)}), enabled: true, key: [1]})
     const {data: tags, isFetched: tagsFetched} = useGetRequest<any>({fetchFunc:  () => getUserTags({user_id: (type === "anyUser"? Number(user_id) : user.user_id)}), enabled: true, key: [1]})

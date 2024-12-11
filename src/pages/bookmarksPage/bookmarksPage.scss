@@ -16,4 +16,17 @@
         border-radius: 0.75rem;
         box-sizing: border-box;
     }
+
+    > .bookmarksPage_list{
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-top: 1rem;
+    }
+}
+
+@media (max-width: 1000px) {
+    .bookmarksPage{
+        padding: 1rem;
+    }
 }

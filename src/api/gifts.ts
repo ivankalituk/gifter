@@ -48,9 +48,9 @@ export async function getAllGiftsByTags(tags: string[], sort: string, byName: st
 }
 
 // получение всех данных по айди создателя
-export async function getAllGiftsByCreatorId(creator_id: number | null): Promise<Gift[]> {
+export async function getAllGiftsByCreatorId(creator_id: number | null, user_id: number): Promise<Gift[]> {
     try {
-        const response = await axios.get<Gift[]>(`http://localhost:1000/gift/creator/${creator_id}`);
+        const response = await axios.get<Gift[]>(`http://localhost:1000/gift/creator/${creator_id}/${user_id}`);
         return response.data; 
     } catch (error) {
         if (axios.isAxiosError(error)) {

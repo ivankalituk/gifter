@@ -129,7 +129,7 @@ function App() {
 
 
             {/* TEST ROUTE */}
-            <Route path='/bookmarks' element={<BookmarksPage />}></Route>
+            <Route path='/bookmarks' element={<BookmarksPage scrollCallback={scrollCallback}/>}></Route>
           </Routes>
         </main>
       </>}
