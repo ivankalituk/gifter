@@ -68,9 +68,10 @@ const ProfilePage: FC <ProfilePageInterface> = ({type, scrollCallback}) => {
                         </div>
                     </div>}
 
-                {type == 'privateUser' && <Link className="link_button" to={'/settings'}>Редагувати</Link>}
+                {type == 'privateUser' && <Link className="link_button" to={'/settings'}>Налаштування</Link>}
                 {type == 'privateUser' && <Link to={'/suggest'} className="link_button">Запропонувати</Link>}
                 {type == 'privateUser' && <Link className="link_button" to={'/adminPanel/suggests'}>Адмін панель</Link>}
+                {type == 'privateUser' && <Link className="link_button" to={'/profile/bookmarks'}>Закладки</Link>}
                 
             </div>
 

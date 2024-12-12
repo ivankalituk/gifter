@@ -115,7 +115,9 @@ function App() {
             {/* PROTECTED AUTH */}
             <Route element = {<ProtectedRoute type='user' />}><Route path='/profile' element={<ProfilePage scrollCallback = {scrollCallback} type={'privateUser'}/>} /></Route>
             <Route element = {<ProtectedRoute type='user' />}><Route path='/settings' element={<SettingsPage />}/></Route>
+            <Route element = {<ProtectedRoute type='user'/>}><Route path='/profile/bookmarks' element={<BookmarksPage scrollCallback={scrollCallback}/>}></Route></Route>
             
+
             {/* PROTECRED AUTH AND BLACKLIST */}
             <Route element = {<ProtectedRoute type='user' blacklist= {true}/>}><Route path='/suggest' element={<SuggestPage/>} /></Route>
 
@@ -126,10 +128,6 @@ function App() {
             <Route element = {<ProtectedRoute type='admin' blacklist= {true}/>}><Route path='/adminPanel/blacklist' element={<AdminBlacklistPage />}/></Route>
             <Route element = {<ProtectedRoute type='admin' blacklist= {true}/>}><Route path='/adminPanel/suggests/submit/:suggest_id' element={<GiftCreationPage type={'suggest'} />} /></Route>
             <Route element = {<ProtectedRoute type='admin' blacklist= {true}/>}><Route path='/adminPanel/reports/submit/:report_id' element={<GiftCreationPage type={'report'}/>} /></Route>
-
-
-            {/* TEST ROUTE */}
-            <Route path='/bookmarks' element={<BookmarksPage scrollCallback={scrollCallback}/>}></Route>
           </Routes>
         </main>
       </>}
