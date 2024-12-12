@@ -19,6 +19,20 @@
                 flex-wrap: wrap;
                 gap: 2.85rem;
             }
+
+            > .mainPage_giftContent_pageSwich{
+                // margin-top: 1rem;
+                display: flex;
+                max-width: 400px;
+                gap: 1rem;
+                margin: 1rem auto;
+                align-items: center;
+
+                >div{
+                    font-weight: 900;
+                    border-radius: 50%;
+                }
+            }
         }
     }
 }
