@@ -6,7 +6,7 @@ const serverUrl = process.env.REACT_APP_SERVER_URL
 // получить все подарки по тегам
 export async function getAllGifts(): Promise<Gift[]> {
     try {
-        const response = await axios.get<{ data: Gift[] }>('http://localhost:1000/gift').then(({data}) => data);
+        const response = await axios.get<{ data: Gift[] }>(serverUrl + '/gift').then(({data}) => data);
         return response.data;
     } catch (error) {
         if (axios.isAxiosError(error)) {
@@ -21,7 +21,7 @@ export async function getAllGifts(): Promise<Gift[]> {
 // получение массива имён по фрагменту имени подарка
 export async function getGiftNameByName(name: string): Promise<giftName[]> {
     try {
-        const response = await axios.post<giftName[]>('http://localhost:1000/gift/name', {name: name});
+        const response = await axios.post<giftName[]>(serverUrl + '/gift/name', {name: name});
 
         return response.data
     } catch (error) {
@@ -50,7 +50,7 @@ export async function getAllGiftsByTags(tags: string[], sort: string, byName: st
 // получение всех данных по айди создателя
 export async function getAllGiftsByCreatorId(creator_id: number | null, user_id: number): Promise<Gift[]> {
     try {
-        const response = await axios.get<Gift[]>(`http://localhost:1000/gift/creator/${creator_id}/${user_id}`);
+        const response = await axios.get<Gift[]>(`${serverUrl}/gift/creator/${creator_id}/${user_id}`);
         return response.data; 
     } catch (error) {
         if (axios.isAxiosError(error)) {
@@ -65,7 +65,7 @@ export async function getAllGiftsByCreatorId(creator_id: number | null, user_id:
 // получение подарка по его айди
 export async function getGiftById(data: any) {
     try{
-        const response = await axios.get('http://localhost:1000/gift/' + data.gift_id);
+        const response = await axios.get(serverUrl + '/gift/' + data.gift_id);
         return response.data
     } catch (error){
         console.log("ERROR WHITE GETTING DATA")
@@ -75,7 +75,7 @@ export async function getGiftById(data: any) {
 // создание подарка 
 export async function postGift(data: any) {
     try{
-        await axios.post('http://localhost:1000/gift', data, {
+        await axios.post(serverUrl + '/gift', data, {
             headers: { 'Content-Type': 'multipart/form-data' },
           })
     } catch (error){
@@ -86,7 +86,7 @@ export async function postGift(data: any) {
 // получение айди рандомного подарка
 export async function gerRandomGiftId() {
     try {
-        const response = await axios.get(`http://localhost:1000/gift-random`);
+        const response = await axios.get(serverUrl + '/gift-random');
         return response.data; 
     } catch (error) {
         if (axios.isAxiosError(error)) {
@@ -101,7 +101,7 @@ export async function gerRandomGiftId() {
 // получение пользовательской оценки подарка
 export async function getUserGiftMark(data: any) {
     try {
-        const response = await axios.post(`http://localhost:1000/gift-reating`, data);
+        const response = await axios.post(serverUrl + '/gift-reating', data);
         return response.data; 
     } catch (error) {
         if (axios.isAxiosError(error)) {
@@ -116,7 +116,7 @@ export async function getUserGiftMark(data: any) {
 // добавление рейтинга подарку
 export async function setUserGiftMark(data: any) {
     try {
-        const response = await axios.put(`http://localhost:1000/gift-reating`, data);
+        const response = await axios.put(serverUrl + '/gift-reating', data);
         return response.data; 
     } catch (error) {
         if (axios.isAxiosError(error)) {
@@ -131,7 +131,7 @@ export async function setUserGiftMark(data: any) {
 // получение массива имён по фрагменту имени подарка
 export async function putGift(data: any){
     try {
-        await axios.put('http://localhost:1000/gift', data, {
+        await axios.put(serverUrl + '/gift', data, {
             headers: { 'Content-Type': 'multipart/form-data' },
           })
 

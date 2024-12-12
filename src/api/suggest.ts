@@ -5,7 +5,7 @@ const serverUrl = process.env.REACT_APP_SERVER_URL
 // получить все подарки по тегам
 export async function createSuggest(data: any) {
     try{
-        return await axios.post('http://localhost:1000/suggest', data, {
+        return await axios.post(serverUrl + '/suggest', data, {
             headers: { 'Content-Type': 'multipart/form-data' },
           }).then(({data}) => data);
     } catch (error){
@@ -15,7 +15,7 @@ export async function createSuggest(data: any) {
 
 export async function getAllSuggests() {
     try{
-        const response = await axios.get('http://localhost:1000/suggest');
+        const response = await axios.get(serverUrl + '/suggest');
         return response.data
     } catch (error){
         console.log("ERROR WHITE GETTING DATA")
@@ -24,7 +24,7 @@ export async function getAllSuggests() {
 
 export async function getSuggestById(data: any) {
     try{
-        const response = await axios.get('http://localhost:1000/suggest/' + data.suggest_id);
+        const response = await axios.get(serverUrl + '/suggest/' + data.suggest_id);
         return response.data
     } catch (error){
         console.log("ERROR WHITE GETTING DATA")
@@ -33,7 +33,7 @@ export async function getSuggestById(data: any) {
 
 export async function deleteSuggest(data: any) {
     try{
-        const response = await axios.delete('http://localhost:1000/suggest/' + data.suggest_id);
+        const response = await axios.delete(serverUrl + '/suggest/' + data.suggest_id);
         return response.data
     } catch (error){
         console.log("ERROR WHITE GETTING DATA")
