@@ -54,7 +54,6 @@ function App() {
           
           const response = await axios.post('http://localhost:1000/user', {access_token: token});
           const data = response.data
-          console.log(data)
           // заполнение редакс стора
 
           const newUser: UserState = {

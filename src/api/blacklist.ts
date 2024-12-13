@@ -6,7 +6,6 @@ const serverUrl = process.env.REACT_APP_SERVER_URL
 export async function getBlacklist() {
     try{
         const response = await axios.get(serverUrl + '/blacklist');
-        // console.log(response.data)
         return response.data
     } catch (error){
         console.log("ERROR WHITE GETTING DATA")

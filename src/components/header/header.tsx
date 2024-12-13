@@ -175,22 +175,22 @@ const Header: FC<HeaderProps> = ({scrollCallback, nameSearchCallBack}) =>{
                     </div>
 
                     <div className="burgerMenu_links">
-                        <Link to={'/'}>
+                        <Link to={'/adminPanel/suggests'}>
                             <img src={suggestListPageSVG}/>
                             <span>Пропозиції</span>
                         </Link>
                         
-                        <Link to={'/'}>
+                        <Link to={'/adminPanel/reports'}>
                             <img src={reportsPageSVG}/>
                             <span>Скарги</span>
                         </Link>
 
-                        <Link to={'/'}>
+                        <Link to={'/adminPanel/admins'}>
                             <img src={adminPageSVG}/>
                             <span>Адміни</span>
                         </Link>
                         
-                        <Link to={'/'}>
+                        <Link to={'/adminPanel/blacklist'}>
                             <img src={blacklistPageSVG}/>
                             <span>Чорний список</span>
                         </Link>
