@@ -55,8 +55,6 @@ const AdminBlacklistPage: FC = () => {
     const [userList, setUserList] = useState<{ id: number; user_id: number; nickname: string; imgPath: string; role: number; email: string; }[]>([]);
 
 
-    console.log(users)
-
     useEffect(() => {
         if (usersFetched && users) {
             setUserList(users); // Сохраняем полученные данные в состояние
@@ -78,7 +76,6 @@ const AdminBlacklistPage: FC = () => {
         // запрос на разблок
         
         if(user.user_role && user.user_role >= 1){
-            console.log('UNBLOCK USER ', id)
             deleteUserFromBlacklist({user_id: id})
             removeUserByUserId(id)
         } else {

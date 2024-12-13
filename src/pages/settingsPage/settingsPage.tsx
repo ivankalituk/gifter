@@ -49,8 +49,7 @@ const SettingsPage: FC = () => {
             setSelectedImg(reader.result)
         }
         reader.readAsDataURL(file)
-    
-        console.log(file) // Логируй напрямую `file`
+
     
         const imgData = new FormData()
         imgData.append('user_id', String(user.user_id))
@@ -80,7 +79,6 @@ const SettingsPage: FC = () => {
         changeName({nickname: nicknameInput, user_id: user.user_id})
         dispatch(setUserNickname({user_nickName: nicknameInput}))
         setNicknameChange(false)
-        console.log(user.user_nickName)
     }
 
     // ---------------
@@ -145,7 +143,6 @@ const SettingsPage: FC = () => {
         if (!userTags.includes(tag)){
             setUserTags(prevTags => [... prevTags, tag])
         }
-        console.log(userTags)
     }
 
     const handleRemoveUserTag = (tag: string) =>{

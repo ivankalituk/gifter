@@ -92,7 +92,6 @@ const ModalGift: FC <ModalGiftInterface>= ({handleGiftModalClose, modalProps, sc
 
     useEffect(() => {
         if (userReating && userReatingFetched){
-            console.log(userReating)
             setStarReating(userReating.mark)
         }
     }, [userReating, userReatingFetched])

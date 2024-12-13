@@ -102,7 +102,6 @@ const Header: FC<HeaderProps> = ({scrollCallback, nameSearchCallBack}) =>{
     useEffect(() => {
         if(randomGift && randomGiftFetched){
             setGiftModal(true)
-            console.log(randomGift)
         }
     }, [randomGift, randomGiftFetched])
 

@@ -13,8 +13,6 @@ const ProtectedRoute: FC<ProtectedRouteInterface> = ({ type, blacklist }) => {
   const user = useTypeSelector((state) => state.user);
   const navigate = useNavigate();
 
-  console.log(type, blacklist);
-
   useEffect(() => {
     if (user.user_email === null) {
       alert('Пройдіть авторизацію');

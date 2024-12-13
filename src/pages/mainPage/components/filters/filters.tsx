@@ -73,7 +73,6 @@ const Filters: FC <FilterInterface>= ({filtersOpen, handleFiltersOpen, filtersCa
 
     // нажатие Застосувати, поиск по фильтрам
     const handleSearchByFilters = () =>{
-        console.log(1)
         filtersCallback(chosenTags)
     }
 
@@ -93,7 +92,6 @@ const Filters: FC <FilterInterface>= ({filtersOpen, handleFiltersOpen, filtersCa
     const handleTagInputCallBack = (text: string) => {
         setTagInput(text)
         setTagInputKey(tagInputKey + 1)
-        console.log(tags)
     }
 
     // окончательное добавление тега через сёрчбар

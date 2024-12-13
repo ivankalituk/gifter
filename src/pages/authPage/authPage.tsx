@@ -20,7 +20,6 @@ const AuthPage: FC = () => {
 
             const response = await axios.post('http://localhost:1000/user', {access_token: data.access_token});
             const res = response.data
-            console.log(res[0])
 
             // получение инфы и занос её в редакс
             const  newUser: UserState = {
@@ -38,7 +37,7 @@ const AuthPage: FC = () => {
         },
 
         onError: (error) => {
-            console.log(error)
+            console.error(error)
         }
     })
 

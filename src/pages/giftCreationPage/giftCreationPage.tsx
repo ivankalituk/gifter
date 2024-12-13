@@ -40,8 +40,6 @@ const GiftCreationPage : FC <giftCreationPage> = ({type, rep_id}) => {
     // обраюотка фото
     // -------------- 
 
-    console.log(report)
-
     const [selectedImgFile, setSelectedImgFile] = useState<any>(null)           //сохранение файла фото
     const [selectedImg, setSelectedImg] = useState<any>(null)                   //сохранение ссылки на файл фото
 
@@ -70,13 +68,11 @@ const GiftCreationPage : FC <giftCreationPage> = ({type, rep_id}) => {
                 setAreaInput(suggest[0].content)
                 setNameInput(suggest[0].name)
 
-                console.log(suggest)
             }
         } else {
             if (report && reportFetched){
                 setAreaInput('')
                 setNameInput(report[0].name)
-                console.log(report)
             }
         }
     }, [suggest, report, suggestFetched, reportFetched])

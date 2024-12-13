@@ -19,8 +19,6 @@ const BookmarksPage: FC <BookmarkPageInterface>= ({scrollCallback}) =>{
 
     const{data: bookmarks, isFetched: bookmarksFetched} = useGetRequest({fetchFunc: () => getUserBookmarks({user_id: user.user_id}), key: [], enabled: true})
 
-    console.log(bookmarks)
-
     return(
         <div className="bookmarksPage">
             <div className="bookmarksPage_heading">Відмічені подарунки</div>

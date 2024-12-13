@@ -56,7 +56,6 @@ const AdminAdminsPage: FC = () => {
     useEffect(() => {
         if (admins && adminsFetched){
             setAdminsReal(admins)
-            console.log(admins)
         }
     }, [admins, adminsFetched])
 
