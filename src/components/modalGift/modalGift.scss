@@ -11,9 +11,9 @@
     
     >img {
       width: 100%;
-      object-fit: cover;
-      aspect-ratio: 280/200;
-      border-radius: 15px 15px 0 0;
+      height: auto;
+      aspect-ratio: 280/155;
+      object-fit: contain;
       object-position: bottom; /* Это изменяет позицию изображения */
     }
 
