@@ -8,7 +8,7 @@ export async function getBlacklist() {
         const response = await axios.get(serverUrl + '/blacklist');
         return response.data
     } catch (error){
-        console.log("ERROR WHITE GETTING DATA")
+        console.error("ERROR WHITE GETTING DATA " + error)
     }
 }
 
@@ -19,7 +19,7 @@ export async function getUsersByEmailPiece(data:any) {
         const response = await axios.post(serverUrl + '/blacklist/email', {email: data.email});
         return response.data
     } catch (error){
-        console.log("ERROR WHITE GETTING DATA")
+        console.error("ERROR WHITE GETTING DATA " + error)
     }
 }
 
@@ -28,7 +28,7 @@ export async function getUsersByEmail(data:any) {
         const response = await axios.post(serverUrl + '/blacklist/users/email', {email: data.email});
         return response.data
     } catch (error){
-        console.log("ERROR WHITE GETTING DATA")
+        console.error("ERROR WHITE GETTING DATA " + error)
     }
 }
 
@@ -37,7 +37,7 @@ export async function deleteUserBlacklist(data:any) {
         const response = await axios.delete(serverUrl + '/blacklist/user/' + data.user_id);
         return response.data
     } catch (error){
-        console.log("ERROR WHITE GETTING DATA")
+        console.error("ERROR WHITE GETTING DATA " + error)
     }
 }
 
@@ -46,6 +46,6 @@ export async function insertBlacklist(data:any) {
     try{
         await axios.post(serverUrl + '/blacklist-add', {user_id: data.user_id});
     } catch (error){
-        console.log("ERROR WHITE GETTING DATA")
+        console.error("ERROR WHITE GETTING DATA " + error)
     }
 }

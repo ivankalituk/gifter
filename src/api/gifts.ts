@@ -10,9 +10,9 @@ export async function getAllGifts(): Promise<Gift[]> {
         return response.data;
     } catch (error) {
         if (axios.isAxiosError(error)) {
-            console.error("Error getting data:", error.message);
+            console.error("ERROR WHITE GETTING DATA " + error)
         } else {
-            console.error("Unexpected error:", error);
+            console.error("ERROR WHITE GETTING DATA " + error)
         }
         return [];
     }
@@ -28,7 +28,7 @@ export async function getGiftNameByName(name: string): Promise<giftName[]> {
         if (axios.isAxiosError(error)) {
             console.error("Error getting data:", error.message);
         } else {
-            console.error("Unexpected error:", error);
+            console.error("ERROR WHITE GETTING DATA " + error)
         }
         return [];
     }

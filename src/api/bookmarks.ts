@@ -8,7 +8,7 @@ export async function toggleBookmark(data: any){
         const response = await axios.post(serverUrl + '/bookmark/toggle', {user_id: data.user_id, gift_id: data.gift_id});
         return response.data
     } catch (error){
-        console.log("ERROR WHITE GETTING DATA")
+        console.error("ERROR WHITE GETTING DATA " + error)
     }
 }
 
@@ -18,6 +18,6 @@ export async function getUserBookmarks(data: any){
         const response = await axios.get(serverUrl + '/bookmarks/' + data.user_id);
         return response.data
     } catch (error){
-        console.log("ERROR WHITE GETTING DATA")
+        console.error("ERROR WHITE GETTING DATA " + error)
     }
 }

@@ -6,6 +6,6 @@ export async function getTagByInput(data: any) {
     try{
         return await axios.post(serverUrl + '/tagName', data).then(({data}) => data);
     } catch (error){
-        console.log("ERROR WHITE GETTING DATA")
+        console.error("ERROR WHITE GETTING DATA " + error)
     }
 }

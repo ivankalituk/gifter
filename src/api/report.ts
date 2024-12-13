@@ -7,7 +7,7 @@ export async function getReportById(data: any) {
         const response = await axios.get(serverUrl + '/report/' + data.report_id);
         return response.data
     } catch (error){
-        console.log("ERROR WHITE GETTING DATA")
+        console.error("ERROR WHITE GETTING DATA " + error)
     }
 }
 
@@ -15,7 +15,7 @@ export async function postReport(data: any) {
     try{
         await axios.post(serverUrl + '/report', data);
     } catch (error){
-        console.log("ERROR WHITE GETTING DATA")
+        console.error("ERROR WHITE GETTING DATA " + error)
     }
 }
 
@@ -24,7 +24,7 @@ export async function getAllReports() {
         const response = await axios.get(serverUrl + '/report');
         return response.data
     } catch (error){
-        console.log("ERROR WHITE GETTING DATA")
+        console.error("ERROR WHITE GETTING DATA " + error)
     }
 }
 
@@ -33,13 +33,12 @@ export async function deleteReport(data: any) {
         const response = await axios.delete(serverUrl + '/report/' + data.report_id);
         return response.data
     } catch (error){
-        console.log("ERROR WHITE GETTING DATA")
+        console.error("ERROR WHITE GETTING DATA " + error)
     }
 }
 
 export async function deleteReportGift(data: any) {
   try {
-    console.log(data)
     await axios.delete(serverUrl + '/report-gift', {
       data: {
         gift_id: data.gift_id,
@@ -47,7 +46,7 @@ export async function deleteReportGift(data: any) {
       }
     });
   } catch (error) {
-    console.log("ERROR WHILE GETTING DATA", error);
+    console.error("ERROR WHITE GETTING DATA " + error)
   }
 }
 
@@ -56,6 +55,6 @@ export async function getGiftByReport(data: any) {
         const response = await axios.get(serverUrl + '/report/gift/' + data.report_id);
         return response.data
     } catch (error){
-        console.log("ERROR WHITE GETTING DATA")
+        console.error("ERROR WHITE GETTING DATA " + error)
     }
 }

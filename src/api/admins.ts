@@ -8,7 +8,7 @@ export async function getAdminsByEmailFragment(data:any) {
         const response = await axios.post(serverUrl + '/admins', {email: data.email});
         return response.data
     } catch (error){
-        console.log("ERROR WHITE GETTING DATA")
+        console.error("ERROR WHITE GETTING DATA " + error)
     }
 }
 
@@ -17,7 +17,7 @@ export async function getAdminsDataByEmailFragment(data:any) {
         const response = await axios.post(serverUrl + '/admins/email', {email: data.email});
         return response.data
     } catch (error){
-        console.log("ERROR WHITE GETTING DATA")
+        console.error("ERROR WHITE GETTING DATA " + error)
     }
 }
 
@@ -26,7 +26,7 @@ export async function patchAdminLevel(data:any) {
         const response = await axios.put(serverUrl + '/admins/leveling', {user_id: data.user_id, operation: data.operation});
         return response.data
     } catch (error){
-        console.log("ERROR WHITE GETTING DATA")
+        console.error("ERROR WHITE GETTING DATA " + error)
     }
 }
 
@@ -35,6 +35,6 @@ export async function insertAdmin(data:any) {
     try{
         await axios.post(serverUrl + '/admin', {user_id: data.user_id});
     } catch (error){
-        console.log("ERROR WHITE GETTING DATA")
+        console.error("ERROR WHITE GETTING DATA " + error)
     }
 }

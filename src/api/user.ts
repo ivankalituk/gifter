@@ -7,7 +7,7 @@ export async function getUserInfo(data:any) {
     try{
         return await axios.get(serverUrl + '/user' + data.user_tocken).then(({data}) => data);
     } catch (error){
-        console.log("ERROR WHITE GETTING DATA")
+        console.error("ERROR WHITE GETTING DATA " + error)
     }
 }
 
@@ -16,7 +16,7 @@ export async function putUserNickname(data: any) {
     try{
         return await axios.put(serverUrl + '/user/nickname', {nickname: data.nickname, user_id: data.user_id})
     } catch (error){
-        console.log("ERROR WHITE GETTING DATA")
+        console.error("ERROR WHITE GETTING DATA " + error)
     }
 }
 
@@ -25,7 +25,7 @@ export async function putUserBio(data: any) {
     try{
         return await axios.put(serverUrl + '/user/bio', {bio: data.bio, user_id: data.user_id})
     } catch (error){
-        console.log("ERROR WHITE GETTING DATA")
+        console.error("ERROR WHITE GETTING DATA " + error)
     }
 }
 
@@ -34,7 +34,7 @@ export async function putUserTags(data: any) {
     try{
         return await axios.put(serverUrl + '/user/tags', {tags: data.tags, user_id: data.user_id})
     } catch (error){
-        console.log("ERROR WHITE GETTING DATA")
+        console.error("ERROR WHITE GETTING DATA " + error)
     }
 }
 
@@ -44,7 +44,7 @@ export async function getUserTags(data:any) {
         const response = await axios.get(serverUrl + '/user/tags/' + data.user_id);
         return response.data
     } catch (error){
-        console.log("ERROR WHITE GETTING DATA")
+        console.error("ERROR WHITE GETTING DATA " + error)
     }
 }
 
@@ -55,7 +55,7 @@ export async function putUserPhoto(data: any) {
             headers: { 'Content-Type': 'multipart/form-data' },
           }).then(({data}) => data);
     } catch (error){
-        console.log("ERROR WHITE GETTING DATA")
+        console.error("ERROR WHITE GETTING DATA " + error)
     }
 }
 
@@ -64,7 +64,7 @@ export async function getUserBio(data:any) {
         const response = await axios.get(serverUrl + '/user/bio/' + data.user_id);
         return response.data
     } catch (error){
-        console.log("ERROR WHITE GETTING DATA")
+        console.error("ERROR WHITE GETTING DATA " + error)
     }
 }
 
@@ -73,6 +73,6 @@ export async function getUserById(data:any) {
         const response = await axios.get(serverUrl + '/user/' + data.user_id);
         return response.data
     } catch (error){
-        console.log("ERROR WHITE GETTING DATA")
+        console.error("ERROR WHITE GETTING DATA " + error)
     }
 }

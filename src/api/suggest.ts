@@ -9,7 +9,7 @@ export async function createSuggest(data: any) {
             headers: { 'Content-Type': 'multipart/form-data' },
           }).then(({data}) => data);
     } catch (error){
-        console.log("ERROR WHITE GETTING DATA")
+        console.error("ERROR WHITE GETTING DATA " + error)
     }
 }
 
@@ -18,7 +18,7 @@ export async function getAllSuggests() {
         const response = await axios.get(serverUrl + '/suggest');
         return response.data
     } catch (error){
-        console.log("ERROR WHITE GETTING DATA")
+        console.error("ERROR WHITE GETTING DATA " + error)
     }
 }
 
@@ -27,7 +27,7 @@ export async function getSuggestById(data: any) {
         const response = await axios.get(serverUrl + '/suggest/' + data.suggest_id);
         return response.data
     } catch (error){
-        console.log("ERROR WHITE GETTING DATA")
+        console.error("ERROR WHITE GETTING DATA " + error)
     }
 }
 
@@ -36,6 +36,6 @@ export async function deleteSuggest(data: any) {
         const response = await axios.delete(serverUrl + '/suggest/' + data.suggest_id);
         return response.data
     } catch (error){
-        console.log("ERROR WHITE GETTING DATA")
+        console.error("ERROR WHITE GETTING DATA " + error)
     }
 }
